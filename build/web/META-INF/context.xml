@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/demo">
+  <Resource auth="Container" 
+            driverClassName="com.mysql.jdbc.Driver" 
+            logAbandoned="true" 
+            maxActive="100" 
+            maxIdle="30" 
+            name="jdbc/Proyecto_BDMM_PAPW" 
+            password="Nn885743" 
+            removeAbandoned="true" 
+            removeAbandonedTimeout="60" 
+            type="javax.sql.DataSource" 
+            url="jdbc:mysql://localhost:3306/Proyecto_BDMM_PAPW" 
+            username="root"/>
+</Context>
