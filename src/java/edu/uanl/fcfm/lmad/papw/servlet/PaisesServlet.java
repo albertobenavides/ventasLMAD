@@ -5,22 +5,20 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
-import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Carlos
+ * @author Alberto
  */
-public class DetalleServlet extends HttpServlet {
+@WebServlet(name = "Paises", urlPatterns = {"/Paises"})
+public class PaisesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,23 +31,22 @@ public class DetalleServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nickname = request.getParameter("nickname");
-        String contrasenia = request.getParameter("contrasenia");
-        String correoElectronico = request.getParameter("correoElectronico");
-        String nombre = request.getParameter("nombre");
-        String apellidoPaterno = request.getParameter("apellidoPaterno");
-        String apellidoMaterno = request.getParameter("apellidoMaterno");
-        String fechaNacimiento = request.getParameter("fechaNacimiento");
-        String strSexo = request.getParameter("sexo");
-        
-        Usuario e = new Usuario(nickname, contrasenia, correoElectronico,
-                nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, strSexo);
-        
-        UsuarioDao.insertar(e);
-        
-        ServletContext ctx = getServletContext();
-        RequestDispatcher disp = ctx.getRequestDispatcher("/lista.jsp");
-        disp.forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Paises</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Paises at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

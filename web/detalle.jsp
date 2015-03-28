@@ -49,7 +49,7 @@
                     </tr>
                 </table>
             </fieldset>
-            <!-- <fieldset>
+            <fieldset>
                 <legend>Datos de contacto</legend>
                 <table>
                     <tr>
@@ -75,20 +75,16 @@
                     <tr>
                         <td>
                             Teléfono:<br>
-                            <input type="tel" value="telephone">
+                            <input type="tel" name="telephone">
                         </td>
                         <td>
                             Celular:<br>
-                            <input type="tel" value="cellphone">
+                            <input type="tel" name="cellphone">
                         </td>
                     </tr>
                 </table>
-            </fieldset> -->
+            </fieldset>
             <input type="reset"><input type="submit">
         </form>
-
-        <br />
-        <br />
-        <a href="">Regresar a la lista</a>
     </body>
 </html>
