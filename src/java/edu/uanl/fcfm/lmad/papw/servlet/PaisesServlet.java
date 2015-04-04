@@ -4,24 +4,23 @@
  * and open the template in the editor.
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
+import edu.uanl.fcfm.lmad.papw.dao.PaisesDAO;
+import edu.uanl.fcfm.lmad.papw.model.Pais;
 
-import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
-import edu.uanl.fcfm.lmad.papw.model.Usuario;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Carlos
+ * @author Alberto
  */
-public class DetalleServlet extends HttpServlet {
+@WebServlet(name = "Paises", urlPatterns = {"/Paises"})
+public class PaisesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,25 +33,33 @@ public class DetalleServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nickname = request.getParameter("nickname");
-        String contrasenia = request.getParameter("contrasenia");
-        String correoElectronico = request.getParameter("correoElectronico");
-        String nombre = request.getParameter("nombre");
-        String apellidoPaterno = request.getParameter("apellidoPaterno");
-        String apellidoMaterno = request.getParameter("apellidoMaterno");
-        String fechaNacimiento = request.getParameter("fechaNacimiento");
-        String sexo = request.getParameter("sexo");
-        String telefono = request.getParameter("telefono");
-        
-        Usuario u = new Usuario(nickname, contrasenia, correoElectronico,
-                nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, sexo,
-                telefono, null );
-        
-        UsuarioDao.insertar(u);
-//        
-//        ServletContext ctx = getServletContext();
-//        RequestDispatcher disp = ctx.getRequestDispatcher("/lista.jsp");
-//        disp.forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            
+            Pais p = new Pais(PaisesDAO.lista());
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Paises</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Paises at " + request.getContextPath() + "</h1>");
+            
+            out.println("<select>");
+            for (String s : p.getPaises())
+            {
+                out.println("<option value=\"" + s + "\">" + s + "</option>");
+            }
+            out.println("</select>");
+            
+            
+            out.println("</body>");
+            out.println("</html>");
+        } finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

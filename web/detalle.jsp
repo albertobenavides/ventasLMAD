@@ -49,46 +49,23 @@
                     </tr>
                 </table>
             </fieldset>
-            <!-- <fieldset>
+            <fieldset>
                 <legend>Datos de contacto</legend>
                 <table>
                     <tr>
                         <td>
-                            País:<br>
-                            <select form="signup" name="country">
-                                <option value="mexico">México</option>
-                            </select><br>
-                        </td>
-                        <td>
-                            Estado:<br>
-                            <select form="signup" name="country">
-                                <option value="nuevoLeon">Nuevo León</option>
-                            </select><br>
-                        </td>
-                        <td>
-                            Ciudad:<br>
-                            <select form="signup" name="country">
-                                <option value="mexico">San Nicolás</option>
-                            </select><br>
+                            Teléfono:<br>
+                            <input type="tel" name="telefono">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Teléfono:<br>
-                            <input type="tel" value="telephone">
-                        </td>
-                        <td>
-                            Celular:<br>
-                            <input type="tel" value="cellphone">
+                            <input type="file" name="imagen">
                         </td>
                     </tr>
                 </table>
-            </fieldset> -->
+            </fieldset>
             <input type="reset"><input type="submit">
         </form>
-
-        <br />
-        <br />
-        <a href="">Regresar a la lista</a>
     </body>
 </html>
