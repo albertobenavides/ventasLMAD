@@ -54,32 +54,13 @@
                 <table>
                     <tr>
                         <td>
-                            País:<br>
-                            <select form="signup" name="country">
-                                <option value="mexico">México</option>
-                            </select><br>
-                        </td>
-                        <td>
-                            Estado:<br>
-                            <select form="signup" name="country">
-                                <option value="nuevoLeon">Nuevo León</option>
-                            </select><br>
-                        </td>
-                        <td>
-                            Ciudad:<br>
-                            <select form="signup" name="country">
-                                <option value="mexico">San Nicolás</option>
-                            </select><br>
+                            Teléfono:<br>
+                            <input type="tel" name="telefono">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Teléfono:<br>
-                            <input type="tel" name="telephone">
-                        </td>
-                        <td>
-                            Celular:<br>
-                            <input type="tel" name="cellphone">
+                            <input type="file" name="imagen">
                         </td>
                     </tr>
                 </table>

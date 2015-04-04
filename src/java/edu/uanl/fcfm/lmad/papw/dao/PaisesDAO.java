@@ -23,7 +23,7 @@ public class PaisesDAO {
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
-            cs = conn.prepareCall("{ call buscar_empleados() }");
+            cs = conn.prepareCall("{ call Paises() }");
             rs = cs.executeQuery();
             List<String> p = new ArrayList<String>();
             while (rs.next()) {

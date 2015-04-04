@@ -6,6 +6,7 @@
 package edu.uanl.fcfm.lmad.papw.dao;
 
 import edu.uanl.fcfm.lmad.papw.model.Usuario;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,20 +17,22 @@ import java.sql.SQLException;
  */
 public class UsuarioDao {
     
-    public static void insertar(Usuario e) {
+    public static void insertar(Usuario u) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = conn.prepareCall("{ call insertarUsuario(?,?,?,?,?,?,?,?) }");
-            cs.setString(1, e.getNickname());
-            cs.setString(2, e.getContrasenia());
-            cs.setString(3, e.getCorreoElectronico());
-            cs.setString(4, e.getNombre());
-            cs.setString(5, e.getApellidoPaterno());
-            cs.setString(6, e.getApellidoMaterno());
-            cs.setString(7, e.getFechaNacimiento());
-            cs.setString(8, e.getSexo());
+            cs = conn.prepareCall("{ call insertarUsuario(?,?,?,?,?,?,?,?,?,?) }");
+            cs.setString(1, u.getNickname());
+            cs.setString(2, u.getContrasenia());
+            cs.setString(3, u.getCorreoElectronico());
+            cs.setString(4, u.getNombre());
+            cs.setString(5, u.getApellidoPaterno());
+            cs.setString(6, u.getApellidoMaterno());
+            cs.setString(7, u.getFechaNacimiento());
+            cs.setString(8, u.getSexo());
+            cs.setString(9, u.getTelefono());
+            cs.setBlob(10, u.getImagen());
             cs.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -7,8 +7,9 @@ package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
 import edu.uanl.fcfm.lmad.papw.model.Usuario;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -40,16 +41,18 @@ public class DetalleServlet extends HttpServlet {
         String apellidoPaterno = request.getParameter("apellidoPaterno");
         String apellidoMaterno = request.getParameter("apellidoMaterno");
         String fechaNacimiento = request.getParameter("fechaNacimiento");
-        String strSexo = request.getParameter("sexo");
+        String sexo = request.getParameter("sexo");
+        String telefono = request.getParameter("telefono");
         
-        Usuario e = new Usuario(nickname, contrasenia, correoElectronico,
-                nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, strSexo);
+        Usuario u = new Usuario(nickname, contrasenia, correoElectronico,
+                nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, sexo,
+                telefono, null );
         
-        UsuarioDao.insertar(e);
-        
-        ServletContext ctx = getServletContext();
-        RequestDispatcher disp = ctx.getRequestDispatcher("/lista.jsp");
-        disp.forward(request, response);
+        UsuarioDao.insertar(u);
+//        
+//        ServletContext ctx = getServletContext();
+//        RequestDispatcher disp = ctx.getRequestDispatcher("/lista.jsp");
+//        disp.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

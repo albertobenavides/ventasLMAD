@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
+import edu.uanl.fcfm.lmad.papw.dao.PaisesDAO;
+import edu.uanl.fcfm.lmad.papw.model.Pais;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +36,9 @@ public class PaisesServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
+            
+            Pais p = new Pais(PaisesDAO.lista());
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -42,6 +46,15 @@ public class PaisesServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Paises at " + request.getContextPath() + "</h1>");
+            
+            out.println("<select>");
+            for (String s : p.getPaises())
+            {
+                out.println("<option value=\"" + s + "\">" + s + "</option>");
+            }
+            out.println("</select>");
+            
+            
             out.println("</body>");
             out.println("</html>");
         } finally {

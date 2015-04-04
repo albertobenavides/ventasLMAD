@@ -21,14 +21,12 @@ public class Usuario {
     private String apellidoMaterno;
     private String fechaNacimiento;
     private String sexo;
-    private String ciudad;
-    private String estado;
-    private String pais;
-    private Blob image;
+    private String telefono;
+    private Blob imagen;
 
     public Usuario(String nickname, String contrasenia, String correoElectronico, 
             String nombre, String apellidoPaterno, String apellidoMaterno, 
-            String fechaNacimiento, String sexo) {
+            String fechaNacimiento, String sexo, String telefono, Blob imagen) {
         this.nickname = nickname;
         this.contrasenia = contrasenia;
         this.correoElectronico = correoElectronico;
@@ -37,6 +35,8 @@ public class Usuario {
         this.apellidoMaterno = apellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
         this.sexo = sexo;
+        this.telefono = telefono;
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -111,36 +111,20 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getEstado() {
-        return estado;
+    public Blob getImagen() {
+        return imagen;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public Blob getImage() {
-        return image;
-    }
-
-    public void setImage(Blob image) {
-        this.image = image;
+    public void setImagen(Blob image) {
+        this.imagen = image;
     }
 
     

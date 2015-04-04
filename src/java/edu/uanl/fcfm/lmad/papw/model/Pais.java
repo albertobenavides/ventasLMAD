@@ -14,8 +14,14 @@ import java.util.List;
 public class Pais {
     List<String> paises;
     
-    public Pais(List<String> l)
+    public Pais(List<String> l) // es una ele
     {
         paises = l;
     }
+
+    public List<String> getPaises() {
+        return paises;
+    }
+    
+    
 }
