@@ -56,16 +56,31 @@
             <div id="left_sidebar">
                 <!-- Start of Newsletter Signup Form -->
                 <div id="newsletter">
-                    <h2>Iniciar sesión</h2>
-                    <form method="post" action="login">
-                        <div>
-                            <input type="text" name="nickname" value="usuario"/>
-                            <input type="password" name="password" value="contraseña"/>
-                            <input type="image" src="images/button_ok.gif" class="button" />
-                            <div class="clearthis">&nbsp;</div>
-                        </div>
-                    </form>
-                    <div id="link_cancel"> <a href="#">Crear cuenta</a> </div>
+                    <%
+                        String nickname = (String)request.getAttribute("nickname");
+                        
+                        if (nickname == null)
+                        {
+                    %>
+                            <h2>Iniciar sesión</h2>
+                            <form method="post" action="login">
+                                <div>
+                                    <input type="text" name="nickname" value="usuario"/>
+                                    <input type="password" name="password" value="contraseña"/>
+                                    <input type="image" src="images/button_ok.gif" class="button" />
+                                    <div class="clearthis">&nbsp;</div>
+                                </div>
+                            </form>
+                            <div id="link_cancel"> <a href="#">Crear cuenta</a> </div>
+                    <%
+                        }
+                        else
+                        {
+                    %>
+                            <h2>Bienvenido, <%= nickname %></h2>
+                    <%
+                        }
+                    %>
                 </div>
                 <!-- End of Newsletter Signup Form -->
                 <!-- Start of Categories Box -->
@@ -127,7 +142,8 @@
                 <!-- Start of New Item Description -->
                 <div id="new_item">
                     <div id="new_item_header">
-                        <h1><%= anuncios.get(0).getNombre() %></h1>
+                        <h1><a href="anuncio?idProducto=<%= anuncios.get(0).getId() %>">
+                                <%= anuncios.get(0).getNombre() %></a></h1>
                         <h2>$<%= anuncios.get(0).getPrecio() %></h2>
                     </div>
                     <div id="new_item_image"> <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" /> </div>

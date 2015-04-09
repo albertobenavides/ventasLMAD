@@ -8,6 +8,7 @@ package edu.uanl.fcfm.lmad.papw.servlet;
 import edu.uanl.fcfm.lmad.papw.dao.LoginDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,24 +36,20 @@ public class LogInServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LogInServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LogInServlet at " + request.getContextPath() + "</h1>");
             String nickname = request.getParameter("nickname");
             String contrasenia = request.getParameter("password");
-            if (LoginDAO.login(nickname, contrasenia))
+            if (LoginDAO.login(nickname, contrasenia) != null)
             {
-                out.println("<p>Usuario conectado</p>");    
+                request.setAttribute("nickname", nickname);
             }
             else
-                out.println("<p>Usuario inexistente</p>");    
-            out.println("</body>");
-            out.println("</html>");
+            {
+                request.setAttribute("nickname", null);
+            }
+            
+            RequestDispatcher disp = getServletContext()
+                    .getRequestDispatcher("/Index");
+                    disp.forward(request, response);
         } finally {
             out.close();
         }

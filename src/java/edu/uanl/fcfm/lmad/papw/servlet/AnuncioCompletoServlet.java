@@ -5,15 +5,8 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
-import edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO;
-import edu.uanl.fcfm.lmad.papw.model.Anuncio;
-import edu.uanl.fcfm.lmad.papw.model.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alberto
  */
-@WebServlet(name = "Index", urlPatterns = {"/Index"})
-public class IndexServlet extends HttpServlet {
+@WebServlet(name = "AnuncioCompletoServlet", urlPatterns = {"/anuncio"})
+public class AnuncioCompletoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,20 +34,16 @@ public class IndexServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            
-            Categoria c = new Categoria(CategoriaDAO.lista());
-            
-            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.lista());
-            
-            String nickname = (String)request.getAttribute("nickname");
-            
-            request.setAttribute("categorias", c.getCategorias());
-            request.setAttribute("anuncios", a);
-            request.setAttribute("nickname", nickname);
-            
-            RequestDispatcher disp = getServletContext()
-                    .getRequestDispatcher("/index.jsp");
-            disp.forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AnuncioCompletoServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AnuncioCompletoServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {
             out.close();
         }

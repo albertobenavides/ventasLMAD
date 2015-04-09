@@ -14,14 +14,16 @@ public class Anuncio {
     double precio;
     String nickUsuario;
     String fecha;
+    int id;
     
     public Anuncio(String nombre, String precio, String nickUsuario,
-            String fecha)
+            String fecha, String id)
     {
         this.nombre = nombre;
         this.precio = Double.parseDouble(precio);
         this.nickUsuario = nickUsuario;
         this.fecha = fecha;
+        this.id = Integer.parseInt(id);
     }
 
     public String getNombre() {
@@ -38,6 +40,10 @@ public class Anuncio {
 
     public String getFecha() {
         return fecha;
+    }
+
+    public int getId() {
+        return id;
     }
     
     

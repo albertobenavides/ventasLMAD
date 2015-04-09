@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @author Alberto
  */
 public class LoginDAO {
-    public static boolean login(String username, String password)
+    public static String login(String username, String password)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -27,9 +27,9 @@ public class LoginDAO {
                 cs.setString(2, password);
                 rs = cs.executeQuery();
                 if (rs.next())
-                    return true;
+                    return username;
                 else
-                    return false;
+                    return null;
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
@@ -37,6 +37,6 @@ public class LoginDAO {
                 DBUtil.closeStatement(cs);
                 pool.freeConnection(conn);
             }
-        return false;
+        return null;
     }   
 }
