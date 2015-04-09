@@ -5,19 +5,27 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
-import edu.uanl.fcfm.lmad.papw.model.Usuario;
+import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
+import edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO;
+import edu.uanl.fcfm.lmad.papw.model.Anuncio;
+import edu.uanl.fcfm.lmad.papw.model.Categoria;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Carlos
+ * @author Alberto
  */
-public class DetalleServlet extends HttpServlet {
+@WebServlet(name = "Index", urlPatterns = {"/Index"})
+public class IndexServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,21 +38,22 @@ public class DetalleServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nickname = request.getParameter("nickname");
-        String contrasenia = request.getParameter("contrasenia");
-        String correoElectronico = request.getParameter("correoElectronico");
-        String nombre = request.getParameter("nombre");
-        String apellidoPaterno = request.getParameter("apellidoPaterno");
-        String apellidoMaterno = request.getParameter("apellidoMaterno");
-        String fechaNacimiento = request.getParameter("fechaNacimiento");
-        String sexo = request.getParameter("sexo");
-        String telefono = request.getParameter("telefono");
-        
-        Usuario u = new Usuario(nickname, contrasenia, correoElectronico,
-                nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, sexo,
-                telefono, null );
-        
-        UsuarioDao.insertar(u);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            Categoria c = new Categoria(CategoriaDAO.lista());
+            
+            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.lista());
+            
+            request.setAttribute("categorias", c.getCategorias());
+            request.setAttribute("anuncios", a);
+
+            RequestDispatcher disp = getServletContext()
+                    .getRequestDispatcher("/index.jsp");
+            disp.forward(request, response);
+        } finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
