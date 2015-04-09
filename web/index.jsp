@@ -4,6 +4,8 @@
     Author     : Alberto
 --%>
 
+<%@page import="java.util.Map.Entry"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -30,7 +32,7 @@
                     </ul>
                 </div>
                 <div id="page_headersearch">
-                    <h3>Search:</h3>
+                    <h3>Buscar</h3>
                     <form action="#">
                         <div>
                             <input type="text" />
@@ -65,7 +67,7 @@
                             <div class="clearthis">&nbsp;</div>
                         </div>
                     </form>
-                    <div id="link_cancel"> <a href="#">Cancel Subscription</a> </div>
+                    <div id="link_cancel"> <a href="#">Crear cuenta</a> </div>
                 </div>
                 <!-- End of Newsletter Signup Form -->
                 <!-- Start of Categories Box -->
@@ -75,21 +77,27 @@
                     </div>
                     <ul>
                         <%
-                            List<String> categorias = (List<String>) 
+                            List<String> categorias = (List<String>)
                                     request.getAttribute("categorias");
                             if (categorias != null) 
                             {
-                                for (String cat : categorias) 
+                                String categoriaTemp = null;
+                                for (String cat : categorias)
                                 {
-                                    if (categorias.indexOf(cat) != categorias.size())
+                                    String subcategoria = cat.substring(cat.indexOf(",") + 1);
+                                    String categoriaString = cat.substring(0, cat.indexOf(","));
+                                    if(!categoriaString.equals(categoriaTemp))
                                     {
+                                            categoriaTemp = categoriaString;
                         %>
-                                        <li><a href="#"><%= cat %></li>
-                        <%          }
+                                            <p><%= categoriaTemp %></p>
+                                            <li><a href="#"><%= subcategoria %></a></li>
+                        <%
+                                    }
                                     else
                                     {
                         %>
-                                        <li class="last"><a href="#"><%= cat %></a></li>
+                                           <li><a href="#"><%= subcategoria %></a></li> 
                         <%
                                     }
                                 }

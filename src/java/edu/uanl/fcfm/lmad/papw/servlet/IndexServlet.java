@@ -5,10 +5,14 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
+import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
 import edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO;
+import edu.uanl.fcfm.lmad.papw.model.Anuncio;
 import edu.uanl.fcfm.lmad.papw.model.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,10 +41,12 @@ public class IndexServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
             Categoria c = new Categoria(CategoriaDAO.lista());
             
+            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.lista());
+            
             request.setAttribute("categorias", c.getCategorias());
+            request.setAttribute("anuncios", a);
 
             RequestDispatcher disp = getServletContext()
                     .getRequestDispatcher("/index.jsp");

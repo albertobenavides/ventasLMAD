@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package edu.uanl.fcfm.lmad.papw.model;
-
 import java.util.List;
 
 /**

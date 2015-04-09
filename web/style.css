@@ -68,7 +68,7 @@ input {
 	width: 780px;
 	height: 113px;
 	color: #fff;
-	background: url('images/header_background.gif') repeat-x 0px 0px;
+	background-color: #434367;
 	overflow: hidden;
 }
 
@@ -84,21 +84,24 @@ input {
 #page_heading {
 	width: 190px;
 	height: 75px;
-	background: url('images/company_logo.jpg') no-repeat 35px 37px;
+        background-color: #8989b6;
+	//background: url('images/company_logo.jpg') no-repeat 35px 37px;
 	float: left;
 }
 
 #page_heading h1 {
 	width: 190px;
 	height: 52px;
-	background: url('images/company_name.jpg') no-repeat 56px 36px;
+        background-color: #820721;
+	//background: url('images/company_name.jpg') no-repeat 56px 36px;
 	float: left;
 }
 
 #page_heading h2 {
 	width: 190px;
 	height: 16px;
-	background: url('images/company_punchline.jpg') no-repeat 56px 2px;
+        background-color: #f2f2f2;
+	//background: url('images/company_punchline.jpg') no-repeat 56px 2px;
 	float: left;
 	clear: both;
 }
@@ -120,7 +123,7 @@ input {
 	padding: 0px 10px 0px 9px;
 	float: left;
 	list-style-type: none;
-	background: url('images/header_toplinks_div.gif') no-repeat 100% 2px;
+	//background: url('images/header_toplinks_div.gif') no-repeat 100% 2px;
 }
 
 #page_headerlinks li.last {
@@ -190,7 +193,7 @@ input {
 	width: 129px;
 	height: 21px;
 	float: left;
-	background: url('images/menu_background.gif') repeat-x 0px 0px;
+	//background: url('images/menu_background.gif') repeat-x 0px 0px;
 	overflow: hidden;
 	text-align: center;
 	font-size: 11px;
@@ -231,6 +234,9 @@ input {
 	color: #75759c;
 }
 
+left_sidebar p{
+    text-transform: uppercase;
+}
 
 
 /* Left Sidebar: Newsletter Signup Box */
