@@ -33,7 +33,7 @@ public class AnuncioDAO {
                         rs.getString("nombreProducto"),
                         rs.getString("precioProducto"),
                         rs.getString("nickUsuario"),
-                        rs.getString("fechaPublicacion")
+                        rs.getString("fechaPublicacionAnuncio")
                 );
                 anuncios.add(a);
             }

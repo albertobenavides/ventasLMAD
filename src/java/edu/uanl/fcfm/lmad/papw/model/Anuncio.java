@@ -23,4 +23,22 @@ public class Anuncio {
         this.nickUsuario = nickUsuario;
         this.fecha = fecha;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public String getNickUsuario() {
+        return nickUsuario;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+    
+    
 }
