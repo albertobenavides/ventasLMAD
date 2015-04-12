@@ -4,7 +4,6 @@
     Author     : Alberto
 --%>
 
-<%@page import="edu.uanl.fcfm.lmad.papw.model.Globales"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
@@ -25,8 +24,7 @@
                 </div>
                 <div id="page_headerlinks">
                     <ul>
-                        <%
-                            String nickname;
+                        String nickname;
                             if (Globales.username == null)
                             {
                                 nickname = (String)request.getAttribute("nickname");
@@ -35,8 +33,7 @@
                             {
                                 nickname = Globales.username;
                             }
-                        %>
-                        <li><a href="Index">Inicio</a></li>
+                        <li><a href="Index>">Inicio</a></li>
                         <li><a href="#">Status</a></li>
                         <li class="last"><a href="#">Contacto</a></li>
                     </ul>
@@ -58,7 +55,7 @@
             <div id="left_sidebar">
                 <!-- Start of Newsletter Signup Form -->
                 <div id="newsletter">
-                    <%                        
+                    <%
                         String logInTry = (String)request.getAttribute("logInTry");
                         
                         if (logInTry == "0")
@@ -144,76 +141,29 @@
             <div id="main_content">
                 
                 <%
-                    List<Anuncio> anuncios = (List<Anuncio>)
-                                    request.getAttribute("anuncios");
+                    Anuncio a = new Anuncio((Anuncio)request.getAttribute("anuncioCompleto"));
                 %>
                 
                 <!-- Start of New Item Description -->
                 <div id="new_item">
                     <div id="new_item_header">
-                        <h1><a href="anuncio?idAnuncio=<%= anuncios.get(0).getId() %>">
-                                <%= anuncios.get(0).getNombre() %></a></h1>
-                        <h2>$<%= anuncios.get(0).getPrecio() %></h2>
+                        <h1><%= a.getNombre() %></h1>
+                        <h2>$<%= a.getPrecio() %></h2>
                     </div>
                     <div id="new_item_image"> <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" /> </div>
                     <div id="new_item_text">
                         <br>
-                        <p>Publicado por: <%= anuncios.get(0).getNickUsuario()%></p>
-                        <p>Fecha de publicación: <%= anuncios.get(0).getFecha().toString().substring(0, 10) %></p>
+                        <h2>Descripción</h2>
+                        <p><%= a.getCaracteristicas()%></p>
+                        <h2>Publicado por</h2>
+                        <p><%= a.getNombreUsuario()%></p>
+                        <p><%= a.getCorreoElectronico()%></p>
+                        <p><%= a.getTelefono()%></p>
+                        <p>Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %></p>
                     </div>
                     <div class="clearthis">&nbsp;</div>
                 </div>
                 <!-- End of New Item Description -->
-                <div class="h_divider">&nbsp;</div>
-                <!-- Start of Sub Item Descriptions -->
-                <div class="sub_items">
-                    <!-- Start Left Sub Item -->
-                    <div class="sub_left">
-                        <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(1).getId() %>">
-                                    <%= anuncios.get(1).getNombre() %></a></h1>
-                        </div>
-                        <div class="sub_items_image">  </div>
-                        <div class="sub_items_text">
-                            <img src="images/item_printer.gif" width="167" height="164" alt="Sub Item Name" />
-                            <p> <strong> Publicado por: <%= anuncios.get(1).getNickUsuario() %> <br />
-                                    <%= anuncios.get(1).getFecha().toString().substring(0, 10)%> <br /></p>
-                        </div>
-                        <div class="sub_items_cartinfo">
-                            <div class="price">
-                                <h2>$<%= anuncios.get(1).getPrecio() %></h2>
-                            </div>
-                            <div class="addtocart"> <a href="#"><span>Add to Cart</span></a> </div>
-                            <div class="clearthis">&nbsp;</div>
-                        </div>
-                        <div class="clearthis">&nbsp;</div>
-                    </div>
-                    <!-- End of Left Sub Item -->
-                    <!-- Start Right Sub Item -->
-                    <div class="sub_right">
-                        <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(2).getId() %>">
-                                    <%= anuncios.get(2).getNombre() %></a></h1>
-                        </div>
-                        <div class="sub_items_image">  </div>
-                        <div class="sub_items_text">
-                            <img src="images/item_printer.gif" width="167" height="164" alt="Sub Item Name" />
-                            <p> <strong> Publicado por: <%= anuncios.get(2).getNickUsuario() %> <br />
-                                    <%= anuncios.get(2).getFecha().toString().substring(0, 10)%> <br /></p>
-                        </div>
-                        <div class="sub_items_cartinfo">
-                            <div class="price">
-                                <h2>$<%= anuncios.get(2).getPrecio() %></h2>
-                            </div>
-                            <div class="addtocart"> <a href="#"><span>Add to Cart</span></a> </div>
-                            <div class="clearthis">&nbsp;</div>
-                        </div>
-                        <div class="clearthis">&nbsp;</div>
-                    </div>
-                    <!-- End of Right Sub Item -->
-                    <div class="clearthis">&nbsp;</div>
-                </div>
-                <!-- End of Sub Item Descriptions -->
                 <div class="h_divider">&nbsp;</div>
             </div>
             <!-- End of Main Content Area -->

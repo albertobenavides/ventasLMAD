@@ -6,6 +6,7 @@
 package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.LoginDAO;
+import edu.uanl.fcfm.lmad.papw.model.Globales;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -38,14 +39,20 @@ public class LogInServlet extends HttpServlet {
         try {
             String nickname = request.getParameter("nickname");
             String contrasenia = request.getParameter("password");
+            String logInTry;
             if (LoginDAO.login(nickname, contrasenia) != null)
             {
                 request.setAttribute("nickname", nickname);
+                Globales.username = nickname;
+                logInTry = "1";
             }
             else
             {
                 request.setAttribute("nickname", null);
+                logInTry = "0";
             }
+            
+            request.setAttribute("logInTry", logInTry);
             
             RequestDispatcher disp = getServletContext()
                     .getRequestDispatcher("/Index");

@@ -41,16 +41,17 @@ public class IndexServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            
             Categoria c = new Categoria(CategoriaDAO.lista());
             
-            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.lista());
+            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.getAnunciosCortos());
             
             String nickname = (String)request.getAttribute("nickname");
+            String logInTry = (String)request.getAttribute("logInTry");
             
             request.setAttribute("categorias", c.getCategorias());
             request.setAttribute("anuncios", a);
             request.setAttribute("nickname", nickname);
+            request.setAttribute("logInTry", logInTry);
             
             RequestDispatcher disp = getServletContext()
                     .getRequestDispatcher("/index.jsp");

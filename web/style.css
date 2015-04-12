@@ -190,7 +190,7 @@ input {
 
 #page_menu li {
 	margin-right: 1px;
-	width: 129px;
+	width: 150px;
 	height: 21px;
 	float: left;
 	//background: url('images/menu_background.gif') repeat-x 0px 0px;
@@ -220,7 +220,7 @@ input {
 /* Left Sidebar */
 
 #left_sidebar {
-	width: 129px;
+	width: 150px;
 	float: left;
 	text-align: left;
 	color: #8989b6;
@@ -234,17 +234,11 @@ input {
 	color: #75759c;
 }
 
-left_sidebar p{
-    text-transform: uppercase;
-}
-
-
 /* Left Sidebar: Newsletter Signup Box */
 
 #newsletter {
 	margin-bottom: 2px;
-	padding: 5px 5px 15px;
-	width: 118px;
+	width: 150px;
 	border-color: #9e9ec3;
 	border-width: 1px 1px 1px 0px;
 	border-style: solid;
@@ -281,18 +275,17 @@ left_sidebar p{
 
 /* Left Sidebar : Categories */
 
-#categories {
-	margin-bottom: 1px;
-	padding: 1px 1px 1px 0px;
-	border-color: #9e9ec3;
-	border-width: 1px 1px 1px 0px;
-	border-style: solid;
-	text-align: center;
+#categories {    
+    padding: 1px 1px 1px 0px;
+    border-color: #9e9ec3;
+    border-width: 1px 1px 1px 0px;
+    border-style: solid;
+    text-align: center;
 }
 
 #categories_header {
 	margin-bottom: 2px;
-	width: 127px;
+	width: 150px;
 	height: 20px;
 	background-color: #9e9ec3;
 	overflow: hidden;
@@ -308,17 +301,27 @@ left_sidebar p{
 
 #categories ul {
 	margin: 0px auto;
-	width: 120px;
+	width: 150px;
 	list-style-type: none;
 }
 
 #categories li {
-	width: 120px;
+	width: 150px;
 	height: 21px;
 	list-style-type: none;
 	text-align: left;
-	border-bottom: #b6b6d2 1px solid;
 	float: left;
+}
+
+#categories .titulo {
+    width: 150px;
+    height: 21px;
+    list-style-type: none;
+    text-align: left;
+    margin-top:10px;
+    float: left;
+    font-size : 110%;
+    font-weight: bold;
 }
 
 #categories li.last {

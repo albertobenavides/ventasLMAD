@@ -5,8 +5,13 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
+import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
+import edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO;
+import edu.uanl.fcfm.lmad.papw.model.Anuncio;
+import edu.uanl.fcfm.lmad.papw.model.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,16 +39,25 @@ public class AnuncioCompletoServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AnuncioCompletoServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AnuncioCompletoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            Categoria c = new Categoria(CategoriaDAO.lista());            
+            
+            String nickname = (String)request.getAttribute("nickname");
+            String logInTry = (String)request.getAttribute("logInTry");
+            
+            request.setAttribute("categorias", c.getCategorias());
+            request.setAttribute("nickname", nickname);
+            request.setAttribute("logInTry", logInTry);
+            
+            String s = (String)request.getParameter("idAnuncio");
+            Integer i = Integer.parseInt(s);
+            Anuncio anuncio = new Anuncio(AnuncioDAO.getAnuncioCompleto(i));
+            
+            request.setAttribute("anuncioCompleto", anuncio);
+            
+            RequestDispatcher disp = getServletContext()
+                    .getRequestDispatcher("/anuncioCompleto.jsp");
+            disp.forward(request, response);
         } finally {
             out.close();
         }
