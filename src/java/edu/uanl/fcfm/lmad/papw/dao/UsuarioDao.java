@@ -9,6 +9,7 @@ import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -17,10 +18,11 @@ import java.sql.SQLException;
  */
 public class UsuarioDao {
     
-    public static void insertar(Usuario u) {
+    public static boolean insertar(Usuario u) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
+        ResultSet rs = null;
         try {
             cs = conn.prepareCall("{ call insertarUsuario(?,?,?,?,?,?,?,?,?,?) }");
             cs.setString(1, u.getNickname());
@@ -33,12 +35,16 @@ public class UsuarioDao {
             cs.setString(8, u.getSexo());
             cs.setString(9, u.getTelefono());
             cs.setBlob(10, u.getImagen());
-            cs.execute();
+            rs = cs.executeQuery();
+            
+            rs.first();
+            return rs.getString(1).equals("1");
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             DBUtil.closeStatement(cs);
             pool.freeConnection(conn);
         }
+        return false;
     }
 }

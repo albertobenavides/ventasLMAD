@@ -4,7 +4,6 @@
     Author     : Alberto
 --%>
 
-<%@page import="edu.uanl.fcfm.lmad.papw.model.Globales"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
@@ -14,6 +13,8 @@
         <title>Ventas LMAD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="themes/alertify.core.css" />
+        <link rel="stylesheet" href="themes/alertify.default.css" />
     </head>
     <body>
         <div id="container">
@@ -25,17 +26,6 @@
                 </div>
                 <div id="page_headerlinks">
                     <ul>
-                        <%
-                            String nickname;
-                            if (Globales.username == null)
-                            {
-                                nickname = (String)request.getAttribute("nickname");
-                            }
-                            else
-                            {
-                                nickname = Globales.username;
-                            }
-                        %>
                         <li><a href="Index">Inicio</a></li>
                         <li><a href="#">Status</a></li>
                         <li class="last"><a href="#">Contacto</a></li>
@@ -58,17 +48,9 @@
             <div id="left_sidebar">
                 <!-- Start of Newsletter Signup Form -->
                 <div id="newsletter">
-                    <%                        
-                        String logInTry = (String)request.getAttribute("logInTry");
-                        
-                        if (logInTry == "0")
-                        {
-                    %>
-                    <script>alert("Usuario y contraseña incorrectos.");</script>
                     <%
-                        }
-                        
-                        if (nickname == null)
+
+                        if (session.getAttribute("username") == null)
                         {
                     %>
                             <h2>Iniciar sesión</h2>
@@ -80,13 +62,17 @@
                                     <div class="clearthis">&nbsp;</div>
                                 </div>
                             </form>
-                            <div id="link_cancel"> <a href="#">Crear cuenta</a> </div>
+                            <div id="link_cancel"> <a href="signup.jsp">Crear cuenta</a> </div>
                     <%
                         }
                         else
                         {
                     %>
-                            <h2>Bienvenido, <%= nickname %></h2>
+                    <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
+                            <ul>
+                                <li><a href="#">Registrar producto</a></li>
+                                <li><a href="Index?logout=true">Cerrar sesión</a></li>
+                            </ul>
                     <%
                         }
                     %>
@@ -235,5 +221,17 @@
             </div>
             <!-- End of Page Footer -->
         </div>
+                            
+            <%                        
+                String message = (String)request.getAttribute("message");
+
+                if (message != null)
+                {
+            %>
+            <script src="lib/alertify.min.js"></script>
+            <script>alertify.log("<%= message %>");</script>
+            <%
+                }
+            %>
     </body>
 </html>

@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -45,12 +46,17 @@ public class IndexServlet extends HttpServlet {
             
             List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.getAnunciosCortos());
             
-            String nickname = (String)request.getAttribute("nickname");
+            String logout = (String)request.getParameter("logout");
+            
+            if (logout != null) 
+            {
+                HttpSession session = request.getSession();
+                session.invalidate();
+            }
             String logInTry = (String)request.getAttribute("logInTry");
             
             request.setAttribute("categorias", c.getCategorias());
             request.setAttribute("anuncios", a);
-            request.setAttribute("nickname", nickname);
             request.setAttribute("logInTry", logInTry);
             
             RequestDispatcher disp = getServletContext()

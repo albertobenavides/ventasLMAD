@@ -40,14 +40,9 @@ public class AnuncioCompletoServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             
-            Categoria c = new Categoria(CategoriaDAO.lista());            
-            
-            String nickname = (String)request.getAttribute("nickname");
-            String logInTry = (String)request.getAttribute("logInTry");
+            Categoria c = new Categoria(CategoriaDAO.lista());
             
             request.setAttribute("categorias", c.getCategorias());
-            request.setAttribute("nickname", nickname);
-            request.setAttribute("logInTry", logInTry);
             
             String s = (String)request.getParameter("idAnuncio");
             Integer i = Integer.parseInt(s);

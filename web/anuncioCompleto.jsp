@@ -24,16 +24,7 @@
                 </div>
                 <div id="page_headerlinks">
                     <ul>
-                        String nickname;
-                            if (Globales.username == null)
-                            {
-                                nickname = (String)request.getAttribute("nickname");
-                            }
-                            else
-                            {
-                                nickname = Globales.username;
-                            }
-                        <li><a href="Index>">Inicio</a></li>
+                        <li><a href="Index">Inicio</a></li>
                         <li><a href="#">Status</a></li>
                         <li class="last"><a href="#">Contacto</a></li>
                     </ul>
@@ -55,17 +46,8 @@
             <div id="left_sidebar">
                 <!-- Start of Newsletter Signup Form -->
                 <div id="newsletter">
-                    <%
-                        String logInTry = (String)request.getAttribute("logInTry");
-                        
-                        if (logInTry == "0")
-                        {
-                    %>
-                    <script>alert("Usuario y contraseña incorrectos.");</script>
-                    <%
-                        }
-                        
-                        if (nickname == null)
+                    <%                        
+                        if (session.getAttribute("username") == null)
                         {
                     %>
                             <h2>Iniciar sesión</h2>
@@ -77,13 +59,17 @@
                                     <div class="clearthis">&nbsp;</div>
                                 </div>
                             </form>
-                            <div id="link_cancel"> <a href="#">Crear cuenta</a> </div>
+                            <div id="link_cancel"> <a href="signup.jsp">Crear cuenta</a> </div>
                     <%
                         }
                         else
                         {
                     %>
-                            <h2>Bienvenido, <%= nickname %></h2>
+                    <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
+                            <ul>
+                                <li><a href="#">Registrar producto</a></li>
+                                <li><a href="Index?logout=true">Cerrar sesión</a></li>
+                            </ul>
                     <%
                         }
                     %>
