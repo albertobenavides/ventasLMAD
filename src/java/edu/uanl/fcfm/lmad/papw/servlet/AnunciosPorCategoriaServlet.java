@@ -6,25 +6,24 @@
 package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
-import edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO;
 import edu.uanl.fcfm.lmad.papw.model.Anuncio;
-import edu.uanl.fcfm.lmad.papw.model.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Alberto
  */
-@WebServlet(name = "AnuncioCompletoServlet", urlPatterns = {"/anuncio"})
-public class AnuncioCompletoServlet extends HttpServlet {
+@WebServlet(name = "AnunciosPorCategoriaServlet", urlPatterns = {"/categoria"})
+public class AnunciosPorCategoriaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,16 +38,18 @@ public class AnuncioCompletoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {            
-            String s = (String)request.getParameter("idAnuncio");
-            Integer i = Integer.parseInt(s);
-            Anuncio anuncio = new Anuncio(AnuncioDAO.getAnuncioCompleto(i));
+        try {
+            String categoria = (String)request.getParameter("categoria");
+            String subcategoria = (String)request.getParameter("subcategoria");
             
-            request.setAttribute("anuncioCompleto", anuncio);
+            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.getAnunciosCortos(categoria, subcategoria, 1));
+            
+            request.setAttribute("anuncios", a);
             
             RequestDispatcher disp = getServletContext()
-                    .getRequestDispatcher("/anuncioCompleto.jsp");
+                    .getRequestDispatcher("/anunciosCategoria.jsp");
             disp.forward(request, response);
+            
         } finally {
             out.close();
         }

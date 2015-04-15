@@ -1,12 +1,12 @@
 <%-- 
-    Document   : index
-    Created on : 06-abr-2015, 20:18:13
+    Document   : anunciosCategoria
+    Created on : 15-abr-2015, 17:53:03
     Author     : Alberto
 --%>
 
-<%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +20,7 @@
             <div id="page_header">
                 <div id="page_heading">
                     <h1><span>Ventas LMAD</span></h1>
-                    <h2><span>Juegos y más juegos para los frikis de hoy y siempre</span></h2>
+                    <h2><span>Juegos y mÃ¡s juegos para los frikis de hoy y siempre</span></h2>
                 </div>
                 <div id="page_headerlinks">
                     <ul>
@@ -46,22 +46,39 @@
             <div id="left_sidebar">
                 <!-- Start of Newsletter Signup Form -->
                 <div id="newsletter">
-                    <h2>Iniciar sesión</h2>
-                    <form method="post" action="login">
-                        <div>
-                            <input type="text" name="nickname" value="usuario"/>
-                            <input type="password" name="password" value="contraseña"/>
-                            <input type="image" src="images/button_ok.gif" class="button" />
-                            <div class="clearthis">&nbsp;</div>
-                        </div>
-                    </form>
-                    <div id="link_cancel"> <a href="#">Crear cuenta</a> </div>
+                    <%                        
+                        if (session.getAttribute("username") == null)
+                        {
+                    %>
+                            <h2>Iniciar sesiÃ³n</h2>
+                            <form method="post" action="login">
+                                <div>
+                                    <input type="text" name="nickname" value="usuario"/>
+                                    <input type="password" name="password" value="contraseÃ±a"/>
+                                    <input type="image" src="images/button_ok.gif" class="button" />
+                                    <div class="clearthis">&nbsp;</div>
+                                </div>
+                            </form>
+                            <div id="link_cancel"> <a href="signup.jsp">Crear cuenta</a> </div>
+                    <%
+                        }
+                        else
+                        {
+                    %>
+                    <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
+                            <ul>
+                                <li><a href="#">Registrar producto</a></li>
+                                <li><a href="Index?logout=true">Cerrar sesiÃ³n</a></li>
+                            </ul>
+                    <%
+                        }
+                    %>
                 </div>
                 <!-- End of Newsletter Signup Form -->
                 <!-- Start of Categories Box -->
                 <div id="categories">
                     <div id="categories_header">
-                        <h2>Categorías</h2>
+                        <h2>CategorÃ­as</h2>
                     </div>
                     <ul>
                         <%
@@ -109,77 +126,72 @@
             <!-- End of Left Sidebar -->
             <!-- Start of Main Content Area -->
             <div id="main_content">                
-                <!-- Start of New Item Description -->
-                <div id="new_item">
-                    <div id="new_item_header">
-                        <h1>Registro de usuario</h1>
+                <!-- Start of Sub Item Descriptions -->
+                <div class="sub_items">
+                    <%
+                        List<Anuncio> anuncios = (List<Anuncio>)
+                                    request.getAttribute("anuncios");
+                        for (int i = 0; i < anuncios.size(); i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                    %>
+                    <!-- Start Left Sub Item -->
+                    <div class="sub_left">
+                        <div class="sub_items_header">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i).getId() %>">
+                                    <%= anuncios.get(i).getNombre() %></a></h1>
+                        </div>
+                        <div class="sub_items_image">  </div>
+                        <div class="sub_items_text">
+                            <img src="images/item_printer.gif" width="167" height="164" alt="Sub Item Name" />
+                            <p> <strong> Publicado por: <%= anuncios.get(i).getNickUsuario() %> <br />
+                                    <%= anuncios.get(i).getFecha().toString().substring(0, 10)%> <br /></p>
+                        </div>
+                        <div class="sub_items_cartinfo">
+                            <div class="price">
+                                <h2>$<%= anuncios.get(i).getPrecio() %></h2>
+                            </div>
+                            <div class="addtocart"> <a href="#"><span>Add to Cart</span></a> </div>
+                            <div class="clearthis">&nbsp;</div>
+                        </div>
+                        <div class="clearthis">&nbsp;</div>
                     </div>
-                    <div id="new_item_text">
-                        <form action="RegistroUsuario" method="post">
-                            <fieldset>
-                                <legend>Información de registro</legend>
-                                <div>
-                                    Nombre de usuario:<br>
-                                    <input type="text" name="nickname"><br>
-                                    Contraseña:<br>
-                                    <input type="password" name="contrasenia"><br>
-                                    Correo electrónico:<br>
-                                    <input type="email" name="correoElectronico"><br>
-                                </div>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Datos personales</legend>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            Nombre:<br>
-                                            <input type="text" name="nombre"><br>
-                                        </td>
-                                        <td>
-                                            Apellido paterno:<br>
-                                            <input type="text" name="apellidoPaterno"><br>
-                                        </td>
-                                        <td>
-                                            Apellido materno:<br>
-                                            <input type="text" name="apellidoMaterno"><br>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Fecha de nacimiento:<br>
-                                            <input type="date" name="fechaNacimiento"><br>
-                                        </td>
-                                        <td>
-                                            <input type="radio" name="sexo" value="m">Hombre<br>
-                                            <input type="radio" name="sexo" value="f">Mujer<br>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Datos de contacto</legend>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            Teléfono:<br>
-                                            <input type="tel" name="telefono">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="file" name="imagen">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </fieldset>
-                            
-                            <input type="hidden" name="logInTry" value="1">
-                            <input type="reset"><input type="submit">
-                        </form>
+                    <!-- End of Left Sub Item -->
+                    <%
+                        }
+                            else if (i % 2 != 0)
+                        {
+                    %>
+                    <!-- Start Right Sub Item -->
+                    <div class="sub_right">
+                        <div class="sub_items_header">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i).getId() %>">
+                                    <%= anuncios.get(i).getNombre() %></a></h1>
+                        </div>
+                        <div class="sub_items_image">  </div>
+                        <div class="sub_items_text">
+                            <img src="images/item_printer.gif" width="167" height="164" alt="Sub Item Name" />
+                            <p> <strong> Publicado por: <%= anuncios.get(i).getNickUsuario() %> <br />
+                                    <%= anuncios.get(i).getFecha().toString().substring(0, 10)%> <br /></p>
+                        </div>
+                        <div class="sub_items_cartinfo">
+                            <div class="price">
+                                <h2>$<%= anuncios.get(i).getPrecio() %></h2>
+                            </div>
+                            <div class="addtocart"> <a href="#"><span>Add to Cart</span></a> </div>
+                            <div class="clearthis">&nbsp;</div>
+                        </div>
+                        <div class="clearthis">&nbsp;</div>
                     </div>
                     <div class="clearthis">&nbsp;</div>
+                    <!-- End of Right Sub Item -->
+                    <%
+                        }
+                        }
+                    %>
                 </div>
-                <!-- End of New Item Description -->
+                <!-- End of Sub Item Descriptions -->
                 <div class="h_divider">&nbsp;</div>
             </div>
             <!-- End of Main Content Area -->

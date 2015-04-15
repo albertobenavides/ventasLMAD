@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/servlet/AnuncioCompletoServlet.java</file>
+            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/dao/AnuncioDAO.java</file>
             <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/web/anuncioCompleto.jsp</file>
+            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/web/anunciosCategoria.jsp</file>
+            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/servlet/AnunciosPorCategoriaServlet.java</file>
             <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/servlet/IndexServlet.java</file>
-            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/servlet/LogInServlet.java</file>
+            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/web/signup.jsp</file>
             <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/web/index.jsp</file>
         </group>
     </open-files>

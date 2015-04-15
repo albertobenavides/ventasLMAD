@@ -71,6 +71,7 @@
                     <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
                             <ul>
                                 <li><a href="#">Registrar producto</a></li>
+                                <li><a href="#">Detalles</a></li>
                                 <li><a href="Index?logout=true">Cerrar sesión</a></li>
                             </ul>
                     <%
@@ -86,7 +87,7 @@
                     <ul>
                         <%
                             List<String> categorias = (List<String>)
-                                    request.getAttribute("categorias");
+                                    session.getAttribute("categorias");
                             if (categorias != null) 
                             {
                                 String categoriaTemp = null;
@@ -96,16 +97,17 @@
                                     String categoriaString = cat.substring(0, cat.indexOf(","));
                                     if(!categoriaString.equals(categoriaTemp))
                                     {
-                                            categoriaTemp = categoriaString;
+                                        categoriaTemp = categoriaString;
                         %>
-                                            <li class="titulo"><%= categoriaTemp %></li>
-                                            <li><a href="#">- <%= subcategoria %></a></li>
+                                        <li class="titulo"><a href="categoria?categoria=<%= categoriaTemp %>">
+                                                <%= categoriaTemp %></a></li>
+                                        <li><a href="categoria?subcategoria=<%= subcategoria %>">- <%= subcategoria %></a></li>
                         <%
                                     }
                                     else
                                     {
                         %>
-                                           <li><a href="#">- <%= subcategoria %></a></li> 
+                                        <li><a href="categoria?subcategoria=<%= subcategoria %>">- <%= subcategoria %></a></li>
                         <%
                                     }
                                 }

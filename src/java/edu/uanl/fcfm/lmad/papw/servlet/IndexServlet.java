@@ -44,7 +44,7 @@ public class IndexServlet extends HttpServlet {
         try {
             Categoria c = new Categoria(CategoriaDAO.lista());
             
-            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.getAnunciosCortos());
+            List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.getAnunciosCortos(null, null, 1));
             
             String logout = (String)request.getParameter("logout");
             
@@ -55,7 +55,9 @@ public class IndexServlet extends HttpServlet {
             }
             String logInTry = (String)request.getAttribute("logInTry");
             
-            request.setAttribute("categorias", c.getCategorias());
+            HttpSession session = request.getSession();
+            
+            session.setAttribute("categorias", c.getCategorias());
             request.setAttribute("anuncios", a);
             request.setAttribute("logInTry", logInTry);
             

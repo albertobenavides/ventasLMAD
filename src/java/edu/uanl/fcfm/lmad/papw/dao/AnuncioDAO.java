@@ -18,16 +18,17 @@ import java.util.List;
  * @author Alberto
  */
 public class AnuncioDAO {
-    public static List<Anuncio> getAnunciosCortos() {
+    public static List<Anuncio> getAnunciosCortos
+        (String categoria, String subcategoria, Integer orden) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
             cs = conn.prepareCall("{ call anuncioCorto(?, ?, ?) }");
-            cs.setString(1, null);
-            cs.setString(2, null);
-            cs.setInt(3, 1);
+            cs.setString(1, categoria);
+            cs.setString(2, subcategoria);
+            cs.setInt(3, orden);
             rs = cs.executeQuery();
             List<Anuncio> anuncios = new ArrayList<Anuncio>();
             while (rs.next()) 
