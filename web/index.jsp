@@ -70,7 +70,7 @@
                     %>
                     <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
                             <ul>
-                                <li><a href="#">Registrar producto</a></li>
+                                <li><a href="nuevoProducto.jsp">Registrar producto</a></li>
                                 <li><a href="#">Detalles</a></li>
                                 <li><a href="Index?logout=true">Cerrar sesión</a></li>
                             </ul>
@@ -139,7 +139,7 @@
                 <!-- Start of New Item Description -->
                 <div id="new_item">
                     <div id="new_item_header">
-                        <h1><a href="anuncio?idAnuncio=<%= anuncios.get(0).getId() %>">
+                        <h1><a href="anuncio?idAnuncio=<%= anuncios.get(0).getIdUsuario()%>">
                                 <%= anuncios.get(0).getNombre() %></a></h1>
                         <h2>$<%= anuncios.get(0).getPrecio() %></h2>
                     </div>
@@ -158,7 +158,7 @@
                     <!-- Start Left Sub Item -->
                     <div class="sub_left">
                         <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(1).getId() %>">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(1).getIdUsuario()%>">
                                     <%= anuncios.get(1).getNombre() %></a></h1>
                         </div>
                         <div class="sub_items_image">  </div>
@@ -180,7 +180,7 @@
                     <!-- Start Right Sub Item -->
                     <div class="sub_right">
                         <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(2).getId() %>">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(2).getIdUsuario()%>">
                                     <%= anuncios.get(2).getNombre() %></a></h1>
                         </div>
                         <div class="sub_items_image">  </div>

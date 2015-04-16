@@ -39,4 +39,27 @@ public class CategoriaDAO {
             pool.freeConnection(conn);
         }
     }
+    
+    public static List<String> listaSubcategorias() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall("{ call subcategoriasDisponibles() }");
+            rs = cs.executeQuery();
+            List<String> c = new ArrayList<String>();
+            while (rs.next()) {
+                c.add(rs.getString("nombreSubcategoria"));
+            }
+            return c;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
 }

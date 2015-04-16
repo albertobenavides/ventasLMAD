@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Blob;
 
 /**
  *
@@ -81,6 +82,39 @@ public class AnuncioDAO {
             return null;
         } finally {
             DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
+    
+    public static void setAnuncioCompleto(Anuncio a)
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall("{ call insertarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs.setString(1, a.getNombre());
+            cs.setFloat(2, Float.parseFloat(a.getPrecio()));
+            cs.setString(3, a.getExistencias());
+            cs.setString(4, a.getVigencia());
+            cs.setString(5, a.getCaracteristicas());
+            cs.setBlob(6, a.getImage1());
+            cs.setBlob(7, a.getImage1());
+            cs.setBlob(8, a.getImage1());
+            cs.setBlob(9, a.getVideo1());
+            cs.setBlob(10, a.getVideo1());
+            cs.setBlob(11, a.getVideo1());
+            cs.setBoolean(12, false);
+            cs.setInt(13, Integer.parseInt(a.getIdUsuario()));
+            cs.setInt(14, Integer.parseInt(a.getIdSubcategoria()));
+            
+            rs = cs.executeQuery();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
             DBUtil.closeStatement(cs);
             pool.freeConnection(conn);
         }

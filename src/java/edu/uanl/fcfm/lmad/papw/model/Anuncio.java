@@ -5,23 +5,43 @@
  */
 package edu.uanl.fcfm.lmad.papw.model;
 
+import java.sql.Blob;
+
 /**
  *
  * @author Alberto
  */
 public class Anuncio {
     String nombre;
-    double precio;
+    Double precio;
     String caracteristicas;
+    String vigencia;
+    Integer existencias;
     String nickUsuario;
     String correoElectronico;
     String telefono;
     String nombreUsuario;
     String fecha;
-    int id;
+    Integer idUsuario;
+    Blob image1;
+    Blob video1;
+    String idSubcategoria;
     
     public Anuncio(){}
-    
+
+    public Anuncio(String nombre, double precio, String caracteristicas, String vigencia, 
+            int existencias, int idUsuario, Blob image1, Blob video1, String idSubcategoria) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.caracteristicas = caracteristicas;
+        this.vigencia = vigencia;
+        this.existencias = existencias;
+        this.idUsuario = idUsuario;
+        this.image1 = image1;
+        this.video1 = video1;
+        this.idSubcategoria = idSubcategoria;
+    }
+
     public Anuncio(String nombre, String precio, String nickUsuario,
             String fecha, String id)
     {
@@ -29,7 +49,7 @@ public class Anuncio {
         this.precio = Double.parseDouble(precio);
         this.nickUsuario = nickUsuario;
         this.fecha = fecha;
-        this.id = Integer.parseInt(id);
+        this.idUsuario = Integer.parseInt(id);
     }
 
     public Anuncio(String nombre, String precio, String caracteristicas, 
@@ -59,8 +79,8 @@ public class Anuncio {
         return nombre;
     }
 
-    public double getPrecio() {
-        return precio;
+    public String getPrecio() {
+        return precio.toString();
     }
 
     public String getNickUsuario() {
@@ -69,10 +89,6 @@ public class Anuncio {
 
     public String getFecha() {
         return fecha;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getCaracteristicas() {
@@ -90,6 +106,29 @@ public class Anuncio {
     public String getNombreUsuario() {
         return nombreUsuario;
     }
-    
-    
+
+    public String getVigencia() {
+        return vigencia;
+    }
+
+    public String getExistencias() {
+        return existencias.toString();
+    }
+
+    public String getIdUsuario() {
+        return idUsuario.toString();
+    }
+
+    public Blob getImage1() {
+        return image1;
+    }
+
+    public Blob getVideo1() {
+        return video1;
+    }
+
+    public String getIdSubcategoria() {
+        return idSubcategoria;
+    }
+
 }

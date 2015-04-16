@@ -6,6 +6,7 @@
 package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.LoginDAO;
+import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -40,15 +41,18 @@ public class LogInServlet extends HttpServlet {
             String nickname = request.getParameter("nickname");
             String contrasenia = request.getParameter("password");
             String message;
-            if (LoginDAO.login(nickname, contrasenia) != null)
+            
+            Usuario u = new Usuario (LoginDAO.login(nickname, contrasenia));
+            
+            if (u.getId() != 0)
             {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", nickname);
+                session.setAttribute("idUsuario", u.getId());
                 message = null;
             }
             else
             {
-                request.setAttribute("nickname", null);
                 message = "Usuario o contraseña incorrectos.";
             }
             

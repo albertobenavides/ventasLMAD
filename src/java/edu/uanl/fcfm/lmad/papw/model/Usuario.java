@@ -24,6 +24,17 @@ public class Usuario {
     private String telefono;
     private Blob imagen;
 
+    public Usuario(Usuario u)
+    {
+        this.id = u.getId();
+        this.nickname = u.getNickname();
+    }
+    
+    public Usuario(int id, String nickname) {
+        this.id = id;
+        this.nickname = nickname;
+    }
+    
     public Usuario(String nickname, String contrasenia, String correoElectronico, 
             String nombre, String apellidoPaterno, String apellidoMaterno, 
             String fechaNacimiento, String sexo, String telefono, Blob imagen) {
