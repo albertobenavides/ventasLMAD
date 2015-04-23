@@ -46,16 +46,21 @@ public class RegistrarProductoServlet extends HttpServlet {
             String descripcionProducto = request.getParameter("descripcionProducto");
             String existenciaProducto = request.getParameter("existenciaProducto");
             String vigenciaProducto = request.getParameter("vigenciaProducto");
-            if (vigenciaProducto == "")
+            if (vigenciaProducto.equals(""))
                 vigenciaProducto = null;
             String idSubcategoria = (String)request.getParameter("idSubcategoria");
             String idUsuario = session.getAttribute("idUsuario").toString();
+            boolean anuncioPublico = Boolean.parseBoolean(request.getParameter("publicarAnuncio"));
             
             Anuncio a = new Anuncio (nombreProducto, Double.parseDouble(precioProducto),
                     descripcionProducto, vigenciaProducto, Integer.parseInt(existenciaProducto),
-                    Integer.parseInt(idUsuario), null, null, idSubcategoria);
+                    Integer.parseInt(idUsuario), null, null, anuncioPublico, idSubcategoria);
             
             AnuncioDAO.setAnuncioCompleto(a);
+            
+            RequestDispatcher disp = getServletContext()
+                    .getRequestDispatcher("/listaProductos.jsp");
+            disp.forward(request, response);
         } finally {
             out.close();
         }

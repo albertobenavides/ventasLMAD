@@ -1,11 +1,13 @@
 <%-- 
-    Document   : anunciosCategoria
-    Created on : 15-abr-2015, 17:53:03
+    Document   : listaProductos
+    Created on : 22-abr-2015, 17:16:50
     Author     : Alberto
 --%>
 
-<%@page import="java.util.List"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +15,15 @@
         <title>Ventas LMAD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+        <%
+            if (session.getAttribute("username") == null)
+            {
+                request.setAttribute("message", "Inicio de sesión requerido.");
+                RequestDispatcher disp = getServletContext()
+                    .getRequestDispatcher("/Index");
+                disp.forward(request, response);
+            }
+        %>          
     </head>
     <body>
         <div id="container">
@@ -46,33 +57,12 @@
             <div id="left_sidebar">
                 <!-- Start of Newsletter Signup Form -->
                 <div id="newsletter">
-                    <%                        
-                        if (session.getAttribute("username") == null)
-                        {
-                    %>
-                            <h2>Iniciar sesión</h2>
-                            <form method="post" action="login">
-                                <div>
-                                    <input type="text" name="nickname" value="usuario"/>
-                                    <input type="password" name="password" value="contraseña"/>
-                                    <input type="image" src="images/button_ok.gif" class="button" />
-                                    <div class="clearthis">&nbsp;</div>
-                                </div>
-                            </form>
-                            <div id="link_cancel"> <a href="signup.jsp">Crear cuenta</a> </div>
-                    <%
-                        }
-                        else
-                        {
-                    %>
                     <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
-                            <ul>
-                                <li><a href="#">Registrar producto</a></li>
-                                <li><a href="Index?logout=true">Cerrar sesión</a></li>
-                            </ul>
-                    <%
-                        }
-                    %>
+                    <ul>
+                        <li><a href="#">Registrar producto</a></li>
+                        <li><a href="#">Detalles</a></li>
+                        <li><a href="Index?logout=true">Cerrar sesión</a></li>
+                    </ul>
                 </div>
                 <!-- End of Newsletter Signup Form -->
                 <!-- Start of Categories Box -->
@@ -126,72 +116,48 @@
             <!-- End of Left Sidebar -->
             <!-- Start of Main Content Area -->
             <div id="main_content">                
-                <!-- Start of Sub Item Descriptions -->
-                <div class="sub_items">
-                    <%
-                        List<Anuncio> anuncios = (List<Anuncio>)
-                                    request.getAttribute("anuncios");
-                        for (int i = 0; i < anuncios.size(); i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                    %>
-                    <!-- Start Left Sub Item -->
-                    <div class="sub_left">
-                        <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i) %>">
-                                    <%= anuncios.get(i).getNombre() %></a></h1>
-                        </div>
-                        <div class="sub_items_image">  </div>
-                        <div class="sub_items_text">
-                            <img src="images/item_printer.gif" width="167" height="164" alt="Sub Item Name" />
-                            <p> <strong> Publicado por: <%= anuncios.get(i).getNickUsuario() %> <br />
-                                    <%= anuncios.get(i).getFecha().toString().substring(0, 10)%> <br /></p>
-                        </div>
-                        <div class="sub_items_cartinfo">
-                            <div class="price">
-                                <h2>$<%= anuncios.get(i).getPrecio() %></h2>
-                            </div>
-                            <div class="addtocart"> <a href="#"><span>Add to Cart</span></a> </div>
-                            <div class="clearthis">&nbsp;</div>
-                        </div>
-                        <div class="clearthis">&nbsp;</div>
+                <!-- Start of New Item Description -->
+                <div id="new_item">
+                    <div id="new_item_header">
+                        <h1>Registrar nuevo producto</h1>
                     </div>
-                    <!-- End of Left Sub Item -->
-                    <%
-                        }
-                            else if (i % 2 != 0)
-                        {
-                    %>
-                    <!-- Start Right Sub Item -->
-                    <div class="sub_right">
-                        <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i) %>">
-                                    <%= anuncios.get(i).getNombre() %></a></h1>
-                        </div>
-                        <div class="sub_items_image">  </div>
-                        <div class="sub_items_text">
-                            <img src="images/item_printer.gif" width="167" height="164" alt="Sub Item Name" />
-                            <p> <strong> Publicado por: <%= anuncios.get(i).getNickUsuario() %> <br />
-                                    <%= anuncios.get(i).getFecha().toString().substring(0, 10)%> <br /></p>
-                        </div>
-                        <div class="sub_items_cartinfo">
-                            <div class="price">
-                                <h2>$<%= anuncios.get(i).getPrecio() %></h2>
-                            </div>
-                            <div class="addtocart"> <a href="#"><span>Add to Cart</span></a> </div>
-                            <div class="clearthis">&nbsp;</div>
-                        </div>
-                        <div class="clearthis">&nbsp;</div>
+                    <div id="new_item_text">
+                        <%
+                            String idUsuario = session.getAttribute("idUsuario").toString();
+                            List<Anuncio> productos = new ArrayList<Anuncio>
+                                (AnuncioDAO.getListaProductos(idUsuario));
+                        %>
+                        <table>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Existencia</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <%
+                            for (Anuncio producto : productos)
+                            {
+                            %>
+                            <tr>
+                                <th><%= producto.getFecha() %></th>
+                                <th><%= producto.getNombre() %></th>
+                                <th><%= producto.getPrecio() %></th>
+                                <th><%= producto.getExistencias() %></th>
+                                <th><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto() %>">Editar</a></th>
+                                <th><a href="#?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></th>
+                                <th><a href="#?idProducto=<%= producto.getIdProducto() %>">Eliminar</a></th>
+                            </tr>
+                            <%
+                            }
+                            %>
+                        </table>
                     </div>
                     <div class="clearthis">&nbsp;</div>
-                    <!-- End of Right Sub Item -->
-                    <%
-                        }
-                        }
-                    %>
                 </div>
-                <!-- End of Sub Item Descriptions -->
+                <!-- End of New Item Description -->
                 <div class="h_divider">&nbsp;</div>
             </div>
             <!-- End of Main Content Area -->

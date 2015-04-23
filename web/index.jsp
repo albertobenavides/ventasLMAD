@@ -70,6 +70,7 @@
                     %>
                     <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
                             <ul>
+                                <li><a href="listaProductos.jsp">Mis productos</a></li>
                                 <li><a href="nuevoProducto.jsp">Registrar producto</a></li>
                                 <li><a href="#">Detalles</a></li>
                                 <li><a href="Index?logout=true">Cerrar sesión</a></li>

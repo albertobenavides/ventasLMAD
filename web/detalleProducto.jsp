@@ -1,11 +1,13 @@
 <%-- 
-    Document   : nuevoProducto
-    Created on : 16-abr-2015, 10:36:11
+    Document   : detalleProducto
+    Created on : 23-abr-2015, 10:31:59
     Author     : Alberto
 --%>
 
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO"%>
 <%@page import="java.util.List"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -115,9 +117,14 @@
             <!-- Start of Main Content Area -->
             <div id="main_content">                
                 <!-- Start of New Item Description -->
+                <%
+                    String idProducto = request.getParameter("idProducto");
+                    Anuncio producto = new Anuncio
+                        (AnuncioDAO.getProducto(idProducto));
+                %>
                 <div id="new_item">
                     <div id="new_item_header">
-                        <h1>Registrar nuevo producto</h1>
+                        <h1>Editar producto</h1>
                     </div>
                     <div id="new_item_text">
                         <form action="nuevoProducto" method="post" id="forma">
@@ -126,10 +133,11 @@
                                 <div>
                                     Nombre del producto:<br>
                                     <input type="text" name="nombreProducto" 
-                                           maxlength="50" required><br>
+                                           maxlength="50" required
+                                           value="<%= producto.getNombre() %>"><br>
                                     Precio:<br>
                                     <input type="number" name="precioProducto"
-                                           required><br>
+                                           required value="<%= producto.getPrecio() %>"><br>
                                     Categoría:
                                     <select name="idSubcategoria" form="forma">
                                 <%
@@ -141,7 +149,7 @@
                                 <%            
                                         }
                                 %>
-                                    </select>
+                                    </select> FALTA SELECCIONAR ELEMENTO
                                 </div>
                             </fieldset>
                             <fieldset>
@@ -149,11 +157,14 @@
                                 <div>
                                     Descripción: [Cambiar por TEXTAREA]<br>
                                     <input type="text" name="descripcionProducto"
-                                           maxlength="500"><br>
+                                           maxlength="500"
+                                           value="<%= producto.getCaracteristicas() %>"><br>
                                     Existencia:<br>
-                                    <input type="number" name="existenciaProducto"><br>
+                                    <input type="number" name="existenciaProducto"
+                                           value="<%= producto.getExistencias()%>"><br>
                                     Vigencia:<br>
-                                    <input type="date" name="vigenciaProducto"><br>
+                                    <input type="date" name="vigenciaProducto"
+                                           value="<%= producto.getVigencia()%>"><br>
                                 </div>
                             </fieldset>
                             <fieldset>
@@ -169,15 +180,31 @@
                                 <legend>Anunciar</legend>
                                 <div>
                                     ¿Desea publicar su producto?<br>
-                                    No: <input type="radio" name="publicarAnuncio" value="false"><br>
-                                    Sí: <input type="radio" name="publicarAnuncio" value="true"><br>
+                                    <%
+                                    if (producto.isAnuncioPublico())
+                                    {
+                                    %>
+                                    No: <input type="radio" name="publicarAnuncio" 
+                                               value="false"><br>
+                                    Sí: <input type="radio" name="publicarAnuncio" 
+                                               value="true" checked><br>
+                                    <%
+                                    }
+                                    else
+                                    {
+                                    %>
+                                    No: <input type="radio" name="publicarAnuncio" 
+                                               value="false" checked><br>
+                                    Sí: <input type="radio" name="publicarAnuncio" 
+                                               value="true"><br>
+                                    <%
+                                    }
+                                    %>
                                 </div>
                             </fieldset>
                             <input type="reset"><input type="submit">
                         </form>
                     </div>
-                    <div class="clearthis">&nbsp;</div>
-                </div>
                 <!-- End of New Item Description -->
                 <div class="h_divider">&nbsp;</div>
             </div>

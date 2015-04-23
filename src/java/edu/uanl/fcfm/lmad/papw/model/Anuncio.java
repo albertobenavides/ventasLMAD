@@ -12,6 +12,7 @@ import java.sql.Blob;
  * @author Alberto
  */
 public class Anuncio {
+    int idProducto;
     String nombre;
     Double precio;
     String caracteristicas;
@@ -25,12 +26,23 @@ public class Anuncio {
     Integer idUsuario;
     Blob image1;
     Blob video1;
+    boolean anuncioPublico;
     String idSubcategoria;
     
     public Anuncio(){}
 
+    public Anuncio(int idProducto, String nombre, Double precio, Integer existencias, String fecha, boolean anuncioPublico) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.existencias = existencias;
+        this.fecha = fecha;
+        this.anuncioPublico = anuncioPublico;
+    }
+    
     public Anuncio(String nombre, double precio, String caracteristicas, String vigencia, 
-            int existencias, int idUsuario, Blob image1, Blob video1, String idSubcategoria) {
+            int existencias, int idUsuario, Blob image1, Blob video1, boolean anuncioPublico,
+            String idSubcategoria) {
         this.nombre = nombre;
         this.precio = precio;
         this.caracteristicas = caracteristicas;
@@ -39,6 +51,7 @@ public class Anuncio {
         this.idUsuario = idUsuario;
         this.image1 = image1;
         this.video1 = video1;
+        this.anuncioPublico = anuncioPublico;
         this.idSubcategoria = idSubcategoria;
     }
 
@@ -70,9 +83,16 @@ public class Anuncio {
         this.precio = a.precio;
         this.caracteristicas = a.caracteristicas;
         this.correoElectronico = a.correoElectronico;
+        this.existencias = a.existencias;
+        this.vigencia = a.vigencia;
         this.telefono = a.telefono;
         this.nombreUsuario = a.nombreUsuario;
         this.fecha = a.fecha;
+        this.anuncioPublico = a.anuncioPublico;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
     }
 
     public String getNombre() {
@@ -125,6 +145,10 @@ public class Anuncio {
 
     public Blob getVideo1() {
         return video1;
+    }
+
+    public boolean isAnuncioPublico() {
+        return anuncioPublico;
     }
 
     public String getIdSubcategoria() {

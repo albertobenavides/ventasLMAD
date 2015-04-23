@@ -87,6 +87,44 @@ public class AnuncioDAO {
         }
     }
     
+    public static Anuncio getProducto(String i) {
+    ConnectionPool pool = ConnectionPool.getInstance();
+    Connection conn = pool.getConnection();
+    CallableStatement cs = null;
+    ResultSet rs = null;
+    try {
+        cs = conn.prepareCall("{ call getProducto(?) }");
+        cs.setString(1, i);
+        rs = cs.executeQuery();
+
+        Anuncio anuncioCompleto = new Anuncio();
+        while (rs.next()) 
+        {
+            boolean anuncioPublico;
+            anuncioPublico = "1".equals(rs.getString("anuncioPublico"));
+            anuncioCompleto = new Anuncio(
+                rs.getString("nombreProducto"),
+                Double.parseDouble(rs.getString("precioProducto")), 
+                rs.getString("caracteristicas"), 
+                null, // Vigencia
+                Integer.parseInt(rs.getString("existenciaProducto")),
+                0, // idUsuario
+                null, // Imagen1
+                null, // Imagen2
+                anuncioPublico,
+                rs.getString("idSubCategoria"));
+        }
+        return anuncioCompleto;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        return null;
+    } finally {
+        DBUtil.closeResultSet(rs);
+        DBUtil.closeStatement(cs);
+        pool.freeConnection(conn);
+    }
+}
+    
     public static void setAnuncioCompleto(Anuncio a)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -106,7 +144,7 @@ public class AnuncioDAO {
             cs.setBlob(9, a.getVideo1());
             cs.setBlob(10, a.getVideo1());
             cs.setBlob(11, a.getVideo1());
-            cs.setBoolean(12, false);
+            cs.setBoolean(12, a.isAnuncioPublico());
             cs.setInt(13, Integer.parseInt(a.getIdUsuario()));
             cs.setInt(14, Integer.parseInt(a.getIdSubcategoria()));
             
@@ -115,6 +153,40 @@ public class AnuncioDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
+    
+    public static List<Anuncio> getListaProductos
+        (String idUsuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall("{ call listadoProductos(?) }");
+            cs.setString(1, idUsuario);
+            rs = cs.executeQuery();
+            List<Anuncio> productos = new ArrayList<Anuncio>();
+            while (rs.next()) 
+            {
+                Anuncio a = new Anuncio(
+                        Integer.parseInt(rs.getString("idProducto")), 
+                        rs.getString("nombreProducto"),
+                        Double.parseDouble(rs.getString("precioProducto")),
+                        Integer.parseInt(rs.getString("existenciaProducto")), 
+                        rs.getString("date(creacionProducto)"),
+                        Boolean.parseBoolean(rs.getString("anuncioPublico"))
+                );
+                productos.add(a);
+            }
+            return productos;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
             DBUtil.closeStatement(cs);
             pool.freeConnection(conn);
         }
