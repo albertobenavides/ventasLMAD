@@ -5,6 +5,7 @@
  */
 package edu.uanl.fcfm.lmad.papw.dao;
 
+import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
  * @author Alberto
  */
 public class LoginDAO {
-    public static String login(String username, String password)
+    public static Usuario login(String username, String password)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -26,10 +27,17 @@ public class LoginDAO {
                 cs.setString(1, username);
                 cs.setString(2, password);
                 rs = cs.executeQuery();
+                
                 if (rs.next())
-                    return username;
+                {
+                    Usuario u = new Usuario (Integer.parseInt(rs.getString(1)), username);
+                    return u;
+                }
                 else
-                    return null;
+                {
+                    Usuario u = new Usuario (0, username);
+                    return u;
+                }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } finally {
