@@ -120,7 +120,8 @@
                         <h1>Registrar nuevo producto</h1>
                     </div>
                     <div id="new_item_text">
-                        <form action="nuevoProducto" method="post" id="forma">
+                        <form action="nuevoProducto" method="post" id="forma"
+                              enctype="multipart/form-data">
                             <fieldset>
                                 <legend>Datos necesarios</legend>
                                 <div>

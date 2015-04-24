@@ -121,13 +121,13 @@
                     <div id="new_item_header">
                         <h1>Registrar nuevo producto</h1>
                     </div>
-                    <div id="new_item_text">
+                    <div id="new_item_list">
                         <%
                             String idUsuario = session.getAttribute("idUsuario").toString();
                             List<Anuncio> productos = new ArrayList<Anuncio>
                                 (AnuncioDAO.getListaProductos(idUsuario));
                         %>
-                        <table>
+                        <table cellspacing="3px">
                             <tr>
                                 <th>Fecha</th>
                                 <th>Producto</th>
@@ -142,13 +142,13 @@
                             {
                             %>
                             <tr>
-                                <th><%= producto.getFecha() %></th>
-                                <th><%= producto.getNombre() %></th>
-                                <th><%= producto.getPrecio() %></th>
-                                <th><%= producto.getExistencias() %></th>
-                                <th><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto() %>">Editar</a></th>
-                                <th><a href="#?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></th>
-                                <th><a href="#?idProducto=<%= producto.getIdProducto() %>">Eliminar</a></th>
+                                <td><%= producto.getFecha() %></td>
+                                <td><%= producto.getNombre() %></td>
+                                <td><%= producto.getPrecio() %></td>
+                                <td><%= producto.getExistencias() %></td>
+                                <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto() %>">Editar</a></td>
+                                <td><a href="#?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></td>
+                                <td><a href="#?idProducto=<%= producto.getIdProducto() %>">Eliminar</a></td>
                             </tr>
                             <%
                             }

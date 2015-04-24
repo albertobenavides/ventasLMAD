@@ -139,7 +139,7 @@
                     <!-- Start Left Sub Item -->
                     <div class="sub_left">
                         <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i) %>">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdUsuario()%>">
                                     <%= anuncios.get(i).getNombre() %></a></h1>
                         </div>
                         <div class="sub_items_image">  </div>
@@ -166,7 +166,7 @@
                     <!-- Start Right Sub Item -->
                     <div class="sub_right">
                         <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i) %>">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdUsuario() %>">
                                     <%= anuncios.get(i).getNombre() %></a></h1>
                         </div>
                         <div class="sub_items_image">  </div>

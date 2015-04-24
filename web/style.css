@@ -437,6 +437,18 @@ input {
 
 }
 
+#new_item_list th {
+	font-size: 20px;
+        padding: 10px;
+        text-align: center;
+}
+
+#new_item_list table {
+	font-size: 12px;
+        padding: 10px;
+        text-align: center;
+}
+
 #new_item_image {
 	width: 245px;
 	float: right;
