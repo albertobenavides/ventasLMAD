@@ -5,8 +5,8 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
-import edu.uanl.fcfm.lmad.papw.model.Anuncio;
+import edu.uanl.fcfm.lmad.papw.dao.ProductoDAO;
+import edu.uanl.fcfm.lmad.papw.model.Producto;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -121,18 +121,26 @@ public class RegistrarProductoServlet extends HttpServlet {
             String precioProducto = request.getParameter("precioProducto");
             String descripcionProducto = request.getParameter("descripcionProducto");
             String existenciaProducto = request.getParameter("existenciaProducto");
-            String vigenciaProducto = request.getParameter("vigenciaProducto");
-            if (vigenciaProducto.equals(""))
-                vigenciaProducto = null;
-            String idSubcategoria = (String)request.getParameter("idSubcategoria");
+            String idSubcategoria = request.getParameter("idSubcategoria");
             String idUsuario = session.getAttribute("idUsuario").toString();
             boolean anuncioPublico = Boolean.parseBoolean(request.getParameter("publicarAnuncio"));
             
-            Anuncio a = new Anuncio (nombreProducto, Double.parseDouble(precioProducto),
-                    descripcionProducto, vigenciaProducto, Integer.parseInt(existenciaProducto),
-                    Integer.parseInt(idUsuario), null, null, anuncioPublico, idSubcategoria);
+            Producto p = new Producto();
+            p.setNombre(nombreProducto);
+            p.setPrecio(Float.parseFloat(precioProducto));
+            p.setExistencia(Integer.parseInt(existenciaProducto));
+            p.setDescripcionLarga(descripcionProducto);
+            p.setImagen1(null);
+            p.setImagen2(null);
+            p.setImagen3(null);
+            p.setVideo1(null);
+            p.setVideo2(null);
+            p.setVideo3(null);
+            p.setAnuncioPublico(anuncioPublico);
+            p.setIdSubcategoria(Integer.parseInt(idSubcategoria));
+            p.setIdUsuario(Integer.parseInt(idUsuario));
             
-            AnuncioDAO.setAnuncioCompleto(a);
+            ProductoDAO.setAnuncioCompleto(p);
             
             RequestDispatcher disp = getServletContext()
                     .getRequestDispatcher("/listaProductos.jsp");

@@ -4,6 +4,8 @@
     Author     : Alberto
 --%>
 
+<%@page import="edu.uanl.fcfm.lmad.papw.dao.ProductoDAO"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.model.Producto"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
@@ -119,8 +121,8 @@
                 <!-- Start of New Item Description -->
                 <%
                     String idProducto = request.getParameter("idProducto");
-                    Anuncio producto = new Anuncio
-                        (AnuncioDAO.getProducto(idProducto));
+                    Producto producto = new Producto
+                        (ProductoDAO.getProducto(idProducto));
                 %>
                 <div id="new_item">
                     <div id="new_item_header">
@@ -158,13 +160,10 @@
                                     Descripción: [Cambiar por TEXTAREA]<br>
                                     <input type="text" name="descripcionProducto"
                                            maxlength="500"
-                                           value="<%= producto.getCaracteristicas() %>"><br>
+                                           value="<%= producto.getDescripcionLarga()%>"><br>
                                     Existencia:<br>
                                     <input type="number" name="existenciaProducto"
-                                           value="<%= producto.getExistencias()%>"><br>
-                                    Vigencia:<br>
-                                    <input type="date" name="vigenciaProducto"
-                                           value="<%= producto.getVigencia()%>"><br>
+                                           value="<%= producto.getExistencia()%>"><br>
                                 </div>
                             </fieldset>
                             <fieldset>

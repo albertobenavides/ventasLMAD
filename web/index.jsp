@@ -140,7 +140,7 @@
                 <!-- Start of New Item Description -->
                 <div id="new_item">
                     <div id="new_item_header">
-                        <h1><a href="anuncio?idAnuncio=<%= anuncios.get(0).getIdUsuario()%>">
+                        <h1><a href="anuncio?idAnuncio=<%= anuncios.get(0).getIdAnuncio()%>">
                                 <%= anuncios.get(0).getNombre() %></a></h1>
                         <h2>$<%= anuncios.get(0).getPrecio() %></h2>
                     </div>
@@ -159,7 +159,7 @@
                     <!-- Start Left Sub Item -->
                     <div class="sub_left">
                         <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(1).getIdUsuario()%>">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(1).getIdAnuncio()%>">
                                     <%= anuncios.get(1).getNombre() %></a></h1>
                         </div>
                         <div class="sub_items_image">  </div>
@@ -181,7 +181,7 @@
                     <!-- Start Right Sub Item -->
                     <div class="sub_right">
                         <div class="sub_items_header">
-                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(2).getIdUsuario()%>">
+                            <h1><a href="anuncio?idAnuncio=<%= anuncios.get(2).getIdAnuncio()%>">
                                     <%= anuncios.get(2).getNombre() %></a></h1>
                         </div>
                         <div class="sub_items_image">  </div>

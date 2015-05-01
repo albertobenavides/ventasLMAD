@@ -12,70 +12,33 @@ import java.sql.Blob;
  * @author Alberto
  */
 public class Anuncio {
-    int idProducto;
-    String nombre;
-    Double precio;
-    String caracteristicas;
+    int idAnuncio;
+    String fecha;
     String vigencia;
-    Integer existencias;
+    Blob imagen1;
+    Blob imagen2;
+    Blob imagen3;
+    Blob video1;
+    Blob video2;
+    Blob video3;
+    int metodoPago;
+    
+    
+    String nombre;
+    float precio;
+    String caracteristicas;
+    
+    int existencias;
     String nickUsuario;
     String correoElectronico;
     String telefono;
     String nombreUsuario;
-    String fecha;
-    Integer idUsuario;
-    Blob image1;
-    Blob video1;
-    boolean anuncioPublico;
-    String idSubcategoria;
+    
+    int idUsuario;
+    
+    int idSubcategoria;
     
     public Anuncio(){}
-
-    public Anuncio(int idProducto, String nombre, Double precio, Integer existencias, String fecha, boolean anuncioPublico) {
-        this.idProducto = idProducto;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.existencias = existencias;
-        this.fecha = fecha;
-        this.anuncioPublico = anuncioPublico;
-    }
-    
-    public Anuncio(String nombre, double precio, String caracteristicas, String vigencia, 
-            int existencias, int idUsuario, Blob image1, Blob video1, boolean anuncioPublico,
-            String idSubcategoria) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.caracteristicas = caracteristicas;
-        this.vigencia = vigencia;
-        this.existencias = existencias;
-        this.idUsuario = idUsuario;
-        this.image1 = image1;
-        this.video1 = video1;
-        this.anuncioPublico = anuncioPublico;
-        this.idSubcategoria = idSubcategoria;
-    }
-
-    public Anuncio(String nombre, String precio, String nickUsuario,
-            String fecha, String id)
-    {
-        this.nombre = nombre;
-        this.precio = Double.parseDouble(precio);
-        this.nickUsuario = nickUsuario;
-        this.fecha = fecha;
-        this.idUsuario = Integer.parseInt(id);
-    }
-
-    public Anuncio(String nombre, String precio, String caracteristicas, 
-            String correoElectronico, String telefono, String nombreUsuario, 
-            String fecha) {
-        this.nombre = nombre;
-        this.precio = Double.parseDouble(precio);
-        this.caracteristicas = caracteristicas;
-        this.correoElectronico = correoElectronico;
-        this.telefono = telefono;
-        this.nombreUsuario = nombreUsuario;
-        this.fecha = fecha;
-    }
     
     public Anuncio (Anuncio a)
     {
@@ -88,71 +51,165 @@ public class Anuncio {
         this.telefono = a.telefono;
         this.nombreUsuario = a.nombreUsuario;
         this.fecha = a.fecha;
-        this.anuncioPublico = a.anuncioPublico;
     }
 
-    public int getIdProducto() {
-        return idProducto;
+    public int getIdAnuncio() {
+        return idAnuncio;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getPrecio() {
-        return precio.toString();
-    }
-
-    public String getNickUsuario() {
-        return nickUsuario;
+    public void setIdAnuncio(int idProducto) {
+        this.idAnuncio = idProducto;
     }
 
     public String getFecha() {
         return fecha;
     }
 
-    public String getCaracteristicas() {
-        return caracteristicas;
-    }
-
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getVigencia() {
         return vigencia;
     }
 
-    public String getExistencias() {
-        return existencias.toString();
+    public void setVigencia(String vigencia) {
+        this.vigencia = vigencia;
     }
 
-    public String getIdUsuario() {
-        return idUsuario.toString();
+    public Blob getImagen1() {
+        return imagen1;
     }
 
-    public Blob getImage1() {
-        return image1;
+    public void setImagen1(Blob imagen1) {
+        this.imagen1 = imagen1;
+    }
+
+    public Blob getImagen2() {
+        return imagen2;
+    }
+
+    public void setImagen2(Blob imagen2) {
+        this.imagen2 = imagen2;
+    }
+
+    public Blob getImagen3() {
+        return imagen3;
+    }
+
+    public void setImagen3(Blob imagen3) {
+        this.imagen3 = imagen3;
     }
 
     public Blob getVideo1() {
         return video1;
     }
 
-    public boolean isAnuncioPublico() {
-        return anuncioPublico;
+    public void setVideo1(Blob video1) {
+        this.video1 = video1;
     }
 
-    public String getIdSubcategoria() {
+    public Blob getVideo2() {
+        return video2;
+    }
+
+    public void setVideo2(Blob video2) {
+        this.video2 = video2;
+    }
+
+    public Blob getVideo3() {
+        return video3;
+    }
+
+    public void setVideo3(Blob video3) {
+        this.video3 = video3;
+    }
+
+    public int getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(int metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public int getExistencias() {
+        return existencias;
+    }
+
+    public void setExistencias(int existencias) {
+        this.existencias = existencias;
+    }
+
+    public String getNickUsuario() {
+        return nickUsuario;
+    }
+
+    public void setNickUsuario(String nickUsuario) {
+        this.nickUsuario = nickUsuario;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdSubcategoria() {
         return idSubcategoria;
     }
 
+    public void setIdSubcategoria(int idSubcategoria) {
+        this.idSubcategoria = idSubcategoria;
+    }
 }

@@ -34,13 +34,13 @@ public class AnuncioDAO {
             List<Anuncio> anuncios = new ArrayList<Anuncio>();
             while (rs.next()) 
             {
-                Anuncio a = new Anuncio(
-                        rs.getString("nombreProducto"),
-                        rs.getString("precioProducto"),
-                        rs.getString("nickUsuario"),
-                        rs.getString("fechaPublicacionAnuncio"),
-                        rs.getString("idAnuncio")
-                );
+                Anuncio a = new Anuncio();
+                
+                a.setNombre(rs.getString("nombreProducto"));
+                a.setPrecio(rs.getFloat("precioProducto"));
+                a.setNickUsuario(rs.getString("nickUsuario"));
+                a.setFecha(rs.getString("fechaPublicacionAnuncio"));
+                a.setIdAnuncio(rs.getInt("idAnuncio"));
                 anuncios.add(a);
             }
             return anuncios;
@@ -64,124 +64,18 @@ public class AnuncioDAO {
             cs.setString(1, i.toString());
             rs = cs.executeQuery();
             
-            Anuncio anuncioCompleto = new Anuncio();
+            Anuncio a = new Anuncio();
             while (rs.next()) 
             {
-            anuncioCompleto = new Anuncio(
-                    rs.getString("nombreProducto"),
-                    rs.getString("precioProducto"),
-                    rs.getString("caracteristicas"),
-                    rs.getString("correoUsuario"),
-                    rs.getString("telefonoUsuario"),
-                    rs.getString("nombreCompletoUsuario"),
-                    rs.getString("fechaPublicacionAnuncio"));
+            a.setNombre(rs.getString("nombreProducto"));
+            a.setPrecio(rs.getFloat("precioProducto"));
+            a.setCaracteristicas(rs.getString("caracteristicas"));
+            a.setCorreoElectronico(rs.getString("correoUsuario"));
+            a.setTelefono(rs.getString("telefonoUsuario"));
+            a.setNombreUsuario(rs.getString("nombreCompletoUsuario"));
+            a.setFecha(rs.getString("fechaPublicacionAnuncio"));
             }
-            return anuncioCompleto;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        } finally {
-            DBUtil.closeResultSet(rs);
-            DBUtil.closeStatement(cs);
-            pool.freeConnection(conn);
-        }
-    }
-    
-    public static Anuncio getProducto(String i) {
-    ConnectionPool pool = ConnectionPool.getInstance();
-    Connection conn = pool.getConnection();
-    CallableStatement cs = null;
-    ResultSet rs = null;
-    try {
-        cs = conn.prepareCall("{ call getProducto(?) }");
-        cs.setString(1, i);
-        rs = cs.executeQuery();
-
-        Anuncio anuncioCompleto = new Anuncio();
-        while (rs.next()) 
-        {
-            boolean anuncioPublico;
-            anuncioPublico = "1".equals(rs.getString("anuncioPublico"));
-            anuncioCompleto = new Anuncio(
-                rs.getString("nombreProducto"),
-                Double.parseDouble(rs.getString("precioProducto")), 
-                rs.getString("caracteristicas"), 
-                null, // Vigencia
-                Integer.parseInt(rs.getString("existenciaProducto")),
-                0, // idUsuario
-                null, // Imagen1
-                null, // Imagen2
-                anuncioPublico,
-                rs.getString("idSubCategoria"));
-        }
-        return anuncioCompleto;
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        return null;
-    } finally {
-        DBUtil.closeResultSet(rs);
-        DBUtil.closeStatement(cs);
-        pool.freeConnection(conn);
-    }
-}
-    
-    public static void setAnuncioCompleto(Anuncio a)
-    {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection conn = pool.getConnection();
-        CallableStatement cs = null;
-        ResultSet rs = null;
-        try {
-            cs = conn.prepareCall("{ call insertarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
-            cs.setString(1, a.getNombre());
-            cs.setFloat(2, Float.parseFloat(a.getPrecio()));
-            cs.setString(3, a.getExistencias());
-            cs.setString(4, a.getVigencia());
-            cs.setString(5, a.getCaracteristicas());
-            cs.setBlob(6, a.getImage1());
-            cs.setBlob(7, a.getImage1());
-            cs.setBlob(8, a.getImage1());
-            cs.setBlob(9, a.getVideo1());
-            cs.setBlob(10, a.getVideo1());
-            cs.setBlob(11, a.getVideo1());
-            cs.setBoolean(12, a.isAnuncioPublico());
-            cs.setInt(13, Integer.parseInt(a.getIdUsuario()));
-            cs.setInt(14, Integer.parseInt(a.getIdSubcategoria()));
-            
-            rs = cs.executeQuery();
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            DBUtil.closeStatement(cs);
-            pool.freeConnection(conn);
-        }
-    }
-    
-    public static List<Anuncio> getListaProductos
-        (String idUsuario) {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection conn = pool.getConnection();
-        CallableStatement cs = null;
-        ResultSet rs = null;
-        try {
-            cs = conn.prepareCall("{ call listadoProductos(?) }");
-            cs.setString(1, idUsuario);
-            rs = cs.executeQuery();
-            List<Anuncio> productos = new ArrayList<Anuncio>();
-            while (rs.next()) 
-            {
-                Anuncio a = new Anuncio(
-                        Integer.parseInt(rs.getString("idProducto")), 
-                        rs.getString("nombreProducto"),
-                        Double.parseDouble(rs.getString("precioProducto")),
-                        Integer.parseInt(rs.getString("existenciaProducto")), 
-                        rs.getString("date(creacionProducto)"),
-                        Boolean.parseBoolean(rs.getString("anuncioPublico"))
-                );
-                productos.add(a);
-            }
-            return productos;
+            return a;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;

@@ -153,8 +153,6 @@
                                            maxlength="500"><br>
                                     Existencia:<br>
                                     <input type="number" name="existenciaProducto"><br>
-                                    Vigencia:<br>
-                                    <input type="date" name="vigenciaProducto"><br>
                                 </div>
                             </fieldset>
                             <fieldset>
