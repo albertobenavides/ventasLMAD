@@ -2,6 +2,7 @@
 {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-size: 14px;
+    color: #555
 }
 
 body
@@ -26,9 +27,20 @@ input[type="text"], textarea {
     vertical-align: top;
 }
 
+a:link
+{
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
 #header
 {
-    text-align: center;
+    width: 1024px;
+    text-align: right;
 }
 
 #main_content
@@ -56,20 +68,66 @@ input[type="text"], textarea {
     border-width: 1px;
 }
 
+#categories .titulo
+{
+    list-style-type: disc;
+    margin-left: -20px;
+}
+
+#categories li
+{
+    list-style-type: circle;
+}
+
+#logo h1
+{
+    text-align: center;
+}
+
+#logo h1 a
+{
+    font-size: 30px;
+}
+
+#categories
+{
+    
+}
+
 #content
 {
     position: relative;
+    margin-left: 0em;
+    margin-right: 0em;
     padding-left: 30px;
     width: 650px;
 }
 
-#new_item
+#newest_item
+{
+    margin: 0 auto;
+    padding: 10px;
+    width: 180px; 
+}
+
+#newests_items
 {
     position: relative;
-    margin: auto;
-    right: 0;
-    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.item
+{
+    width: 180px; 
+    margin: 5px;
     padding: 10px;
-    width: 300px;
-    
+    display: inline-block;
+}
+
+p.footer
+{
+    text-align: right;
+    line-height: 90%;
+    margin-top: 0em;
 }

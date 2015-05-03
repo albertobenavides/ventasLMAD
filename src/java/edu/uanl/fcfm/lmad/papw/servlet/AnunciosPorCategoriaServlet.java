@@ -39,8 +39,8 @@ public class AnunciosPorCategoriaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String categoria = (String)request.getParameter("categoria");
-            String subcategoria = (String)request.getParameter("subcategoria");
+            String categoria = request.getParameter("categoria");
+            String subcategoria = request.getParameter("subcategoria");
             
             List<Anuncio> a = new ArrayList<Anuncio>(AnuncioDAO.getAnunciosCortos(categoria, subcategoria, 1));
             

@@ -19,10 +19,8 @@
     <body>
         <div id="header">
             <ul class="inline">
-                <li><a href="Index">Inicio</a></li>
-                <li><a href="#">Status</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><input type="text" value="Buscar..."/></li>
+                <li><input type="text" value="Buscar..." onclick="this.value=''"
+                           onblur="if(this.value === '') { this.value='Buscar...';}"/></li>
                 <li><input type="submit" /></li>
             </ul>
         </div>
@@ -32,8 +30,8 @@
             <div id="menu" class="inline_block">
 
                 <div id="logo">
-                    <h1><span>Ventas LMAD</span></h1>
-                    <h2><span>Juegos y más juegos para los frikis de hoy y siempre</span></h2>
+                    <h1><a href="Index">VENTASLMAD</a></h1>
+                    <h2>Juegos y más juegos para los frikis de hoy y siempre</h2>
                 </div>
 
                 <div id="session">
@@ -43,8 +41,12 @@
                 %>
                     <h2>Iniciar sesión</h2>
                     <form method="post" action="login">
-                        <input type="text" name="nickname" value="usuario"/>
-                        <input type="password" name="password" value="contraseña"/>
+                        <input type="text" name="nickname" value="usuario"
+                               onclick="this.value=''" onblur="if(this.value === '') { this.value='usuario';}"/>
+                        <input type="text" name="password" value="contraseña"
+                               onclick="this.value=''; this.type='password'" 
+                               onblur="if(this.value === '') 
+                                   { this.value='contraseña'; this.type='text'}"/>
                         <input type="submit">
                         <input type="reset">
                     </form>
@@ -84,13 +86,13 @@
                     %>
                         <li class="titulo"><a href="categoria?categoria=<%= categoriaTemp %>">
                                 <%= categoriaTemp %></a></li>
-                        <li><a href="categoria?subcategoria=<%= subcategoria %>">- <%= subcategoria %></a></li>
+                        <li><a href="categoria?subcategoria=<%= subcategoria %>"><%= subcategoria %></a></li>
                     <%
                                 }
                                 else
                                 {
                     %>
-                        <li><a href="categoria?subcategoria=<%= subcategoria %>">- <%= subcategoria %></a></li>
+                        <li><a href="categoria?subcategoria=<%= subcategoria %>"><%= subcategoria %></a></li>
                     <%
                                 }
                             }
@@ -106,35 +108,35 @@
                                 request.getAttribute("anuncios");
             %>
 
-                <div id="new_item">
+                <div id="newest_item">
                     <a href="anuncio?idAnuncio=<%= anuncios.get(0).getIdAnuncio()%>">
-                        <%= anuncios.get(0).getNombre() %>
+                        <h1><%= anuncios.get(0).getNombre() %></h1>
                         <img src="images/item_new.gif" width="180" height="170" alt="New Item Name">
-                    </a><br>
-                    $<%= anuncios.get(0).getPrecio() %><br>
-                    <%= anuncios.get(0).getFecha().toString().substring(0, 10) %>
+                    </a>
+                    <p class="footer">$<%= anuncios.get(0).getPrecio() %><br>
+                    <%= anuncios.get(0).getFecha().toString().substring(0, 10) %></p>
                 </div>
 
-                <div id="new_item" class="inline_block">
-                    <h1><a href="anuncio?idAnuncio=<%= anuncios.get(1).getIdAnuncio()%>">
-                            <%= anuncios.get(1).getNombre() %></a></h1>
-                    <img src="images/item_printer.gif" width="170" height="170" alt="Sub Item Name" />
+                <div id="newests_items">
+                    <div class="item">
+                        <a href="anuncio?idAnuncio=<%= anuncios.get(1).getIdAnuncio()%>">
+                            <h1><%= anuncios.get(1).getNombre() %></h1>
+                            <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
+                        </a>
 
-                    <p>$<%= anuncios.get(1).getPrecio() %></p>
-                    <p><%= anuncios.get(1).getFecha().toString().substring(0, 10)%></p>
+                        <p class="footer">$<%= anuncios.get(1).getPrecio() %><br>
+                        <%= anuncios.get(1).getFecha().toString().substring(0, 10) %></p>
+                    </div>
 
-                    <a href="#">Comprar</a>
-                </div>
-
-                <div id="new_item" class="inline_block">
-                    <h1><a href="anuncio?idAnuncio=<%= anuncios.get(2).getIdAnuncio()%>">
-                            <%= anuncios.get(2).getNombre() %></a></h1>
-                    <img src="images/item_printer.gif" width="170" height="170" alt="Sub Item Name" />
+                    <div class="item">
+                    <a href="anuncio?idAnuncio=<%= anuncios.get(2).getIdAnuncio()%>">
+                        <h1><%= anuncios.get(2).getNombre() %></h1>
+                        <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
+                    </a>
                     
-                    <p>$<%= anuncios.get(2).getPrecio() %></p>
-                    <p><%= anuncios.get(2).getFecha().toString().substring(0, 10)%></p>
-
-                    <a href="#">Comprar</a>
+                    <p class="footer">$<%= anuncios.get(2).getPrecio() %><br>
+                    <%= anuncios.get(2).getFecha().toString().substring(0, 10) %></p>
+                    </div>
                 </div>
             </div>
         </div>
