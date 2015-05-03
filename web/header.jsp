@@ -22,11 +22,13 @@
         <h2>Iniciar sesión</h2>
         <form method="post" action="login">
             <input type="text" name="nickname" value="usuario"
-                   onclick="this.value=''" onblur="if(this.value === '') { this.value='usuario';}"/>
+                   onclick="if(this.value === 'usuario'){this.value='';}" 
+                   onblur="if(this.value === '') { this.value='usuario';}"/>
             <input type="text" name="password" value="contraseña"
-                   onclick="this.value=''; this.type='password'" 
+                   onclick="if(this.value === 'contraseña')
+                       {this.value=''; this.type='password';}" 
                    onblur="if(this.value === '') 
-                       { this.value='contraseña'; this.type='text'}"/>
+                       { this.value='contraseña'; this.type='text';}"/>
             <input type="submit">
             <input type="reset">
         </form>

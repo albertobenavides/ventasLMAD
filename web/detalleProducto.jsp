@@ -65,10 +65,10 @@
                     <fieldset>
                         <legend>Información adicional</legend>
                         <div>
-                            Descripción: [Cambiar por TEXTAREA]<br>
-                            <input type="text" name="descripcionProducto"
-                                   maxlength="500"
-                                   value="<%= producto.getDescripcionLarga()%>"><br>
+                            Descripción:<br>
+                            <textarea name="descripcionProducto"
+                                maxlength="500" form="forma"
+                                rows="5" cols="40" ></textarea><br>
                             Existencia:<br>
                             <input type="number" name="existenciaProducto"
                                    value="<%= producto.getExistencia()%>"><br>

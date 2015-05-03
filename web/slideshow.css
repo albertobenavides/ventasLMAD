@@ -1,0 +1,63 @@
+.css-slideshow{
+    background-color: red;
+    position: relative;
+    max-width: 495px;
+    height: 370px;
+    margin: 5em auto .5em auto;
+}
+.css-slideshow figure
+{
+    margin: 0;
+    width: 170px;
+    height: 180px;
+    position: absolute;
+}
+
+.css-slideshow figcaption{
+   position: absolute;
+   top: 0;
+   color: #fff;
+   background: rgba(0,0,0, .3);
+   font-size: .8em;
+   padding: 8px 12px;
+   opacity: 0;
+   -webkit-transition: opacity .5s;
+}
+.css-slideshow:hover figure figcaption{
+   -webkit-transition: opacity .5s;
+   opacity: 1;
+}
+
+.css-slideshow figure{
+    opacity: 1;
+}
+
+figure:nth-child(1) {
+   -webkit-animation: xfade 18s 12s infinite;
+}
+figure:nth-child(2) {
+   -webkit-animation: xfade 18s 6s infinite;
+}
+figure:nth-child(3) {
+   -webkit-animation: xfade 18s 0s infinite;
+}
+
+@-webkit-keyframes xfade{
+   0%
+   {
+       opacity: 1;
+   }
+   10.5% 
+   {
+       opacity:1;
+   }
+   33.3%{
+      opacity: 0;
+   }
+   89.5% {
+      opacity:0;
+   }
+   100% {
+      opacity:1;
+   }
+}

@@ -31,7 +31,7 @@
                 <form action="nuevoProducto" method="post" id="forma"
                       enctype="multipart/form-data">
                     <fieldset>
-                        <legend>Datos necesarios</legend>
+                        <legend>Campos requeridos</legend>
                         <div>
                             Nombre del producto:<br>
                             <input type="text" name="nombreProducto" 
@@ -55,13 +55,12 @@
                     </fieldset>
                     <fieldset>
                         <legend>Información adicional</legend>
-                        <div>
-                            Descripción: [Cambiar por TEXTAREA]<br>
-                            <input type="text" name="descripcionProducto"
-                                   maxlength="500"><br>
+                            Descripción:<br>
+                            <textarea name="descripcionProducto"
+                                maxlength="500" form="forma"
+                                rows="5" cols="40" ></textarea><br>
                             Existencia:<br>
                             <input type="number" name="existenciaProducto"><br>
-                        </div>
                     </fieldset>
                     <fieldset>
                         <legend>Multimedia</legend>

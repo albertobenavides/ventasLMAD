@@ -13,6 +13,7 @@
         <title>Ventas LMAD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="slideshow.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="themes/alertify.core.css" />
         <link rel="stylesheet" href="themes/alertify.default.css" />
     </head>
@@ -20,18 +21,34 @@
         <div id="header">
             <%@include file="header.jsp"%>
             <div id="content" class="inline_block">
-            <%
-                List<Anuncio> anuncios = (List<Anuncio>)
-                                request.getAttribute("anuncios");
-            %>
-
+                <%
+                    List<Anuncio> anuncios = (List<Anuncio>)
+                            request.getAttribute("anuncios");
+                %>
+                <div class="css-slideshow"> 
+                    <figure>
+                        <img src="images/noImage.jpg"/>
+                        <figcaption><strong>CSS3:</strong> CSS3 delivers a...</figcaption> 
+                    </figure>
+                    <figure>
+                        <img src="images/test.jpg"/>
+                        <figcaption><strong>Semantics:</strong> Giving meaning to...</figcaption> 
+                    </figure>
+                    <figure>
+                        <img src="images/test2.jpg"/>
+                        <figcaption><strong>Semantics:</strong> Giving meaning to...</figcaption> 
+                    </figure>
+                </div>
+                
                 <div id="newest_item">
-                    <a href="anuncio?idAnuncio=<%= anuncios.get(0).getIdAnuncio()%>">
-                        <h1><%= anuncios.get(0).getNombre() %></h1>
-                        <img src="images/item_new.gif" width="180" height="170" alt="New Item Name">
-                    </a>
-                    <p class="footer">$<%= anuncios.get(0).getPrecio() %><br>
-                    <%= anuncios.get(0).getFecha().toString().substring(0, 10) %></p>
+                    <div class="item">
+                        <a href="anuncio?idAnuncio=<%= anuncios.get(0).getIdAnuncio()%>">
+                            <h1><%= anuncios.get(0).getNombre() %></h1>
+                            <img src="images/item_new.gif" width="180" height="170" alt="New Item Name">
+                        </a>
+                        <p class="footer">$<%= anuncios.get(0).getPrecio() %><br>
+                        <%= anuncios.get(0).getFecha().toString().substring(0, 10) %></p>
+                    </div>
                 </div>
 
                 <div id="newests_items">

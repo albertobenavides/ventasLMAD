@@ -16,6 +16,11 @@ input[type="text"], textarea {
 
 }
 
+textarea
+{
+    resize: none;
+}
+
 .inline li
 {
     display : inline;
@@ -123,6 +128,13 @@ a:hover
     margin: 5px;
     padding: 10px;
     display: inline-block;
+}
+
+.item h1
+{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;   
 }
 
 p.footer
