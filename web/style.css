@@ -108,18 +108,31 @@ a:hover
     width: 650px;
 }
 
-#newest_item
-{
-    margin: 0 auto;
-    padding: 10px;
-    width: 180px; 
-}
-
-#newests_items
+#trending_items
 {
     position: relative;
     width: 100%;
     text-align: center;
+    border-bottom-style: dotted;
+    border-width: 1px;
+    margin-bottom: 40px;
+}
+
+#trending_items h1
+{
+    margin: 0 25px;
+    text-align: left;
+}
+
+#trending_items p
+{
+    margin: 0;
+}
+
+#trending_items p.see_more
+{
+    text-align: right;
+    margin: 0 25px;
 }
 
 .item
@@ -130,8 +143,9 @@ a:hover
     display: inline-block;
 }
 
-.item h1
+.item h2
 {
+    margin: 0;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space: nowrap;   

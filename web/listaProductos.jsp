@@ -56,7 +56,7 @@
                             <td><%= producto.getPrecio() %></td>
                             <td><%= producto.getExistencia() %></td>
                             <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto()%>">Editar</a></td>
-                            <td><a href="#?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></td>
+                            <td><a href="nuevoAnuncio.jsp?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></td>
                             <td><a href="#?idProducto=<%= producto.getIdProducto() %>">Eliminar</a></td>
                         </tr>
                 <%

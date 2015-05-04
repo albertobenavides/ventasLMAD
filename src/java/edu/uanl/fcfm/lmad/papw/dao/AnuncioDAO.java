@@ -19,6 +19,10 @@ import java.sql.Blob;
  * @author Alberto
  */
 public class AnuncioDAO {
+    public static void setAnuncio(String vigencia, int metodoPago, int idProducto)
+    {
+    }
+    
     public static List<Anuncio> getAnunciosCortos
         (String categoria, String subcategoria, Integer orden) {
         ConnectionPool pool = ConnectionPool.getInstance();
