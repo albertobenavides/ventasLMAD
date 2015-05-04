@@ -35,7 +35,7 @@
                         (ProductoDAO.getProducto(idProducto));
                 %>
                 <h1>Anunciar producto</h1>
-                <form action="nuevoAnuncio" method="post" id="forma">
+                <form action="RegistrarAnuncio" method="get" id="forma">
                     <fieldset>
                         <legend>Información del producto</legend>
                             Nombre: <%= producto.getNombre() %><br>
@@ -57,7 +57,25 @@
                             Descripción: <%= producto.getDescripcionLarga()%><br>
                             Existencia: <%= producto.getExistencia()%><br>
                     </fieldset>
-                    <input type="reset"><input type="submit">
+                    <fieldset>
+                        <legend>Datos del anuncio</legend>
+                        Vigencia: <input type="number" name="vigencia" > días<br>
+                        Miniatura: <input type="text" name="miniatura"><br>
+                        Método de pago: 
+                        <input type="checkbox" name="efectivo" value="1" id="efectivo">Efectivo 
+                        <input type="checkbox" name="tarjeta" value="2" id="tarjeta">Tarjeta<br>
+                        <input type="hidden" name="idProducto" value="<%= idProducto %>">
+                    </fieldset>
+                    <script>
+                        function check()
+                        {
+                        if (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked)
+                            document.getElementById("forma").submit();
+                        else
+                            alert("nomames");
+                        }
+                    </script>
+                    <input type="reset"><input type="button" onclick="check()" value="Enviar">
                 </form>
             </div>
         </div>

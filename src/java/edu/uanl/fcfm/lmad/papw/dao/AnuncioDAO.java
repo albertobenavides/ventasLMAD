@@ -12,15 +12,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Blob;
 
 /**
  *
  * @author Alberto
  */
 public class AnuncioDAO {
-    public static void setAnuncio(String vigencia, int metodoPago, int idProducto)
+    public static void setAnuncio(String vigencia, String miniatura,
+            int metodoPago, int idProducto)
     {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall("{ call altaAnuncio(?, ?, ?, ?) }");
+            cs.setString(1, vigencia);
+            cs.setString(2, miniatura);
+            cs.setInt(3, metodoPago);
+            cs.setInt(4, idProducto);
+            rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
     }
     
     public static List<Anuncio> getAnunciosCortos

@@ -18,12 +18,12 @@ public class Producto {
     int existencia;
     String fecha;
     String descripcionLarga;
-    Blob imagen1;
-    Blob imagen2;
-    Blob imagen3;
-    Blob video1;
-    Blob video2;
-    Blob video3;
+    String imagen1;
+    String imagen2;
+    String imagen3;
+    String video1;
+    String video2;
+    String video3;
     boolean anuncioPublico;
     int idSubcategoria;
     int idUsuario;
@@ -91,53 +91,55 @@ public class Producto {
         this.descripcionLarga = descripcionLarga;
     }
 
-    public Blob getImagen1() {
+    public String getImagen1() {
         return imagen1;
     }
 
-    public void setImagen1(Blob imagen1) {
+    public void setImagen1(String imagen1) {
         this.imagen1 = imagen1;
     }
 
-    public Blob getImagen2() {
+    public String getImagen2() {
         return imagen2;
     }
 
-    public void setImagen2(Blob imagen2) {
+    public void setImagen2(String imagen2) {
         this.imagen2 = imagen2;
     }
 
-    public Blob getImagen3() {
+    public String getImagen3() {
         return imagen3;
     }
 
-    public void setImagen3(Blob imagen3) {
+    public void setImagen3(String imagen3) {
         this.imagen3 = imagen3;
     }
 
-    public Blob getVideo1() {
+    public String getVideo1() {
         return video1;
     }
 
-    public void setVideo1(Blob video1) {
+    public void setVideo1(String video1) {
         this.video1 = video1;
     }
 
-    public Blob getVideo2() {
+    public String getVideo2() {
         return video2;
     }
 
-    public void setVideo2(Blob video2) {
+    public void setVideo2(String video2) {
         this.video2 = video2;
     }
 
-    public Blob getVideo3() {
+    public String getVideo3() {
         return video3;
     }
 
-    public void setVideo3(Blob video3) {
+    public void setVideo3(String video3) {
         this.video3 = video3;
     }
+    
+    
 
     public boolean isAnuncioPublico() {
         return anuncioPublico;

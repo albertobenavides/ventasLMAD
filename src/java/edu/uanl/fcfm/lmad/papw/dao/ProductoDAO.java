@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Blob;
 
 /**
  *
@@ -72,12 +71,12 @@ public class ProductoDAO {
             cs.setFloat(2, p.getPrecio());
             cs.setInt(3, p.getExistencia());
             cs.setString(4, p.getDescripcionLarga());
-            cs.setBlob(5, p.getImagen1());
-            cs.setBlob(6, p.getImagen2());
-            cs.setBlob(7, p.getImagen3());
-            cs.setBlob(8, p.getVideo1());
-            cs.setBlob(9, p.getVideo2());
-            cs.setBlob(10, p.getVideo3());
+            cs.setString(5, p.getImagen1());
+            cs.setString(6, p.getImagen2());
+            cs.setString(7, p.getImagen3());
+            cs.setString(8, p.getVideo1());
+            cs.setString(9, p.getVideo2());
+            cs.setString(10, p.getVideo3());
             cs.setBoolean(11, p.isAnuncioPublico());
             cs.setInt(12, p.getIdUsuario());
             cs.setInt(13, p.getIdSubcategoria());

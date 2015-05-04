@@ -37,8 +37,11 @@
                             <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
                         </a>
 
-                        <p class="footer">$<%= anuncios.get(1).getPrecio() %><br>
-                        <%= anuncios.get(i).getFecha().toString().substring(0, 10) %></p>
+                        <p class="footer">
+                            Por: <%= anuncios.get(1).getNickUsuario() %> <br>
+                            $<%= anuncios.get(1).getPrecio() %><br>
+                            <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
+                        </p>
                     </div>
                     <%
                     }
@@ -59,8 +62,11 @@
                             <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
                         </a>
 
-                        <p class="footer">$<%= anuncios.get(1).getPrecio() %><br>
-                        <%= anuncios.get(i).getFecha().toString().substring(0, 10) %></p>
+                        <p class="footer">
+                            Por: <%= anuncios.get(1).getNickUsuario() %> <br>
+                            $<%= anuncios.get(1).getPrecio() %><br>
+                            <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
+                        </p>
                     </div>
                     <%
                     }
