@@ -38,8 +38,16 @@ public class RegistrarAnuncioServlet extends HttpServlet {
         try {            
             String vigencia = request.getParameter("vigencia");
             String miniatura = request.getParameter("miniatura");
-            int efectivo = Integer.parseInt(request.getParameter("efectivo"));
-            int tarjeta = Integer.parseInt(request.getParameter("tarjeta"));
+            int efectivo;
+            if(request.getParameter("efectivo") != null)
+                efectivo = Integer.parseInt(request.getParameter("efectivo"));
+            else
+                efectivo = 0;
+            int tarjeta;
+            if (request.getParameter("tarjeta") != null)
+                tarjeta = Integer.parseInt(request.getParameter("tarjeta"));
+            else 
+                tarjeta = 0;
             int metodoPago = efectivo + tarjeta;
             int idProducto = Integer.parseInt(request.getParameter("idProducto"));
             
