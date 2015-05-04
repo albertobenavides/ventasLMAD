@@ -66,7 +66,7 @@ public class ProductoDAO {
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
-            cs = conn.prepareCall("{ call insertarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{ call insertarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setString(1, p.getNombre());
             cs.setFloat(2, p.getPrecio());
             cs.setInt(3, p.getExistencia());

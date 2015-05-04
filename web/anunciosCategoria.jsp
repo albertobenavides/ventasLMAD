@@ -27,13 +27,15 @@
                     %>
                     <div class="item">
                         <a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
-                            <h1><%= anuncios.get(i).getNombre() %></a></h1>
-                            <img src="images/item_printer.gif" width="167" height="164" alt="Sub Item Name" />
+                            <h2><%= anuncios.get(i).getNombre() %></h2>
+                            <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
                         </a>
-                        <p class="footer">Publicado por: <%= anuncios.get(i).getNickUsuario() %> <br />
-                        <%= anuncios.get(i).getFecha().toString().substring(0, 10)%> <br />
-                        $<%= anuncios.get(i).getPrecio() %><br>
-                        <a href="#">Add to Cart</a></p>
+
+                        <p class="footer">
+                            Por: <%= anuncios.get(i).getNickUsuario() %> <br>
+                            $<%= anuncios.get(i).getPrecio() %><br>
+                            <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
+                        </p>
                     </div>
                     <%
                         }

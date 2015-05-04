@@ -68,7 +68,7 @@
                             Descripción:<br>
                             <textarea name="descripcionProducto"
                                 maxlength="500" form="forma"
-                                rows="5" cols="40" ></textarea><br>
+                                rows="5" cols="40"></textarea><br>
                             Existencia:<br>
                             <input type="number" name="existenciaProducto"
                                    value="<%= producto.getExistencia()%>"><br>

@@ -23,10 +23,13 @@
         <form method="post" action="login">
             <input type="text" name="nickname" value="usuario"
                    onclick="if(this.value === 'usuario'){this.value='';}" 
+                   onfocus="if(this.value === 'usuario'){this.value='';}" 
                    onblur="if(this.value === '') { this.value='usuario';}"/>
             <input type="text" name="password" value="contraseña"
                    onclick="if(this.value === 'contraseña')
                        {this.value=''; this.type='password';}" 
+                    onfocus="if(this.value === 'contraseña')
+                       {this.value=''; this.type='password';}"
                    onblur="if(this.value === '') 
                        { this.value='contraseña'; this.type='text';}"/>
             <input type="submit">

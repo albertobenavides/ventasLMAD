@@ -5,8 +5,6 @@
  */
 package edu.uanl.fcfm.lmad.papw.model;
 
-import java.sql.Blob;
-
 /**
  *
  * @author Alberto
@@ -39,6 +37,12 @@ public class Producto {
         this.idSubcategoria = p.idSubcategoria;
         this.existencia = p.existencia;
         this.anuncioPublico = p.anuncioPublico;
+        this.imagen1 = p.imagen1;
+        this.imagen2 = p.imagen2;
+        this.imagen3 = p.imagen3;
+        this.video1 = p.video1;
+        this.video2 = p.video2;
+        this.video3 = p.video3;
     }
 
     
@@ -164,6 +168,4 @@ public class Producto {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
-    
 }

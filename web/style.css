@@ -13,12 +13,6 @@ body
 input[type="text"], textarea {
 
   background-color : white; 
-
-}
-
-textarea
-{
-    resize: none;
 }
 
 .inline li

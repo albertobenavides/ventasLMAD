@@ -38,8 +38,8 @@
                         </a>
 
                         <p class="footer">
-                            Por: <%= anuncios.get(1).getNickUsuario() %> <br>
-                            $<%= anuncios.get(1).getPrecio() %><br>
+                            Por: <%= anuncios.get(i).getNickUsuario() %> <br>
+                            $<%= anuncios.get(i).getPrecio() %><br>
                             <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
                         </p>
                     </div>
@@ -63,8 +63,8 @@
                         </a>
 
                         <p class="footer">
-                            Por: <%= anuncios.get(1).getNickUsuario() %> <br>
-                            $<%= anuncios.get(1).getPrecio() %><br>
+                            Por: <%= anuncios.get(i).getNickUsuario() %> <br>
+                            $<%= anuncios.get(i).getPrecio() %><br>
                             <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
                         </p>
                     </div>

@@ -28,8 +28,7 @@
             <%@include file="header.jsp"%>
             <div id="content" class="inline_block">
                 <h1>Registrar nuevo producto</h1>
-                <form action="nuevoProducto" method="post" id="forma"
-                      enctype="multipart/form-data">
+                <form action="nuevoProducto" method="post" id="forma">
                     <fieldset>
                         <legend>Campos requeridos</legend>
                         <div>
@@ -58,7 +57,7 @@
                             Descripción:<br>
                             <textarea name="descripcionProducto"
                                 maxlength="500" form="forma"
-                                rows="5" cols="40" ></textarea><br>
+                                rows="5" cols="40"></textarea><br>
                             Existencia:<br>
                             <input type="number" name="existenciaProducto"><br>
                     </fieldset>
