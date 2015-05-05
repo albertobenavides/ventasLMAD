@@ -49,6 +49,7 @@ public class Anuncio {
         this.telefono = a.telefono;
         this.nombreUsuario = a.nombreUsuario;
         this.fecha = a.fecha;
+        this.nickUsuario = a.nickUsuario;
     }
 
     public int getIdAnuncio() {

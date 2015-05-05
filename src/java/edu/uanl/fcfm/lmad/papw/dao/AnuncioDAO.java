@@ -76,14 +76,14 @@ public class AnuncioDAO {
         }
     }
     
-    public static Anuncio getAnuncioCompleto(Integer i) {
+    public static Anuncio getAnuncioCompleto(int idAnuncio) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
             cs = conn.prepareCall("{ call anuncioCompleto(?) }");
-            cs.setString(1, i.toString());
+            cs.setInt(1, idAnuncio);
             rs = cs.executeQuery();
             
             Anuncio a = new Anuncio();
@@ -96,6 +96,7 @@ public class AnuncioDAO {
             a.setTelefono(rs.getString("telefonoUsuario"));
             a.setNombreUsuario(rs.getString("nombreCompletoUsuario"));
             a.setFecha(rs.getString("fechaPublicacionAnuncio"));
+            a.setNickUsuario(rs.getString("nickUsuario"));
             }
             return a;
         } catch (SQLException ex) {

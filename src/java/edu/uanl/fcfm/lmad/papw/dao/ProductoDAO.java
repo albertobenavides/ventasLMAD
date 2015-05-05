@@ -32,8 +32,6 @@ public class ProductoDAO {
         Producto p = new Producto();
         while (rs.next()) 
         {
-            boolean anuncioPublico;
-            anuncioPublico = "1".equals(rs.getString("anuncioPublico"));
             p.setNombre(rs.getString("nombreProducto"));
             p.setPrecio(rs.getFloat("precioProducto"));
             p.setExistencia(rs.getInt("existenciaProducto"));
@@ -44,7 +42,6 @@ public class ProductoDAO {
             p.setVideo1(null);
             p.setVideo2(null);
             p.setVideo3(null);
-            p.setAnuncioPublico(anuncioPublico);
             p.setIdSubcategoria(rs.getInt("idSubCategoria"));
             p.setIdUsuario(0);
         }
@@ -59,14 +56,14 @@ public class ProductoDAO {
     }
 }
     
-    public static void setAnuncioCompleto(Producto p)
+    public static void setProducto(Producto p)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
-            cs = conn.prepareCall("{ call insertarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{ call insertarProducto(?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setString(1, p.getNombre());
             cs.setFloat(2, p.getPrecio());
             cs.setInt(3, p.getExistencia());
@@ -77,9 +74,8 @@ public class ProductoDAO {
             cs.setString(8, p.getVideo1());
             cs.setString(9, p.getVideo2());
             cs.setString(10, p.getVideo3());
-            cs.setBoolean(11, p.isAnuncioPublico());
-            cs.setInt(12, p.getIdUsuario());
-            cs.setInt(13, p.getIdSubcategoria());
+            cs.setInt(11, p.getIdUsuario());
+            cs.setInt(12, p.getIdSubcategoria());
             
             rs = cs.executeQuery();
             
@@ -110,7 +106,6 @@ public class ProductoDAO {
                 p.setPrecio(rs.getFloat("precioProducto"));
                 p.setExistencia(rs.getInt("existenciaProducto"));
                 p.setFecha(rs.getString("date(creacionProducto)"));
-                p.setAnuncioPublico(rs.getBoolean("anuncioPublico"));
                 
                 productos.add(p);
             }

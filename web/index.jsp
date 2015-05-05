@@ -18,74 +18,76 @@
         <link rel="stylesheet" href="themes/alertify.default.css" />
     </head>
     <body>
-        <div id="header">
-            <%@include file="header.jsp"%>
-            <div id="content" class="inline_block">
+        <%@include file="header.jsp"%>
+        <div id="content" class="inline_block">
+            <%
+                List<Anuncio> anuncios = AnuncioDAO.getAnunciosCortos(null, null, 1);
+            %>
+
+            <div id="trending_items">
+                <h1>NOVEDADES</h1>
                 <%
-                    List<Anuncio> anuncios = AnuncioDAO.getAnunciosCortos(null, null, 1);
+                for (int i = 0; i < 3; i++)
+                {
                 %>
-                
-                <div id="trending_items">
-                    <h1>NOVEDADES</h1>
-                    <%
-                    for (int i = 0; i < 3; i++)
-                    {
-                    %>
-                    <div class="item">
-                        <a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
-                            <h2><%= anuncios.get(i).getNombre() %></h2>
-                            <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
-                        </a>
+                <div class="item">
+                    <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
+                        <h2><%= anuncios.get(i).getNombre() %></h2>
+                        <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
+                    </a>
 
-                        <p class="footer">
-                            Por: <%= anuncios.get(i).getNickUsuario() %> <br>
-                            $<%= anuncios.get(i).getPrecio() %><br>
-                            <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
-                        </p>
-                    </div>
-                    <%
-                    }
-                    %>
-                    <p class="see_more"><a href="#">Ver más...</a></p>
+                    <p class="footer">
+                        Por: <%= anuncios.get(i).getNickUsuario() %> <br>
+                        $<%= anuncios.get(i).getPrecio() %><br>
+                        <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
+                    </p>
                 </div>
-                
-                <div id="trending_items">
-                    <h1>MÁS BARATOS</h1>
-                    <%
-                    anuncios = AnuncioDAO.getAnunciosCortos(null, null, 2);
-                    for (int i = 0; i < 3; i++)
-                    {
-                    %>
-                    <div class="item">
-                        <a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
-                            <h2><%= anuncios.get(i).getNombre() %></h2>
-                            <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
-                        </a>
-
-                        <p class="footer">
-                            Por: <%= anuncios.get(i).getNickUsuario() %> <br>
-                            $<%= anuncios.get(i).getPrecio() %><br>
-                            <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
-                        </p>
-                    </div>
-                    <%
-                    }
-                    %>
-                    <p class="see_more"><a href="#">Ver más...</a></p>
-                </div>
+                <%
+                }
+                %>
+                <p class="see_more"><a href="#">Ver más...</a></p>
             </div>
-        </div>
-                            
-    <%                        
-        String message = (String)request.getAttribute("message");
 
-        if (message != null)
-        {
-    %>
-    <script src="lib/alertify.min.js"></script>
-    <script>alertify.log("<%= message %>");</script>
-    <%
-        }
-    %>
+            <div id="trending_items">
+                <h1>MÁS BARATOS</h1>
+                <%
+                anuncios = AnuncioDAO.getAnunciosCortos(null, null, 2);
+                for (int i = 0; i < 3; i++)
+                {
+                %>
+                <div class="item">
+                    <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
+                        <h2><%= anuncios.get(i).getNombre() %></h2>
+                        <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
+                    </a>
+
+                    <p class="footer">
+                        Por: <%= anuncios.get(i).getNickUsuario() %> <br>
+                        $<%= anuncios.get(i).getPrecio() %><br>
+                        <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
+                    </p>
+                </div>
+                <%
+                }
+                %>
+                <p class="see_more"><a href="#">Ver más...</a></p>
+            </div>
+
+            <div id='users'>
+
+
+            </div>
+        </div>                    
+        <%                        
+            String message = (String)request.getAttribute("message");
+
+            if (message != null)
+            {
+        %>
+        <script src="lib/alertify.min.js"></script>
+        <script>alertify.log("<%= message %>");</script>
+        <%
+            }
+        %>
     </body>
 </html>
