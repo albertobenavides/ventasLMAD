@@ -197,3 +197,35 @@ p.footer
 {
     text-align: left;
 }
+
+.questions h1
+{
+    margin: 0;
+    text-align: left;
+    padding: 0;
+}
+
+.questions div
+{
+    border-bottom-style: dotted;
+    border-width: 1px;
+    margin-bottom: 20px;
+    background-color: #EFF5FB;
+}
+
+.questions div h2
+{
+    font-weight: 100;
+    margin-bottom: 0;
+}
+
+.questions div p
+{
+    margin: 0 0 0 10px;
+}
+
+.questions div h3
+{
+    margin: 0 0 0 10px;
+    background-color: #CEE3F6;
+}

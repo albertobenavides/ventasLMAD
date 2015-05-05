@@ -48,7 +48,6 @@ public class RegistrarProductoServlet extends HttpServlet {
             String existenciaProducto = (String)request.getParameter("existenciaProducto");
             String idSubcategoria = (String)request.getParameter("idSubcategoria");
             String idUsuario = (String)session.getAttribute("idUsuario").toString();
-            boolean anuncioPublico = Boolean.parseBoolean(request.getParameter("publicarAnuncio"));
             
             Producto p = new Producto();
             p.setNombre(nombreProducto);

@@ -40,7 +40,7 @@ public class PreguntasServlet extends HttpServlet {
             HttpSession session = request.getSession();
             request.setCharacterEncoding("UTF-8");
             String pregunta = request.getParameter("pregunta");
-            String respuesta = request.getParameter("respuesta");
+            String respuesta = request.getParameter("respuesta" + request.getParameter("counter"));
             int idUsuario;
             if(session.getAttribute("idUsuario") != null)
                 idUsuario = (Integer)session.getAttribute("idUsuario");

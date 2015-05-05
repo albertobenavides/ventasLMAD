@@ -10,7 +10,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,42 +30,49 @@
                 <h2>$<%= a.getPrecio() %></h2>
                 <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" />
                 <br>
-                <h2>Descripción</h2>
+                <h2>DescripciÃ³n</h2>
                 <p><%= a.getCaracteristicas()%></p>
                 <h2>Publicado por</h2>
                 <p><%= a.getNombreUsuario()%></p>
                 <p><%= a.getCorreoElectronico()%></p>
                 <p><%= a.getTelefono()%></p>
-                <p>Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %></p>
+                <p>Fecha de publicaciÃ³n: <%= a.getFecha().toString().substring(0, 10) %></p>
             </div>
             <div class="questions">
-                <h1>Preguntas de usuarios</h1>
+                <h1>PREGUNTAS DE USUARIOS</h1>
                 <%
                 List<Pregunta> preguntas = new ArrayList<Pregunta>(PreguntaDAO.getPregunta(idAnuncio));
+                int counter = 0;
                 for(Pregunta p : preguntas)
                 {
+                    counter++;
                 %>
-                <h2><%= p.getNombreUsuario() %> en <%= p.getFechaPublicacion().substring(0,10) %></h2>
-                    <h3><%= p.getTextoPregunta() %></h3>
-                <%
-                if(p.getTextoRespuesta() != null)
-                {
-                %>
-                    <h4><%= a.getNickUsuario()%>: <%= p.getTextoRespuesta() %></h4>
-                <%
-                }
-                else if(a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
+                <div>
+                    <h2><strong><%= p.getNombreUsuario()%></strong> (<%= p.getFechaPublicacion().substring(0,10) %>):</h2>
+                    <p><%= p.getTextoPregunta() %></p>
+                    <%
+                    if(p.getTextoRespuesta() != null)
                     {
-                %>
-                        <form action="PreguntasServlet" method="post" id="forma">
-                            <textarea name="respuesta" form="forma"
-                                      maxlength="500" rows="2" cols="65"></textarea><br>
-                            <input type="hidden" name="idPregunta" value="<%= p.getIdPregunta() %>">
-                            <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
-                            <input type="reset"><input type="submit" value="Responder">
-                        </form>
-                <%
+                    %>
+                        <h3><strong><%= a.getNickUsuario()%></strong>: <%= p.getTextoRespuesta() %></h3>
+                    <%
                     }
+                    else if(a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
+                    {
+                    %>
+                            <form action="PreguntasServlet" method="post" id="forma<%=counter%>">
+                                <textarea name="respuesta<%=counter%>" form="forma<%=counter%>"
+                                          maxlength="500" rows="2" cols="65"></textarea><br>
+                                <input type="hidden" name="idPregunta" value="<%= p.getIdPregunta() %>">
+                                <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
+                                <input type="hidden" name="counter" value="<%= counter %>">
+                                <input type="reset"><input type="submit" value="Responder">
+                            </form>
+                    <%
+                        }
+                    %>
+                </div>
+                <%
                 }
                 %>
                 <%
@@ -74,7 +81,7 @@
                 %>
                 <p>
                     Requieres ser un usuario registrado para hacer preguntas. 
-                    Regístrate <a href="signup.jsp">aquí</a>.
+                    RegÃ­strate <a href="signup.jsp">aquÃ­</a>.
                 </p>
                 <%
                 }
