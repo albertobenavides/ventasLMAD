@@ -18,6 +18,19 @@
         <link rel="stylesheet" href="themes/alertify.default.css" />
     </head>
     <body>
+        <%
+        String logout = (String)request.getParameter("logout");
+            
+        if (logout != null) 
+        {
+            session = request.getSession();
+            session.invalidate();
+        }
+        
+        String logInTry = (String)request.getAttribute("logInTry");
+        
+        session = request.getSession(); // Revisar
+        %>
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
             <%
@@ -45,7 +58,7 @@
                 <%
                 }
                 %>
-                <p class="see_more"><a href="#">Ver más...</a></p>
+                <p class="see_more"><a href="anuncios.jsp?orden=1">Ver más...</a></p>
             </div>
 
             <div id="trending_items">
@@ -70,7 +83,7 @@
                 <%
                 }
                 %>
-                <p class="see_more"><a href="#">Ver más...</a></p>
+                <p class="see_more"><a href="anuncios.jsp?orden=2">Ver más...</a></p>
             </div>
 
             <div id='users'>

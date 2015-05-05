@@ -59,7 +59,7 @@ public class LogInServlet extends HttpServlet {
             request.setAttribute("message", message);
             
             RequestDispatcher disp = getServletContext()
-                    .getRequestDispatcher("/Index");
+                    .getRequestDispatcher("/index.jsp");
                     disp.forward(request, response);
         } finally {
             out.close();

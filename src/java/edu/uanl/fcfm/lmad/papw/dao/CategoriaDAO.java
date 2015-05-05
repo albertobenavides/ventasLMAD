@@ -5,6 +5,7 @@
  */
 package edu.uanl.fcfm.lmad.papw.dao;
 
+import edu.uanl.fcfm.lmad.papw.model.Categoria;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.List;
  * @author Alberto
  */
 public class CategoriaDAO {
-    public static List<String> lista() {
+    public static List<Categoria> getCategorias() {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
@@ -25,11 +26,15 @@ public class CategoriaDAO {
         try {
             cs = conn.prepareCall("{ call anuncioCategoriasSubcategorias() }");
             rs = cs.executeQuery();
-            List<String> c = new ArrayList<String>();
-            while (rs.next()) {
-                c.add(rs.getString("nombreCategoria") + "," + rs.getString("nombreSubCategoria"));
+            List<Categoria> categorias = new ArrayList<Categoria>();
+            while (rs.next()) 
+            {
+                Categoria c = new Categoria();
+                c.setCategoria(rs.getString("nombreCategoria"));
+                c.setSubcategoria(rs.getString("nombreSubcategoria"));
+                categorias.add(c);
             }
-            return c;
+            return categorias;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;

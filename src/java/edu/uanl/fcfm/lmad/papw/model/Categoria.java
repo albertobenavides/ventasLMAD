@@ -4,21 +4,29 @@
  * and open the template in the editor.
  */
 package edu.uanl.fcfm.lmad.papw.model;
-import java.util.List;
 
 /**
  *
  * @author Alberto
  */
 public class Categoria {
-    List<String> categorias;
-    
-    public Categoria(List<String> l) // es una ele
-    {
-        categorias = l;
+    String categoria;
+    String subcategoria;
+
+    public String getCategoria() {
+        return categoria;
     }
 
-    public List<String> getCategorias() {
-        return categorias;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
+
+    public String getSubcategoria() {
+        return subcategoria;
+    }
+
+    public void setSubcategoria(String subcategoria) {
+        this.subcategoria = subcategoria;
+    }
+    
 }

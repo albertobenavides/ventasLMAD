@@ -1,20 +1,24 @@
+<%@page import="edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.model.Categoria"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <div id="header">
-    <form>
+    <form action="anuncios.jsp" method="get">
         <ul class="inline">
-            <li><input type="text" value="Buscar..." 
+            <li><input type="text" name="parametro" value="Buscar..." 
                     onclick="if(this.value === 'Buscar...'){this.value='';}" 
                     onfocus="if(this.value === 'Buscar...'){this.value='';}" 
                     onblur="if(this.value === '') { this.value='Buscar...';}"/></li>
             <li>
                  en 
-                <select>
-                    <option>Todos</option>
-                    <option>Productos</option>
-                    <option>Usuarios</option>
-                    <option>Fecha</option>
+                <select name="criterio">
+                    <option value="todos">Todos</option>
+                    <option value="productos">Productos</option>
+                    <option value="usuarios">Usuarios</option>
+                    <option value="fecha">Fecha</option>
                 </select>
             </li>
-            <li><input type="submit" /></li>
+            <li><input type="submit" value="Buscar"/></li>
         </ul>
     </form>
 </div>
@@ -24,8 +28,7 @@
     <div id="menu" class="inline_block">
 
         <div id="logo">
-            <h1><a href="Index">VENTASLMAD</a></h1>
-            <h2>Juegos y más juegos para los frikis de hoy y siempre</h2>
+            <h1><a href="index.jsp">VENTASLMAD</a></h1>
         </div>
 
         <div id="session">
@@ -59,7 +62,7 @@
                 <li><a href="listaProductos.jsp">Mis productos</a></li>
                 <li><a href="nuevoProducto.jsp">Registrar producto</a></li>
                 <li><a href="#">Detalles</a></li>
-                <li><a href="Index?logout=true">Cerrar sesión</a></li>
+                <li><a href="index.jsp?logout=true">Cerrar sesión</a></li>
             </ul>
         <%
             }
@@ -70,28 +73,28 @@
             <h2>Categorías</h2>
             <ul>
             <%
-                List<String> categorias = (List<String>)
-                    session.getAttribute("categorias");
+                List<Categoria> categorias = new ArrayList<Categoria>(CategoriaDAO.getCategorias());
                 if (categorias != null) 
                 {
                     String categoriaTemp = null;
-                    for (String cat : categorias)
+                    for (Categoria c : categorias)
                     {
-                        String subcategoria = cat.substring(cat.indexOf(",") + 1);
-                        String categoriaString = cat.substring(0, cat.indexOf(","));
-                        if(!categoriaString.equals(categoriaTemp))
+                        String categoria = c.getCategoria();
+                        if(!categoria.equals(categoriaTemp))
                         {
-                            categoriaTemp = categoriaString;
+                            categoriaTemp = categoria;
             %>
-                <li class="titulo"><a href="categoria?categoria=<%= categoriaTemp %>">
+                <li class="titulo"><a href="anuncios.jsp?categoria=<%= categoriaTemp %>">
                         <%= categoriaTemp %></a></li>
-                <li><a href="categoria?subcategoria=<%= subcategoria %>"><%= subcategoria %></a></li>
+                <li><a href="anuncios.jsp?subcategoria=<%= c.getSubcategoria() %>">
+                        <%= c.getSubcategoria() %></a></li>
             <%
                         }
                         else
                         {
             %>
-                <li><a href="categoria?subcategoria=<%= subcategoria %>"><%= subcategoria %></a></li>
+                <li><a href="anuncios.jsp?subcategoria=<%= c.getSubcategoria() %>">
+                        <%= c.getSubcategoria() %></a></li>
             <%
                         }
                     }

@@ -75,6 +75,44 @@ public class AnuncioDAO {
             pool.freeConnection(conn);
         }
     }
+        
+        public static List<Anuncio> getAnunciosBusqueda (String producto, 
+                String usuario, String fechaInicial, String fechaFinal) 
+        {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall("{ call Busqueda(?, ?, ?, ?) }");
+            cs.setString(1, producto);
+            cs.setString(2, usuario);
+            cs.setString(3, fechaInicial);
+            cs.setString(4, fechaFinal);
+            
+            rs = cs.executeQuery();
+            List<Anuncio> anuncios = new ArrayList<Anuncio>();
+            while (rs.next()) 
+            {
+                Anuncio a = new Anuncio();
+                
+                a.setNombre(rs.getString("nombreProducto"));
+                a.setPrecio(rs.getFloat("precioProducto"));
+                a.setNickUsuario(rs.getString("nickUsuario"));
+                a.setFecha(rs.getString("fechaPublicacionAnuncio"));
+                a.setIdAnuncio(rs.getInt("idAnuncio"));
+                anuncios.add(a);
+            }
+            return anuncios;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
     
     public static Anuncio getAnuncioCompleto(int idAnuncio) {
         ConnectionPool pool = ConnectionPool.getInstance();
