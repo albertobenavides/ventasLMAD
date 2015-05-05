@@ -1,7 +1,6 @@
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Categoria"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <div id="header">
     <form action="anuncios.jsp" method="get">
         <ul class="inline">
