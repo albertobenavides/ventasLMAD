@@ -26,58 +26,56 @@
         %>          
     </head>
     <body>
-        <div id="header">
-            <%@include file="header.jsp"%>
-            <div id="content" class="inline_block">
-                <%
-                    String idProducto = request.getParameter("idProducto");
-                    Producto producto = new Producto
-                        (ProductoDAO.getProducto(idProducto));
-                %>
-                <h1>Anunciar producto</h1>
-                <form action="RegistrarAnuncio" method="get" id="forma">
-                    <fieldset>
-                        <legend>Información del producto</legend>
-                            Nombre: <%= producto.getNombre() %><br>
-                            Precio: <%= producto.getPrecio() %><br>
-                            Categoría:
-                            <%
-                                List<String> subcategorias = CategoriaDAO.listaSubcategorias();
-                                for (int i = 0; i < subcategorias.size(); i++)
+        <%@include file="header.jsp"%>
+        <div id="content" class="inline_block">
+            <%
+                String idProducto = request.getParameter("idProducto");
+                Producto producto = new Producto
+                    (ProductoDAO.getProducto(idProducto));
+            %>
+            <h1>Anunciar producto</h1>
+            <form action="RegistrarAnuncio" method="get" id="forma">
+                <fieldset>
+                    <legend>Información del producto</legend>
+                        Nombre: <%= producto.getNombre() %><br>
+                        Precio: <%= producto.getPrecio() %><br>
+                        Categoría:
+                        <%
+                            List<String> subcategorias = CategoriaDAO.listaSubcategorias();
+                            for (int i = 0; i < subcategorias.size(); i++)
+                            {
+                                if (i == producto.getIdSubcategoria() - 1)
                                 {
-                                    if (i == producto.getIdSubcategoria() - 1)
-                                    {
-                            %>
-                            <%= subcategorias.get(i) %>
-                            <%       
-                                    }
+                        %>
+                        <%= subcategorias.get(i) %>
+                        <%       
                                 }
-                            %>
-                            <br>
-                            Descripción: <%= producto.getDescripcionLarga()%><br>
-                            Existencia: <%= producto.getExistencia()%><br>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Datos del anuncio</legend>
-                        Vigencia: <input type="number" name="vigencia" > días<br>
-                        Miniatura: <input type="text" name="miniatura"><br>
-                        Método de pago: 
-                        <input type="checkbox" name="efectivo" value="1" id="efectivo">Efectivo 
-                        <input type="checkbox" name="tarjeta" value="2" id="tarjeta">Tarjeta<br>
-                        <input type="hidden" name="idProducto" value="<%= idProducto %>">
-                    </fieldset>
-                    <script>
-                        function check()
-                        {
-                        if (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked)
-                            document.getElementById("forma").submit();
-                        else
-                            alert("nomames");
-                        }
-                    </script>
-                    <input type="reset"><input type="button" onclick="check()" value="Enviar">
-                </form>
-            </div>
+                            }
+                        %>
+                        <br>
+                        Descripción: <%= producto.getDescripcionLarga()%><br>
+                        Existencia: <%= producto.getExistencia()%><br>
+                </fieldset>
+                <fieldset>
+                    <legend>Datos del anuncio</legend>
+                    Vigencia: <input type="number" name="vigencia" > días<br>
+                    Miniatura: <input type="text" name="miniatura"><br>
+                    Método de pago: 
+                    <input type="checkbox" name="efectivo" value="1" id="efectivo">Efectivo 
+                    <input type="checkbox" name="tarjeta" value="2" id="tarjeta">Tarjeta<br>
+                    <input type="hidden" name="idProducto" value="<%= idProducto %>">
+                </fieldset>
+                <script>
+                    function check()
+                    {
+                    if (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked)
+                        document.getElementById("forma").submit();
+                    else
+                        alert("nomames");
+                    }
+                </script>
+                <input type="reset"><input type="button" onclick="check()" value="Enviar">
+            </form>
         </div>
     </body>
 </html>

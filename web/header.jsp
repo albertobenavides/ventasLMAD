@@ -1,8 +1,22 @@
-<ul class="inline">
-    <li><input type="text" value="Buscar..." onclick="this.value=''"
-               onblur="if(this.value === '') { this.value='Buscar...';}"/></li>
-    <li><input type="submit" /></li>
-</ul>
+<div id="header">
+    <form>
+        <ul class="inline">
+            <li><input type="text" value="Buscar..." 
+                    onclick="if(this.value === 'Buscar...'){this.value='';}" 
+                    onfocus="if(this.value === 'Buscar...'){this.value='';}" 
+                    onblur="if(this.value === '') { this.value='Buscar...';}"/></li>
+            <li>
+                 en 
+                <select>
+                    <option>Todos</option>
+                    <option>Productos</option>
+                    <option>Usuarios</option>
+                    <option>Fecha</option>
+                </select>
+            </li>
+            <li><input type="submit" /></li>
+        </ul>
+    </form>
 </div>
 
 <div id="main_content">

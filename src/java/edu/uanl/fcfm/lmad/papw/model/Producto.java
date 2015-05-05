@@ -22,7 +22,6 @@ public class Producto {
     String video1;
     String video2;
     String video3;
-    boolean anuncioPublico;
     int idSubcategoria;
     int idUsuario;
 
@@ -36,7 +35,6 @@ public class Producto {
         this.descripcionLarga = p.descripcionLarga;
         this.idSubcategoria = p.idSubcategoria;
         this.existencia = p.existencia;
-        this.anuncioPublico = p.anuncioPublico;
         this.imagen1 = p.imagen1;
         this.imagen2 = p.imagen2;
         this.imagen3 = p.imagen3;
@@ -141,16 +139,6 @@ public class Producto {
 
     public void setVideo3(String video3) {
         this.video3 = video3;
-    }
-    
-    
-
-    public boolean isAnuncioPublico() {
-        return anuncioPublico;
-    }
-
-    public void setAnuncioPublico(boolean anuncioPublico) {
-        this.anuncioPublico = anuncioPublico;
     }
 
     public int getIdSubcategoria() {

@@ -61,15 +61,25 @@ public class RegistrarProductoServlet extends HttpServlet {
             p.setVideo1("");
             p.setVideo2("");
             p.setVideo3("");
-            p.setAnuncioPublico(anuncioPublico);
             p.setIdSubcategoria(Integer.parseInt(idSubcategoria));
             p.setIdUsuario(Integer.parseInt(idUsuario));
             
             ProductoDAO.setAnuncioCompleto(p);
             
-            RequestDispatcher disp = getServletContext()
+            RequestDispatcher disp;
+            
+            if ("true".equals(request.getParameter("publicarAnuncio")))
+            {
+                disp = getServletContext()
+                    .getRequestDispatcher("RegistrarAnuncio");
+                disp.forward(request, response);
+            }
+            else
+            {
+                disp = getServletContext()
                     .getRequestDispatcher("/listaProductos.jsp");
-            disp.forward(request, response);
+                disp.forward(request, response);
+            }
         } finally {
             out.close();
         }

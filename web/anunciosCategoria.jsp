@@ -15,33 +15,47 @@
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
     </head>
     <body>
-        <div id="header">
-            <%@include file="header.jsp"%>
-            <div id="content" class="inline_block">
-                <div class="content">
-                    <%
-                        List<Anuncio> anuncios = (List<Anuncio>)
-                                    request.getAttribute("anuncios");
-                        for (int i = 0; i < anuncios.size(); i++)
-                        {
-                    %>
-                    <div class="item">
-                        <a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
-                            <h2><%= anuncios.get(i).getNombre() %></h2>
-                            <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
-                        </a>
-
-                        <p class="footer">
-                            Por: <%= anuncios.get(i).getNickUsuario() %> <br>
-                            $<%= anuncios.get(i).getPrecio() %><br>
-                            <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
-                        </p>
-                    </div>
-                    <%
-                        }
-                    %>
-                </div>
+        <%@include file="header.jsp"%>
+        <div id="content" class="inline_block">
+            <div id='searcher'>
+                Ordenar por: 
+                <select>
+                    <option>Fecha</option>
+                    <option>Ventas</option>
+                    <option>Precio</option>
+                </select>
+                <select>
+                    <option>Descendente</option>
+                    <option>Ascendente</option>
+                </select>
+                <select>
+                    <option>1</option>
+                    <option>5</option>
+                    <option>10</option>
+                </select>
+                por página
             </div>
+            <%
+                List<Anuncio> anuncios = (List<Anuncio>)
+                            request.getAttribute("anuncios");
+                for (int i = 0; i < anuncios.size(); i++)
+                {
+            %>
+            <div class="item">
+                <a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
+                    <h2><%= anuncios.get(i).getNombre() %></h2>
+                    <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
+                </a>
+
+                <p class="footer">
+                    Por: <%= anuncios.get(i).getNickUsuario() %> <br>
+                    $<%= anuncios.get(i).getPrecio() %><br>
+                    <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
+                </p>
+            </div>
+            <%
+                }
+            %>
         </div>
     </body>
 </html>

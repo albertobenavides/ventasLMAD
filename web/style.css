@@ -10,6 +10,11 @@ body
     background-color: white;
 }
 
+textarea
+{
+    resize: none;
+}
+
 input[type="text"], textarea {
 
   background-color : white; 
@@ -53,7 +58,7 @@ a:hover
 
 #menu
 {
-    width: 250px;
+    width: 220px;
 }
 
 #menu div
@@ -95,11 +100,13 @@ a:hover
 
 #content
 {
+    margin-top: 40px;
     position: relative;
     margin-left: 0em;
     margin-right: 0em;
     padding-left: 30px;
     width: 650px;
+    text-align: center;
 }
 
 #trending_items
@@ -116,11 +123,13 @@ a:hover
 {
     margin: 0 25px;
     text-align: left;
+    padding: 0;
 }
 
 #trending_items p
 {
     margin: 0;
+    padding: 0;
 }
 
 #trending_items p.see_more
@@ -132,9 +141,14 @@ a:hover
 .item
 {
     width: 180px; 
-    margin: 5px;
+    margin: 0px;
     padding: 10px;
     display: inline-block;
+}
+
+.item:hover
+{
+    background-color: #EFF5FB;
 }
 
 .item h2
@@ -142,7 +156,7 @@ a:hover
     margin: 0;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space: nowrap;   
+    white-space: nowrap;
 }
 
 p.footer
@@ -150,4 +164,29 @@ p.footer
     text-align: right;
     line-height: 90%;
     margin-top: 0em;
+}
+
+.ads, .questions
+{
+    border-style: solid;
+    border-width: 1px;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+#searcher
+{
+    text-align: right;
+    border-top-style: dotted;
+    border-bottom-style: dotted;
+    border-width: 1px;
+    margin-right: 30px;
+    margin-left: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.questions
+{
+    text-align: left;
 }
