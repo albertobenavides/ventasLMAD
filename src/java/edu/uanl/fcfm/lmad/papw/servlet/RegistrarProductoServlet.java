@@ -64,7 +64,7 @@ public class RegistrarProductoServlet extends HttpServlet {
             p.setIdSubcategoria(Integer.parseInt(idSubcategoria));
             p.setIdUsuario(Integer.parseInt(idUsuario));
             
-            ProductoDAO.setAnuncioCompleto(p);
+            ProductoDAO.setProducto(p);
             
             RequestDispatcher disp;
             

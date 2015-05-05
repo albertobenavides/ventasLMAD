@@ -75,7 +75,6 @@
                         </tr>
                     </table>
                 </fieldset>
-
                 <input type="hidden" name="logInTry" value="1">
                 <input type="reset"><input type="submit">
             </form>

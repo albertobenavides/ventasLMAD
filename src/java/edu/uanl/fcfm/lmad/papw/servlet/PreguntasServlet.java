@@ -5,8 +5,7 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
-import edu.uanl.fcfm.lmad.papw.model.Anuncio;
+import edu.uanl.fcfm.lmad.papw.dao.PreguntaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -15,13 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Alberto
  */
-@WebServlet(name = "AnuncioCompletoServlet", urlPatterns = {"/anuncio"})
-public class AnuncioCompletoServlet extends HttpServlet {
+@WebServlet(name = "PreguntasServlet", urlPatterns = {"/PreguntasServlet"})
+public class PreguntasServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,15 +36,38 @@ public class AnuncioCompletoServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {            
-            String s = (String)request.getParameter("idAnuncio");
-            Integer i = Integer.parseInt(s);
-            Anuncio anuncio = new Anuncio(AnuncioDAO.getAnuncioCompleto(i));
+        try {
+            HttpSession session = request.getSession();
+            request.setCharacterEncoding("UTF-8");
+            String pregunta = request.getParameter("pregunta");
+            String respuesta = request.getParameter("respuesta");
+            int idUsuario;
+            if(session.getAttribute("idUsuario") != null)
+                idUsuario = (Integer)session.getAttribute("idUsuario");
+            else
+                idUsuario = 0;
+            int idAnuncio;
+            if (request.getParameter("idAnuncio") != null)
+                idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
+            else
+                idAnuncio = 0;
+            int idPregunta;
+            if (request.getParameter("idPregunta") != null)
+                idPregunta = Integer.parseInt(request.getParameter("idPregunta"));
+            else
+                idPregunta = 0;
             
-            request.setAttribute("anuncioCompleto", anuncio);
+            if (pregunta != null)
+            {
+                PreguntaDAO.setPregunta(pregunta, idUsuario, idAnuncio);
+            }
+            else
+            {
+                PreguntaDAO.setRespuesta(respuesta, idPregunta);
+            }
             
             RequestDispatcher disp = getServletContext()
-                    .getRequestDispatcher("/anuncioCompleto.jsp");
+                    .getRequestDispatcher("/anuncioCompleto.jsp?idAnuncio=" + idAnuncio);
             disp.forward(request, response);
         } finally {
             out.close();

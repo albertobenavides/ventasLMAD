@@ -2,7 +2,7 @@
 {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-size: 14px;
-    color: #555
+    color: #585858;
 }
 
 body
@@ -31,9 +31,16 @@ input[type="text"], textarea {
     vertical-align: top;
 }
 
+a
+{
+    color: #151515;
+    font-weight: 500;
+}
+
 a:link
 {
     text-decoration: none;
+    
 }
 
 a:hover

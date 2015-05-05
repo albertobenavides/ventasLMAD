@@ -56,7 +56,7 @@ public class ProductoDAO {
     }
 }
     
-    public static void setAnuncioCompleto(Producto p)
+    public static void setProducto(Producto p)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();

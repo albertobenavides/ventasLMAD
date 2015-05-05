@@ -31,7 +31,7 @@
                 {
                 %>
                 <div class="item">
-                    <a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
+                    <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre() %></h2>
                         <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
                     </a>
@@ -56,7 +56,7 @@
                 {
                 %>
                 <div class="item">
-                    <a href="anuncio?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
+                    <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre() %></h2>
                         <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
                     </a>
