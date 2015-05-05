@@ -84,7 +84,10 @@
                     }
                 %>
                 </ul>
-                <ul class="pagination"></ul>
+                <div class="pages">
+                    <p>Página: </p>
+                    <ul class="pagination"></ul>
+                </div>
             </div>
         </div>
         </div>

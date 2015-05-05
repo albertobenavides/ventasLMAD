@@ -80,7 +80,7 @@
                 {
                 %>
                 <p>
-                    Requieres ser un usuario registrado para hacer preguntas. 
+                    Sólo los usuarios registrados pueden hacer preguntas. 
                     Regístrate <a href="signup.jsp">aquí</a>.
                 </p>
                 <%

@@ -179,6 +179,7 @@ p.footer
     border-width: 1px;
     padding: 20px;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 #searcher
@@ -232,9 +233,27 @@ p.footer
 
 .pagination li {
   display:inline-block;
-  padding:5px;
+  padding-left: 5px;
+  padding-right:5px;
 }
 
-.pagination {
-  text-align: right;
+.pages
+{
+    text-align: right;
+    border-top-style: dotted;
+    border-bottom-style: dotted;
+    border-width: 1px;
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.pages ul, .pages p
+{
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 100px;
+    display: inline;
 }
