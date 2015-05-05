@@ -158,7 +158,7 @@ a:hover
     background-color: #EFF5FB;
 }
 
-.item h2
+.item h2, .list h2
 {
     margin: 0;
     overflow:hidden;
@@ -228,4 +228,13 @@ p.footer
 {
     margin: 0 0 0 10px;
     background-color: #CEE3F6;
+}
+
+.pagination li {
+  display:inline-block;
+  padding:5px;
+}
+
+.pagination {
+  text-align: right;
 }

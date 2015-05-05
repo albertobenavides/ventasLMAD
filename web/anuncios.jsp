@@ -15,24 +15,27 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
         <script src="list.js"></script>
+        <script src="list.pagination.min.js"></script>
     </head>
     <body>
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
             <div id="anuncios">
-                Ordenar por: 
-                <button class="sort" data-sort="nombre">
-                    Producto
-                </button>
-                <button class="sort" data-sort="precio">
-                    Precio
-                </button>
-                <button class="sort" data-sort="fecha">
-                    Fecha
-                </button>
-                <button class="sort" data-sort="usuario">
-                    Usuario
-                </button>
+                <div id="searcher">
+                    Ordenar por: 
+                    <button class="sort" data-sort="nombre">
+                        Producto
+                    </button>
+                    <button class="sort" data-sort="precio">
+                        Precio
+                    </button>
+                    <button class="sort" data-sort="fecha">
+                        Fecha
+                    </button>
+                    <button class="sort" data-sort="usuario">
+                        Usuario
+                    </button>
+                </div>
                 <%
                     String categoria = request.getParameter("categoria");
                     String subcategoria = request.getParameter("subcategoria");
@@ -68,7 +71,7 @@
                     for (int i = 0; i < anuncios.size(); i++)
                     {
                 %>
-                    <li>
+                    <li class="item">
                         <h2 class="nombre"><%= anuncios.get(i).getNombre() %></h2>
                         <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                             <img src="images/noImage.jpg" width="180" height="170" alt="Sub Item Name" />
@@ -81,15 +84,20 @@
                     }
                 %>
                 </ul>
+                <ul class="pagination"></ul>
             </div>
         </div>
         </div>
         <script>
-            var options = 
-            {
-                valueNames: [ 'nombre', 'usuario', 'precio', 'fecha' ]
-            };
-            var userList = new List('anuncios', options);
+            var userList = new List
+            (
+                'anuncios', 
+                    {
+                        valueNames: ['nombre', 'usuario', 'precio', 'fecha'],
+                        page: 6,
+                        plugins: [ ListPagination({}) ] 
+                    }
+            );
         </script>
     </body>
 </html>
