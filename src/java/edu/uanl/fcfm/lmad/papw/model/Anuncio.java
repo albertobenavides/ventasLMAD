@@ -19,7 +19,7 @@ public class Anuncio {
     String video1;
     String video2;
     String video3;
-    int metodoPago;
+    String metodoPago;
     
     
     String nombre;
@@ -50,6 +50,7 @@ public class Anuncio {
         this.nombreUsuario = a.nombreUsuario;
         this.fecha = a.fecha;
         this.nickUsuario = a.nickUsuario;
+        this.metodoPago = a.metodoPago;
     }
 
     public int getIdAnuncio() {
@@ -124,11 +125,11 @@ public class Anuncio {
         this.video3 = video3;
     }
 
-    public int getMetodoPago() {
+    public String getMetodoPago() {
         return metodoPago;
     }
 
-    public void setMetodoPago(int metodoPago) {
+    public void setMetodoPago(String metodoPago) {
         this.metodoPago = metodoPago;
     }
 

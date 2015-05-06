@@ -4,6 +4,7 @@
     Author     : Alberto
 --%>
 
+<%@page import="java.util.Locale"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page import="java.util.List"%>
@@ -51,7 +52,7 @@
 
                     <p class="footer">
                         Por: <%= anuncios.get(i).getNickUsuario() %> <br>
-                        $<%= anuncios.get(i).getPrecio() %><br>
+                        $<%= String.format(Locale.US, "%.2f", anuncios.get(i).getPrecio()) %><br>
                         <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
                     </p>
                 </div>
@@ -76,7 +77,7 @@
 
                     <p class="footer">
                         Por: <%= anuncios.get(i).getNickUsuario() %> <br>
-                        $<%= anuncios.get(i).getPrecio() %><br>
+                        $<%= String.format(Locale.US, "%.2f", anuncios.get(i).getPrecio()) %><br>
                         <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
                     </p>
                 </div>

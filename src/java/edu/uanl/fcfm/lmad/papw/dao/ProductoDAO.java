@@ -88,14 +88,14 @@ public class ProductoDAO {
     }
     
     public static List<Producto> getListaProductos
-        (String idUsuario) {
+        (int idUsuario) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         ResultSet rs = null;
         try {
             cs = conn.prepareCall("{ call listadoProductos(?) }");
-            cs.setString(1, idUsuario);
+            cs.setInt(1, idUsuario);
             rs = cs.executeQuery();
             List<Producto> productos = new ArrayList<Producto>();
             while (rs.next()) 

@@ -30,12 +30,16 @@ public class LoginDAO {
                 
                 if (rs.next())
                 {
-                    Usuario u = new Usuario (Integer.parseInt(rs.getString(1)), username);
+                    Usuario u = new Usuario ();
+                    u.setId(rs.getInt("idUsuario"));
+                    u.setNickname(username);
+                    u.setCorreoElectronico(rs.getString("correoUsuario"));
                     return u;
                 }
                 else
                 {
-                    Usuario u = new Usuario (0, username);
+                    Usuario u = new Usuario ();
+                    u.setId(0);
                     return u;
                 }
             } catch (SQLException ex) {

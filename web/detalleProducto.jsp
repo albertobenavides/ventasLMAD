@@ -53,12 +53,21 @@
                             List<String> subcategorias = CategoriaDAO.listaSubcategorias();
                             for (int i = 0; i < subcategorias.size(); i++)
                             {
+                                if (i + 1 == producto.getIdSubcategoria())
+                                {
+                    %>
+                    <option value="<%= i + 1%>" selected><%= subcategorias.get(i) %></option>
+                    <%            
+                                }
+                                else
+                                {
                     %>
                     <option value="<%= i + 1%>"><%= subcategorias.get(i) %></option>
-                    <%            
+                    <%
+                                }
                             }
                     %>
-                        </select> FALTA SELECCIONAR ELEMENTO
+                        </select>
                     </div>
                 </fieldset>
                 <fieldset>

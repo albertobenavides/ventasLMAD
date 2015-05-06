@@ -4,6 +4,7 @@
     Author     : Alberto
 --%>
 
+<%@page import="java.util.Locale"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.PreguntaDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Pregunta"%>
@@ -27,8 +28,24 @@
                 Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
                 %>
                 <h1><%= a.getNombre() %></h1>
-                <h2>$<%= a.getPrecio() %></h2>
+                <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
                 <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" />
+                
+                <form action="compra" method="post">
+                    Cantidad: <input type="number" name="cantidad" value="1">
+                    <input type="submit" value="Comprar"><br>
+                    <select>
+                        <%
+                        String[] metodoPago = a.getMetodoPago().split(",");
+                        for(String s : metodoPago)
+                        {
+                        %>
+                        <option><%= s %></option>
+                        <%
+                        }
+                        %>
+                    </select>
+                </form>
                 <br>
                 <h2>Descripción</h2>
                 <p><%= a.getCaracteristicas()%></p>
@@ -66,7 +83,7 @@
                                 <input type="hidden" name="idPregunta" value="<%= p.getIdPregunta() %>">
                                 <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
                                 <input type="hidden" name="counter" value="<%= counter %>">
-                                <input type="reset"><input type="submit" value="Responder">
+                                <input type="submit" value="Responder">
                             </form>
                     <%
                         }
@@ -92,7 +109,7 @@
                     <textarea name="pregunta" form="forma"
                               maxlength="500" rows="4" cols="65"></textarea><br>
                     <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
-                    <input type="reset"><input type="submit" value="Preguntar">
+                    <input type="submit" value="Preguntar">
                 </form>
                 <%
                 }

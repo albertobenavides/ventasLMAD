@@ -49,6 +49,7 @@ public class LogInServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", nickname);
                 session.setAttribute("idUsuario", u.getId());
+                session.setAttribute("email", u.getCorreoElectronico());
                 message = null;
             }
             else

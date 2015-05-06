@@ -5,11 +5,8 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
-import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alberto
  */
-@WebServlet(name = "RegistroUsuarioServlet", urlPatterns = {"/RegistroUsuario"})
-public class RegistroUsuarioServlet extends HttpServlet {
+@WebServlet(name = "CompraServlet", urlPatterns = {"/Comprar"})
+public class CompraServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,38 +34,16 @@ public class RegistroUsuarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
-            Usuario u = new Usuario();
-            u.setNickname(request.getParameter("nickname"));
-            u.setContrasenia(request.getParameter("contrasenia"));
-            u.setCorreoElectronico(request.getParameter("correoElectronico"));
-            u.setNombre(request.getParameter("nombre"));
-            u.setApellidoPaterno(request.getParameter("apellidoPaterno"));
-            u.setApellidoMaterno(request.getParameter("apellidoMaterno"));
-            u.setFechaNacimiento(request.getParameter("fechaNacimiento"));
-            u.setSexo(request.getParameter("sexo"));
-            u.setTelefono(request.getParameter("telefono"));
-            u.setImagen(null);
-            
-            RequestDispatcher disp;
-            
-            String message;
-            if (UsuarioDao.insertar(u) == true)
-            {
-                message = "Usuario registrado con éxito.";
-                request.setAttribute("message", message);
-                disp = getServletContext()
-                        .getRequestDispatcher("/index.jsp");
-                disp.forward(request, response);
-            }
-            else
-            {
-                message = "Usuario existente.";
-                request.setAttribute("message", message);
-                disp = getServletContext()
-                        .getRequestDispatcher("/signup.jsp");
-                disp.forward(request, response);
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CompraServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CompraServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         } finally {
             out.close();
         }

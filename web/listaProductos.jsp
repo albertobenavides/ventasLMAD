@@ -4,6 +4,7 @@
     Author     : Alberto
 --%>
 
+<%@page import="java.util.Locale"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.ProductoDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Producto"%>
 <%@page import="java.util.ArrayList"%>
@@ -28,22 +29,22 @@
     <body>
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
-            <h1>Registrar nuevo producto</h1>
+            <h1>Listado de productos</h1>
             <div id="new_item_list">
             <%
-                String idUsuario = session.getAttribute("idUsuario").toString();
+                int idUsuario = (Integer)session.getAttribute("idUsuario");
                 List<Producto> productos = new ArrayList<Producto>
                     (ProductoDAO.getListaProductos(idUsuario));
             %>
-                <table cellspacing="3px">
+                <table cellspacing="0" cellpadding="0">
                     <tr>
                         <th>Fecha</th>
                         <th>Producto</th>
-                        <th>Precio</th>
+                        <th>Precio ($)</th>
                         <th>Existencia</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Preguntas</th>
+                        <th>Compras</th>
+                        <th>Editar</th>
                     </tr>
             <%
             for (Producto producto : productos)
@@ -52,7 +53,7 @@
                     <tr>
                         <td><%= producto.getFecha() %></td>
                         <td><%= producto.getNombre() %></td>
-                        <td><%= producto.getPrecio() %></td>
+                        <td><%= String.format(Locale.US, "%.2f", producto.getPrecio()) %></td>
                         <td><%= producto.getExistencia() %></td>
                         <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto()%>">Editar</a></td>
                         <td><a href="nuevoAnuncio.jsp?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></td>

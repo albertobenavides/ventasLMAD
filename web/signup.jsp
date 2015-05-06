@@ -6,12 +6,14 @@
 
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Ventas LMAD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <link rel="stylesheet" href="themes/alertify.core.css" />
+        <link rel="stylesheet" href="themes/alertify.default.css" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
     </head>
     <body>
@@ -20,13 +22,13 @@
             <h1>Registro de usuario</h1>
             <form action="RegistroUsuario" method="post">
                 <fieldset>
-                    <legend>Información de registro</legend>
+                    <legend>InformaciÃ³n de registro</legend>
                     <div>
                         Nombre de usuario:<br>
                         <input type="text" name="nickname"><br>
-                        Contraseña:<br>
+                        ContraseÃ±a:<br>
                         <input type="password" name="contrasenia"><br>
-                        Correo electrónico:<br>
+                        Correo electrÃ³nico:<br>
                         <input type="email" name="correoElectronico"><br>
                     </div>
                 </fieldset>
@@ -64,7 +66,7 @@
                     <table>
                         <tr>
                             <td>
-                                Teléfono:<br>
+                                TelÃ©fono:<br>
                                 <input type="tel" name="telefono">
                             </td>
                         </tr>
@@ -79,5 +81,16 @@
                 <input type="reset"><input type="submit">
             </form>
         </div>
+        <%                        
+            String message = (String)request.getAttribute("message");
+
+            if (message != null)
+            {
+        %>
+        <script src="lib/alertify.min.js"></script>
+        <script>alertify.log("<%= message %>");</script>
+        <%
+            }
+        %>
     </body>
 </html>

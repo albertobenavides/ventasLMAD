@@ -35,7 +35,7 @@
             if (session.getAttribute("username") == null)
             {
         %>
-            <h2>Iniciar sesión</h2>
+        <h2>Iniciar sesión</h2>
             <form method="post" action="login">
                 <input type="text" name="nickname" value="usuario"
                        onclick="if(this.value === 'usuario'){this.value='';}" 
@@ -48,8 +48,7 @@
                            {this.value=''; this.type='password';}"
                        onblur="if(this.value === '') 
                            { this.value='contraseña'; this.type='text';}"/>
-                <input type="submit">
-                <input type="reset">
+                <input type="submit">  <a href="signup.jsp" >Registrarse</a>
             </form>
         <%
             }
@@ -60,6 +59,7 @@
             <ul>
                 <li><a href="listaProductos.jsp">Mis productos</a></li>
                 <li><a href="nuevoProducto.jsp">Registrar producto</a></li>
+                <li><a href="nuevoProducto.jsp">Mis compras</a></li>
                 <li><a href="#">Detalles</a></li>
                 <li><a href="index.jsp?logout=true">Cerrar sesión</a></li>
             </ul>

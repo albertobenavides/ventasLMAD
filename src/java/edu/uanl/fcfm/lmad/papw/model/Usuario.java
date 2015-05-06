@@ -28,27 +28,10 @@ public class Usuario {
     {
         this.id = u.getId();
         this.nickname = u.getNickname();
+        this.correoElectronico = u.getCorreoElectronico();
     }
     
-    public Usuario(int id, String nickname) {
-        this.id = id;
-        this.nickname = nickname;
-    }
-    
-    public Usuario(String nickname, String contrasenia, String correoElectronico, 
-            String nombre, String apellidoPaterno, String apellidoMaterno, 
-            String fechaNacimiento, String sexo, String telefono, Blob imagen) {
-        this.nickname = nickname;
-        this.contrasenia = contrasenia;
-        this.correoElectronico = correoElectronico;
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.fechaNacimiento = fechaNacimiento;
-        this.sexo = sexo;
-        this.telefono = telefono;
-        this.imagen = imagen;
-    }
+    public Usuario() {}    
 
     public int getId() {
         return id;
@@ -134,9 +117,9 @@ public class Usuario {
         return imagen;
     }
 
-    public void setImagen(Blob image) {
-        this.imagen = image;
+    public void setImagen(Blob imagen) {
+        this.imagen = imagen;
     }
 
-    
+   
 }

@@ -48,6 +48,28 @@ a:hover
     text-decoration: underline;
 }
 
+
+table
+{
+    border: none;
+    width: 650px;
+}
+
+th
+{
+    padding-bottom: 10px;
+}
+
+td, th
+{
+    width: 92px;
+    overflow: hidden;
+    width: 100px;
+}
+
+tr:nth-child(even) {background: #CCC}
+tr:nth-child(odd) {background: #FFF}
+
 #header
 {
     width: 1024px;
@@ -111,7 +133,8 @@ a:hover
     position: relative;
     margin-left: 0em;
     margin-right: 0em;
-    padding-left: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
     width: 650px;
     text-align: center;
 }
