@@ -8,21 +8,41 @@ package edu.uanl.fcfm.lmad.papw.servlet;
 import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
 import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Alberto
  */
 @WebServlet(name = "RegistroUsuarioServlet", urlPatterns = {"/RegistroUsuario"})
+@MultipartConfig(
+        fileSizeThreshold   = 1024 * 1024 * 1,  // 1 MB
+        maxFileSize         = 1024 * 1024 * 10, // 10 MB
+        maxRequestSize      = 1024 * 1024 * 15 // 15 MB
+)
 public class RegistroUsuarioServlet extends HttpServlet {
 
+    private String extractExtension(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                String filename = s.substring(s.indexOf("=") + 2, s.length() - 1);
+                return filename.substring(filename.indexOf(".") - 1, filename.length());
+            }
+        }
+        return "";
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,7 +57,8 @@ public class RegistroUsuarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
+            Part filePart = request.getPart("imagen"); 
+            String contentType = filePart.getContentType();
             Usuario u = new Usuario();
             u.setNickname(request.getParameter("nickname"));
             u.setContrasenia(request.getParameter("contrasenia"));
@@ -48,13 +69,21 @@ public class RegistroUsuarioServlet extends HttpServlet {
             u.setFechaNacimiento(request.getParameter("fechaNacimiento"));
             u.setSexo(request.getParameter("sexo"));
             u.setTelefono(request.getParameter("telefono"));
-            u.setImagen(null);
+            u.setTipo(contentType);
             
+            String nombreArchivo = String.valueOf(System.currentTimeMillis());
+            nombreArchivo += extractExtension(filePart);
+            
+            InputStream inputStream = filePart.getInputStream();
+            u.setStream(inputStream);
+                      
             RequestDispatcher disp;
             
             String message;
             if (UsuarioDao.insertar(u) == true)
-            {
+            {   
+                int id = UsuarioDao.insertarImagen(u);
+                request.setAttribute("id", id);
                 message = "Usuario registrado con éxito.";
                 request.setAttribute("message", message);
                 disp = getServletContext()
