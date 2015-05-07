@@ -19,14 +19,14 @@ import java.util.List;
  */
 public class ProductoDAO {
     
-    public static Producto getProducto(String i) {
+    public static Producto getProducto(int i) {
     ConnectionPool pool = ConnectionPool.getInstance();
     Connection conn = pool.getConnection();
     CallableStatement cs = null;
     ResultSet rs = null;
     try {
         cs = conn.prepareCall("{ call getProducto(?) }");
-        cs.setString(1, i);
+        cs.setInt(1, i);
         rs = cs.executeQuery();
 
         Producto p = new Producto();
@@ -92,7 +92,6 @@ public class ProductoDAO {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
-        ResultSet rs = null;
         try {
             cs = conn.prepareCall("{ call editarProducto(?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setInt(1, p.getIdProducto());
@@ -108,7 +107,7 @@ public class ProductoDAO {
             cs.setString(11, p.getVideo3());
             cs.setInt(12, p.getIdSubcategoria());
             
-            rs = cs.executeQuery();
+            cs.executeQuery();
             
         } catch (SQLException ex) {
             ex.printStackTrace();

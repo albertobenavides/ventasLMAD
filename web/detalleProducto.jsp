@@ -32,7 +32,7 @@
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
             <%
-                String idProducto = request.getParameter("idProducto");
+                int idProducto = Integer.parseInt(request.getParameter("idProducto"));
                 Producto producto = new Producto
                     (ProductoDAO.getProducto(idProducto));
             %>
@@ -70,6 +70,7 @@
                     %>
                         </select>
                     </div>
+                    <input type="hidden" name="idProducto" value="<%= idProducto %>">
                 </fieldset>
                 <fieldset>
                     <legend>Información adicional</legend>
@@ -100,19 +101,62 @@
                     <legend>Anunciar</legend>
                     <div>
                         <p>¿Desea publicar su anuncio?<br>
+                            <%
+                            Anuncio a = new Anuncio();
+                            a.setMetodoPago("");
+                            int idAnuncio = AnuncioDAO.getIdAnuncio(idProducto);
+                            if (idAnuncio != 0)
+                            {
+                                a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idProducto));
+                            %>
+                            Sí: <input type="radio" name="anunciar" value="yes" id="yes" checked onchange="show()"><br>
+                            No: <input type="radio" name="anunciar" value="no" id="no" onchange="show()">
+                            </p>
+                            <div id="anunciar" style="display: block">
+                            <%
+                            }
+                            else
+                            {
+                            %>
                             Sí: <input type="radio" name="anunciar" value="yes" id="yes" onchange="show()"><br>
                             No: <input type="radio" name="anunciar" value="no" id="no" checked onchange="show()">
-                        </p>
-                        <div id="anunciar" style="display: none">
+                            </p>
+                            <div id="anunciar" style="display: none">
+                            <%
+                            }
+                            %>
                             <p>Vigencia: <input type="number" align="right" 
                                                 name="vigencia" value="30"
                                                 min="1"
                                                 max="365"> días</p>
                             <p>Miniatura: <input type="text" name="miniatura"></p>
-                            <p>Método de pago: 
-                                <input type="checkbox" name="efectivo" value="1" id="efectivo">Efectivo 
+                            <p>Método de pago:
+                                <%
+                            if (a.getMetodoPago().contains("Efectivo"))
+                            {
+                                %>
+                                <input type="checkbox" name="efectivo" checked value="1" id="efectivo">Efectivo 
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <input type="checkbox" name="efectivo" value="1" id="efectivo">Efectivo
+                                <%
+                            }
+                            if (a.getMetodoPago().contains("Tarjeta"))
+                            {
+                                %>
+                                <input type="checkbox" name="tarjeta" checked value="2" id="tarjeta">Tarjeta<br>
+                                <%
+                            }
+                            else
+                            {
+                                %>
                                 <input type="checkbox" name="tarjeta" value="2" id="tarjeta">Tarjeta<br>
-                                <input type="hidden" name="idProducto" value="<%= idProducto %>">
+                                <%
+                            }
+                                %>
                             </p>
                         </div>
                     </div>

@@ -43,6 +43,7 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             
             request.setCharacterEncoding("UTF-8");
             
+            int idProducto = Integer.parseInt(request.getParameter("idProducto"));
             String nombreProducto = (String)request.getParameter("nombreProducto");
             String precioProducto = (String)request.getParameter("precioProducto");
             String descripcionProducto = (String)request.getParameter("descripcionProducto");
@@ -51,6 +52,7 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             String idUsuario = (String)session.getAttribute("idUsuario").toString();
             
             Producto p = new Producto();
+            p.setIdProducto(idProducto);
             p.setNombre(nombreProducto);
             p.setPrecio(Float.parseFloat(precioProducto));
             p.setExistencia(Integer.parseInt(existenciaProducto));
@@ -71,7 +73,7 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             String miniatura = request.getParameter("miniatura");
             String anunciar = request.getParameter("anunciar");
             
-            if(anunciar.equalsIgnoreCase("yes"))
+            if (anunciar.equalsIgnoreCase("yes"))
             {
                 int efectivo;
                 if(request.getParameter("efectivo") != null)
@@ -84,9 +86,12 @@ public class RegistrarAnuncioServlet extends HttpServlet {
                 else 
                     tarjeta = 0;
                 int metodoPago = efectivo + tarjeta;
-                int idProducto = Integer.parseInt(request.getParameter("idProducto"));
 
                 AnuncioDAO.setAnuncio(vigencia, miniatura, metodoPago, idProducto);
+            }
+            else if (anunciar.equalsIgnoreCase("no"))
+            {
+                AnuncioDAO.bajaAnuncio(idProducto);
             }
             
             RequestDispatcher disp = getServletContext()
