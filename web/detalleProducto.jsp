@@ -17,6 +17,8 @@
     <head>
         <title>Ventas LMAD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <link rel="stylesheet" href="themes/alertify.core.css" />
+        <link rel="stylesheet" href="themes/alertify.default.css" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
         <%
             if (session.getAttribute("username") == null)
@@ -107,10 +109,12 @@
                             int idAnuncio = AnuncioDAO.getIdAnuncio(idProducto);
                             if (idAnuncio != 0)
                             {
-                                a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idProducto));
+                                a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
                             %>
                             Sí: <input type="radio" name="anunciar" value="yes" id="yes" checked onchange="show()"><br>
                             No: <input type="radio" name="anunciar" value="no" id="no" onchange="show()">
+                            <input type="hidden" name="anuncioExiste" value="yes">
+                            <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
                             </p>
                             <div id="anunciar" style="display: block">
                             <%
@@ -120,6 +124,7 @@
                             %>
                             Sí: <input type="radio" name="anunciar" value="yes" id="yes" onchange="show()"><br>
                             No: <input type="radio" name="anunciar" value="no" id="no" checked onchange="show()">
+                            <input type="hidden" name="anuncioExiste" value="no">
                             </p>
                             <div id="anunciar" style="display: none">
                             <%
@@ -160,6 +165,7 @@
                             </p>
                         </div>
                     </div>
+                    <script src="lib/alertify.min.js"></script>
                     <script>
                         function show() 
                         {
@@ -174,15 +180,20 @@
                         }
                         function check()
                         {
-                        if (document.getElementById("yes").checked &&
-                                (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked))
-                            document.getElementById("forma").submit();
-                        else
-                            alert("Seleccione al menos un método de pago.");
+                            if (document.getElementById("no").checked)
+                            {
+                                document.getElementById("forma").submit();
+                            }
+                            else if (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked)
+                                document.getElementById("forma").submit();
+                            else
+                            {
+                                alertify.log("Inserte al menos un método de pago");
+                            }
                         }
                     </script>
                 </fieldset>
-                <input type="reset"><input type="submit">
+                <input type="reset"><input type="button" onclick="check()" value="Enviar">
             </form>
         </div>
     </body>

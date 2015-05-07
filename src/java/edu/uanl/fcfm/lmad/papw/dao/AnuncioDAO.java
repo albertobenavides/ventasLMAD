@@ -150,13 +150,13 @@ public class AnuncioDAO {
         }
     }
     
-    public static void bajaAnuncio(int idProducto) {
+    public static void bajaAnuncio(int idAnuncio) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs;
         try {
             cs = conn.prepareCall("{ call bajaAnuncio(?) }");
-            cs.setInt(1, idProducto);
+            cs.setInt(1, idAnuncio);
             cs.executeQuery();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -189,5 +189,26 @@ public class AnuncioDAO {
             pool.freeConnection(conn);
         }
         return 0;
+    }
+
+    public static void updateAnuncio
+        (int idAnuncio, int metodoPago, String miniatura, String vigencia) 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        try {
+            cs = conn.prepareCall("{ call editarAnuncio(?, ?, ?, ?) }");
+            cs.setInt(1, idAnuncio);
+            cs.setInt(2, metodoPago);
+            cs.setString(3, miniatura);
+            cs.setString(4, vigencia);
+            cs.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
     }
 }

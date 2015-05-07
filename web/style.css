@@ -38,13 +38,6 @@ input[type="number"]
     text-align:right;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button 
-{
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 .inline li
 {
     display : inline;
@@ -102,9 +95,10 @@ tr:nth-child(odd) {background: #FFF}
 }
 
 #main_content
-{   
+{
     position: absolute;
-    margin: auto;
+    margin-right: auto;
+    margin-left: auto;
     right: 0;
     left: 0;
     width: 1024px;
@@ -147,17 +141,12 @@ tr:nth-child(odd) {background: #FFF}
     font-size: 30px;
 }
 
-#categories
-{
-    
-}
-
 #content
 {
     margin-top: 40px;
     position: relative;
-    margin-left: 0em;
-    margin-right: 0em;
+    margin-left: 0;
+    margin-right: 0;
     padding-left: 25px;
     padding-right: 25px;
     width: 650px;

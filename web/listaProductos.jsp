@@ -4,6 +4,7 @@
     Author     : Alberto
 --%>
 
+<%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
 <%@page import="java.util.Locale"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.ProductoDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Producto"%>
@@ -43,7 +44,7 @@
                         <th>Existencia</th>
                         <th>Preguntas pendientes</th>
                         <th>Compras pendientes</th>
-                        <th>Anunciar</th>
+                        <th>Anunciado</th>
                         <th>Editar</th>
                     </tr>
             <%
@@ -57,7 +58,20 @@
                         <td><a href="anuncioCompleto.jsp?idAnuncio=<%= producto.getIdProducto() %>#preguntas">
                                 <%= producto.getPreguntasPendientes() %></a></td>
                         <td><%= producto.getComprasPendientes()%></td>
-                        <td><a href="nuevoAnuncio.jsp?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></td>
+                        <%
+                        if (AnuncioDAO.getIdAnuncio(producto.getIdProducto()) != 0)
+                        {
+                        %>
+                        <td>Sí</td>
+                        <%
+                        }
+                        else
+                        {
+                        %>
+                        <td style="color: red">No</td>
+                        <%
+                        }
+                        %>
                         <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto()%>">Editar</a></td>
                     </tr>
             <%

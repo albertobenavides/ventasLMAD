@@ -8,7 +8,7 @@
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Anuncio"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -59,11 +59,11 @@
                 <%
                 }
                 %>
-                <p class="see_more"><a href="anuncios.jsp?orden=1">Ver m·s...</a></p>
+                <p class="see_more"><a href="anuncios.jsp?orden=1">Ver m√°s...</a></p>
             </div>
 
             <div id="trending_items">
-                <h1>M¡S BARATOS</h1>
+                <h1>M√ÅS BARATOS</h1>
                 <%
                 anuncios = AnuncioDAO.getAnunciosCortos(null, null, 2);
                 for (int i = 0; i < 3; i++)
@@ -84,7 +84,7 @@
                 <%
                 }
                 %>
-                <p class="see_more"><a href="anuncios.jsp?orden=2">Ver m·s...</a></p>
+                <p class="see_more"><a href="anuncios.jsp?orden=2">Ver m√°s...</a></p>
             </div>
 
             <div id='users'>

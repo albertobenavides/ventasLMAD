@@ -30,14 +30,14 @@
                 <div style="display: inline-block; margin-right: 20px;">
                     <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" />
                 </div>
-                <%
-                if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
-                {
-                %>
                 <div style="display: inline-block; vertical-align: bottom;">
                     <h1><%= a.getNombre() %></h1>
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
                     <br><br>
+                    <%
+                if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
+                {
+                %>
                     <form action="compra" method="post">
                         Cantidad: <input type="number" name="cantidad" value="1">
                         <input type="submit" value="Comprar"><br>
@@ -54,10 +54,10 @@
                             %>
                         </select>
                     </form>
-                </div>
                 <%
                 }
                 %>
+                </div>
 
                 <br>
                 <h2>Descripción</h2>
