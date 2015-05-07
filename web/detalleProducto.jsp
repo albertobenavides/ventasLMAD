@@ -91,12 +91,6 @@
                         <input type="file" name="videoProducto"><br>
                     </div>
                 </fieldset>
-                <fieldset>
-                    <legend>Anunciar</legend>
-                    <div>
-                        ¿Desea publicar su producto?<br>
-                    </div>
-                </fieldset>
                 <input type="reset"><input type="submit">
             </form>
         </div>

@@ -69,15 +69,6 @@
                         <input type="file" name="videoProducto"><br>
                     </div>
                 </fieldset>
-                <fieldset>
-                    <legend>Anunciar</legend>
-                    <div>
-                        ¿Desea publicar su producto ahora?<br>
-                        No: <input type="radio" name="publicarAnuncio" 
-                                   value="false" checked><br>
-                        Sí: <input type="radio" name="publicarAnuncio" value="true"><br>
-                    </div>
-                </fieldset>
                 <input type="reset"><input type="submit">
             </form>
         </div>

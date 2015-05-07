@@ -106,6 +106,8 @@ public class ProductoDAO {
                 p.setPrecio(rs.getFloat("precioProducto"));
                 p.setExistencia(rs.getInt("existenciaProducto"));
                 p.setFecha(rs.getString("date(creacionProducto)"));
+                p.setComprasPendientes(rs.getInt("comprasRealizadas"));
+                p.setPreguntasPendientes(rs.getInt("preguntasRealizadas"));
                 
                 productos.add(p);
             }

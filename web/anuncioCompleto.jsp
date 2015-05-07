@@ -31,6 +31,10 @@
                 <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
                 <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" />
                 
+                <%
+                if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
+                {
+                %>
                 <form action="compra" method="post">
                     Cantidad: <input type="number" name="cantidad" value="1">
                     <input type="submit" value="Comprar"><br>
@@ -46,6 +50,10 @@
                         %>
                     </select>
                 </form>
+                <%
+                }
+                %>
+                    
                 <br>
                 <h2>Descripción</h2>
                 <p><%= a.getCaracteristicas()%></p>
@@ -56,7 +64,7 @@
                 <p>Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %></p>
             </div>
             <div class="questions">
-                <h1>PREGUNTAS DE USUARIOS</h1>
+                <h1>PREGUNTAS DE USUARIOS</h1><a name="preguntas"></a>
                 <%
                 List<Pregunta> preguntas = new ArrayList<Pregunta>(PreguntaDAO.getPregunta(idAnuncio));
                 int counter = 0;

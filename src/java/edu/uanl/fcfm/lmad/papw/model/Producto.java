@@ -24,6 +24,8 @@ public class Producto {
     String video3;
     int idSubcategoria;
     int idUsuario;
+    int comprasPendientes;
+    int preguntasPendientes;
 
     public Producto() {}
 
@@ -156,4 +158,21 @@ public class Producto {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public int getComprasPendientes() {
+        return comprasPendientes;
+    }
+
+    public void setComprasPendientes(int comprasPendientes) {
+        this.comprasPendientes = comprasPendientes;
+    }
+
+    public int getPreguntasPendientes() {
+        return preguntasPendientes;
+    }
+
+    public void setPreguntasPendientes(int preguntasPendientes) {
+        this.preguntasPendientes = preguntasPendientes;
+    }
+    
 }

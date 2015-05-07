@@ -38,12 +38,12 @@
             %>
                 <table cellspacing="0" cellpadding="0">
                     <tr>
-                        <th>Fecha</th>
                         <th>Producto</th>
-                        <th>Precio ($)</th>
+                        <th>Precio (MXN)</th>
                         <th>Existencia</th>
-                        <th>Preguntas</th>
-                        <th>Compras</th>
+                        <th>Preguntas pendientes</th>
+                        <th>Compras pendientes</th>
+                        <th>Anunciar</th>
                         <th>Editar</th>
                     </tr>
             <%
@@ -51,13 +51,14 @@
             {
             %>
                     <tr>
-                        <td><%= producto.getFecha() %></td>
                         <td><%= producto.getNombre() %></td>
                         <td><%= String.format(Locale.US, "%.2f", producto.getPrecio()) %></td>
                         <td><%= producto.getExistencia() %></td>
-                        <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto()%>">Editar</a></td>
+                        <td><a href="anuncioCompleto.jsp?idAnuncio=<%= producto.getIdProducto() %>#preguntas">
+                                <%= producto.getPreguntasPendientes() %></a></td>
+                        <td><%= producto.getComprasPendientes()%></td>
                         <td><a href="nuevoAnuncio.jsp?idProducto=<%= producto.getIdProducto() %>">Anunciar</a></td>
-                        <td><a href="#?idProducto=<%= producto.getIdProducto() %>">Eliminar</a></td>
+                        <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto()%>">Editar</a></td>
                     </tr>
             <%
             }
