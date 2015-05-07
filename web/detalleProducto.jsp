@@ -4,6 +4,7 @@
     Author     : Alberto
 --%>
 
+<%@page import="java.util.Locale"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.ProductoDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Producto"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.dao.CategoriaDAO"%>
@@ -31,24 +32,24 @@
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
             <%
-                String idProducto = request.getParameter("idProducto");
+                int idProducto = Integer.parseInt(request.getParameter("idProducto"));
                 Producto producto = new Producto
                     (ProductoDAO.getProducto(idProducto));
             %>
             <h1>Editar producto</h1>
-            <form action="nuevoProducto" method="post" id="forma">
+            <form action="detalleProducto" method="post" id="forma">
                 <fieldset>
                     <legend>Datos necesarios</legend>
                     <div>
-                        Nombre del producto:<br>
+                        <p>Nombre del producto:<br>
                         <input type="text" name="nombreProducto" 
                                maxlength="50" required
-                               value="<%= producto.getNombre() %>"><br>
-                        Precio:<br>
+                               value="<%= producto.getNombre() %>"></p>
+                        <p>Precio: 
                         <input type="number" name="precioProducto"
-                               required value="<%= producto.getPrecio() %>"><br>
-                        Categoría:
-                        <select name="idSubcategoria" form="forma">
+                               required value="<%= String.format(Locale.US, "%.2f",producto.getPrecio()) %>"> MXN</p>
+                        <p>Categoría:
+                            <select name="idSubcategoria" form="forma"></p>
                     <%
                             List<String> subcategorias = CategoriaDAO.listaSubcategorias();
                             for (int i = 0; i < subcategorias.size(); i++)
@@ -69,6 +70,7 @@
                     %>
                         </select>
                     </div>
+                    <input type="hidden" name="idProducto" value="<%= idProducto %>">
                 </fieldset>
                 <fieldset>
                     <legend>Información adicional</legend>
@@ -77,7 +79,7 @@
                         <textarea name="descripcionProducto"
                             maxlength="500" form="forma"
                             rows="5" cols="40"><%= producto.getDescripcionLarga() %></textarea><br>
-                        Existencia:<br>
+                        Existencias: 
                         <input type="number" name="existenciaProducto"
                                value="<%= producto.getExistencia()%>"><br>
                     </div>
@@ -86,10 +88,99 @@
                     <legend>Multimedia</legend>
                     <div>
                         Cargar imágenes:<br>
-                        <input type="file" name="imagenProducto"><br>
+                        <input type="file" name="imagenProducto1"><br>
+                        <input type="file" name="imagenProducto2"><br>
+                        <input type="file" name="imagenProducto3"><br>
                         Cargar Video:<br>
-                        <input type="file" name="videoProducto"><br>
+                        <input type="file" name="videoProducto1"><br>
+                        <input type="file" name="videoProducto2"><br>
+                        <input type="file" name="videoProducto3"><br>
                     </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Anunciar</legend>
+                    <div>
+                        <p>¿Desea publicar su anuncio?<br>
+                            <%
+                            Anuncio a = new Anuncio();
+                            a.setMetodoPago("");
+                            int idAnuncio = AnuncioDAO.getIdAnuncio(idProducto);
+                            if (idAnuncio != 0)
+                            {
+                                a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idProducto));
+                            %>
+                            Sí: <input type="radio" name="anunciar" value="yes" id="yes" checked onchange="show()"><br>
+                            No: <input type="radio" name="anunciar" value="no" id="no" onchange="show()">
+                            </p>
+                            <div id="anunciar" style="display: block">
+                            <%
+                            }
+                            else
+                            {
+                            %>
+                            Sí: <input type="radio" name="anunciar" value="yes" id="yes" onchange="show()"><br>
+                            No: <input type="radio" name="anunciar" value="no" id="no" checked onchange="show()">
+                            </p>
+                            <div id="anunciar" style="display: none">
+                            <%
+                            }
+                            %>
+                            <p>Vigencia: <input type="number" align="right" 
+                                                name="vigencia" value="30"
+                                                min="1"
+                                                max="365"> días</p>
+                            <p>Miniatura: <input type="text" name="miniatura"></p>
+                            <p>Método de pago:
+                                <%
+                            if (a.getMetodoPago().contains("Efectivo"))
+                            {
+                                %>
+                                <input type="checkbox" name="efectivo" checked value="1" id="efectivo">Efectivo 
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <input type="checkbox" name="efectivo" value="1" id="efectivo">Efectivo
+                                <%
+                            }
+                            if (a.getMetodoPago().contains("Tarjeta"))
+                            {
+                                %>
+                                <input type="checkbox" name="tarjeta" checked value="2" id="tarjeta">Tarjeta<br>
+                                <%
+                            }
+                            else
+                            {
+                                %>
+                                <input type="checkbox" name="tarjeta" value="2" id="tarjeta">Tarjeta<br>
+                                <%
+                            }
+                                %>
+                            </p>
+                        </div>
+                    </div>
+                    <script>
+                        function show() 
+                        {
+                            if (document.getElementById("yes").checked)
+                            {
+                                document.getElementById("anunciar").style.display = 'block';
+                            }
+                            else if (document.getElementById("no").checked)
+                            {
+                                document.getElementById("anunciar").style.display = 'none';
+                            }
+                        }
+                        function check()
+                        {
+                        if (document.getElementById("yes").checked &&
+                                (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked))
+                            document.getElementById("forma").submit();
+                        else
+                            alert("Seleccione al menos un método de pago.");
+                        }
+                    </script>
                 </fieldset>
                 <input type="reset"><input type="submit">
             </form>

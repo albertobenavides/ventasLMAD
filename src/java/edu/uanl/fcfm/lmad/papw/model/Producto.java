@@ -44,8 +44,6 @@ public class Producto {
         this.video2 = p.video2;
         this.video3 = p.video3;
     }
-
-    
     
     public int getIdProducto() {
         return idProducto;

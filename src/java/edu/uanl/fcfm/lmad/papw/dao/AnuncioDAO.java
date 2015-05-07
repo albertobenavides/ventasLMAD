@@ -137,6 +137,7 @@ public class AnuncioDAO {
             a.setNickUsuario(rs.getString("nickUsuario"));
             a.setMetodoPago(rs.getString("metodoPagoAnuncio"));
             a.setIdUsuario(rs.getInt("idUsuario"));
+            a.setExistencias(rs.getInt("existenciaProducto"));
             }
             return a;
         } catch (SQLException ex) {
@@ -147,5 +148,46 @@ public class AnuncioDAO {
             DBUtil.closeStatement(cs);
             pool.freeConnection(conn);
         }
+    }
+    
+    public static void bajaAnuncio(int idProducto) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs;
+        try {
+            cs = conn.prepareCall("{ call bajaAnuncio(?) }");
+            cs.setInt(1, idProducto);
+            cs.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            pool.freeConnection(conn);
+        }
+    }
+    
+    public static int getIdAnuncio(int idProducto) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall("{ call getIdAnuncio(?) }");
+            cs.setInt(1, idProducto);
+            rs = cs.executeQuery();
+            int idAnuncio = 0;
+            while (rs.next()) 
+            {
+                idAnuncio = rs.getInt("idAnuncio");
+                return idAnuncio;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return 0;
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+        return 0;
     }
 }
