@@ -64,9 +64,13 @@
                     <legend>Multimedia</legend>
                     <div>
                         Cargar imágenes:<br>
-                        <input type="file" name="imagenProducto"><br>
-                        Cargar Video:<br>
-                        <input type="file" name="videoProducto"><br>
+                        <input type="file" name="imagenProducto1"><br>
+                        <input type="file" name="imagenProducto2"><br>
+                        <input type="file" name="imagenProducto3"><br>
+                        Cargar videos:<br>
+                        <input type="file" name="videoProducto1"><br>
+                        <input type="file" name="videoProducto2"><br>
+                        <input type="file" name="videoProducto3"><br>
                     </div>
                 </fieldset>
                 <input type="reset"><input type="submit">

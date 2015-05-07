@@ -51,6 +51,7 @@ public class Anuncio {
         this.fecha = a.fecha;
         this.nickUsuario = a.nickUsuario;
         this.metodoPago = a.metodoPago;
+        this.idUsuario = a.idUsuario;
     }
 
     public int getIdAnuncio() {

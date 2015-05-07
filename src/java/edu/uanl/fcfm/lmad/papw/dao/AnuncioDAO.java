@@ -136,6 +136,7 @@ public class AnuncioDAO {
             a.setFecha(rs.getString("fechaPublicacionAnuncio"));
             a.setNickUsuario(rs.getString("nickUsuario"));
             a.setMetodoPago(rs.getString("metodoPagoAnuncio"));
+            a.setIdUsuario(rs.getInt("idUsuario"));
             }
             return a;
         } catch (SQLException ex) {

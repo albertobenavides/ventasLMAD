@@ -36,8 +36,9 @@ public class PreguntaDAO {
             p.setTextoPregunta(rs.getString("textoPregunta"));
             p.setTextoRespuesta(rs.getString("textoRespuesta"));
             p.setFechaPublicacion(rs.getString("fechaPublicacionPregunta"));
-            p.setNombreUsuario(rs.getString("nombreUsuario"));
+            p.setNombreUsuario(rs.getString("nickUsuario"));
             p.setIdPregunta(rs.getInt("idPregunta"));
+            p.setIdUsuario(rs.getInt("idUsuario"));
             preguntas.add(p);
         }
         return preguntas;

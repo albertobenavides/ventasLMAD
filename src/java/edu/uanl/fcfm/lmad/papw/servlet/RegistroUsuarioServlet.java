@@ -29,20 +29,7 @@ import javax.servlet.http.Part;
         maxFileSize         = 1024 * 1024 * 10, // 10 MB
         maxRequestSize      = 1024 * 1024 * 15 // 15 MB
 )
-public class RegistroUsuarioServlet extends HttpServlet {
-
-    private String extractExtension(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
-                String filename = s.substring(s.indexOf("=") + 2, s.length() - 1);
-                return filename.substring(filename.indexOf(".") - 1, filename.length());
-            }
-        }
-        return "";
-    }
-    
+public class RegistroUsuarioServlet extends HttpServlet {    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -59,20 +46,25 @@ public class RegistroUsuarioServlet extends HttpServlet {
         try {
             Part filePart = request.getPart("imagen"); 
             String contentType = filePart.getContentType();
+            
             Usuario u = new Usuario();
+            
             u.setNickname(request.getParameter("nickname"));
             u.setContrasenia(request.getParameter("contrasenia"));
             u.setCorreoElectronico(request.getParameter("correoElectronico"));
-            u.setNombre(request.getParameter("nombre"));
-            u.setApellidoPaterno(request.getParameter("apellidoPaterno"));
-            u.setApellidoMaterno(request.getParameter("apellidoMaterno"));
+            u.setNombre(
+                    new String (
+                            request.getParameter("nombre").getBytes ("iso-8859-1"), "UTF-8"));
+            u.setApellidoPaterno(
+                    new String (
+                            request.getParameter("apellidoPaterno").getBytes ("iso-8859-1"), "UTF-8"));
+            u.setApellidoMaterno(
+                    new String (
+                            request.getParameter("apellidoMaterno").getBytes ("iso-8859-1"), "UTF-8"));
             u.setFechaNacimiento(request.getParameter("fechaNacimiento"));
             u.setSexo(request.getParameter("sexo"));
             u.setTelefono(request.getParameter("telefono"));
             u.setTipo(contentType);
-            
-            String nombreArchivo = String.valueOf(System.currentTimeMillis());
-            nombreArchivo += extractExtension(filePart);
             
             InputStream inputStream = filePart.getInputStream();
             u.setStream(inputStream);
@@ -82,8 +74,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
             String message;
             if (UsuarioDao.insertar(u) == true)
             {   
-                int id = UsuarioDao.insertarImagen(u);
-                request.setAttribute("id", id);
+                UsuarioDao.insertarImagen(u);
                 message = "Usuario registrado con éxito.";
                 request.setAttribute("message", message);
                 disp = getServletContext()

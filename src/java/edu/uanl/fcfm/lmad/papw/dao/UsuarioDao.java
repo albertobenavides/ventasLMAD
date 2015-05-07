@@ -6,6 +6,7 @@
 package edu.uanl.fcfm.lmad.papw.dao;
 
 import edu.uanl.fcfm.lmad.papw.model.Usuario;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -48,7 +49,7 @@ public class UsuarioDao {
         return false;
     }
     
-     public static int insertarImagen(Usuario u) {
+    public static int insertarImagen(Usuario u) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         CallableStatement cs = null;
@@ -75,4 +76,28 @@ public class UsuarioDao {
             pool.freeConnection(connection);
         }
     }
+     
+    public static InputStream obtenerImagen(int idUsuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try { 
+            cs = connection.prepareCall("{ call obtenerImagen(?) }");
+            cs.setInt(1, idUsuario);
+            rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getBinaryStream(1);
+            }
+            return null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+            
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
+        }
+    } 
 }

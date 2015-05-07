@@ -15,6 +15,7 @@ public class Pregunta {
     String fechaPublicacion;
     String nombreUsuario;
     int idPregunta;
+    int idUsuario;
 
     public Pregunta() {}
 
@@ -56,6 +57,14 @@ public class Pregunta {
 
     public void setIdPregunta(int idPregunta) {
         this.idPregunta = idPregunta;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
     

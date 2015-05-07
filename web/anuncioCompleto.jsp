@@ -27,41 +27,54 @@
                 int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
                 Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
                 %>
-                <h1><%= a.getNombre() %></h1>
-                <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
-                <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" />
-                
+                <div style="display: inline-block; margin-right: 20px;">
+                    <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" />
+                </div>
                 <%
                 if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
                 {
                 %>
-                <form action="compra" method="post">
-                    Cantidad: <input type="number" name="cantidad" value="1">
-                    <input type="submit" value="Comprar"><br>
-                    <select>
-                        <%
-                        String[] metodoPago = a.getMetodoPago().split(",");
-                        for(String s : metodoPago)
-                        {
-                        %>
-                        <option><%= s %></option>
-                        <%
-                        }
-                        %>
-                    </select>
-                </form>
+                <div style="display: inline-block; vertical-align: bottom;">
+                    <h1><%= a.getNombre() %></h1>
+                    <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
+                    <br><br>
+                    <form action="compra" method="post">
+                        Cantidad: <input type="number" name="cantidad" value="1">
+                        <input type="submit" value="Comprar"><br>
+                        Método de pago:
+                        <select>
+                            <%
+                            String[] metodoPago = a.getMetodoPago().split(",");
+                            for(String s : metodoPago)
+                            {
+                            %>
+                            <option><%= s %></option>
+                            <%
+                            }
+                            %>
+                        </select>
+                    </form>
+                </div>
                 <%
                 }
                 %>
-                    
+
                 <br>
                 <h2>Descripción</h2>
                 <p><%= a.getCaracteristicas()%></p>
+                
                 <h2>Publicado por</h2>
-                <p><%= a.getNombreUsuario()%></p>
-                <p><%= a.getCorreoElectronico()%></p>
-                <p><%= a.getTelefono()%></p>
-                <p>Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %></p>
+                <div style="display: inline-block; margin-right: 20px;">
+                    <img 
+                    src="<%= request.getServletContext().getContextPath() 
+                                + "/mostrarImagen?id=" +  a.getIdUsuario() %>"
+                                width="100px" height="130px"/></div>
+                <div style="display: inline-block; vertical-align: bottom;">
+                    <%= a.getNombreUsuario()%><br>
+                    <%= a.getCorreoElectronico()%><br>
+                    <%= a.getTelefono()%><br>
+                    Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %><<br><br>
+                </div>
             </div>
             <div class="questions">
                 <h1>PREGUNTAS DE USUARIOS</h1><a name="preguntas"></a>
@@ -73,7 +86,10 @@
                     counter++;
                 %>
                 <div>
-                    <h2><strong><%= p.getNombreUsuario()%></strong> (<%= p.getFechaPublicacion().substring(0,10) %>):</h2>
+                    <h2><img src="<%= request.getServletContext().getContextPath() 
+                            + "/mostrarImagen?id=" +  p.getIdUsuario() %>"/>
+                        <strong><%= p.getNombreUsuario()%></strong></h2>
+                    
                     <p><%= p.getTextoPregunta() %></p>
                     <%
                     if(p.getTextoRespuesta() != null)
@@ -96,6 +112,7 @@
                     <%
                         }
                     %>
+                    <p align="right"><%= p.getFechaPublicacion().substring(0,10) %></p>
                 </div>
                 <%
                 }

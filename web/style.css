@@ -20,6 +20,11 @@ input[type="text"], textarea {
   background-color : white; 
 }
 
+input[type="number"]
+{
+    width: 100px;
+}
+
 .inline li
 {
     display : inline;
