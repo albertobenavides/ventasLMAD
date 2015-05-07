@@ -87,6 +87,37 @@ public class ProductoDAO {
         }
     }
     
+    public static void editarProducto(Producto p)
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try {
+            cs = conn.prepareCall("{ call editarProducto(?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs.setInt(1, p.getIdProducto());
+            cs.setString(2, p.getNombre());
+            cs.setFloat(3, p.getPrecio());
+            cs.setInt(4, p.getExistencia());
+            cs.setString(5, p.getDescripcionLarga());
+            cs.setString(6, p.getImagen1());
+            cs.setString(7, p.getImagen2());
+            cs.setString(8, p.getImagen3());
+            cs.setString(9, p.getVideo1());
+            cs.setString(10, p.getVideo2());
+            cs.setString(11, p.getVideo3());
+            cs.setInt(12, p.getIdSubcategoria());
+            
+            rs = cs.executeQuery();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
+    
     public static List<Producto> getListaProductos
         (int idUsuario) {
         ConnectionPool pool = ConnectionPool.getInstance();

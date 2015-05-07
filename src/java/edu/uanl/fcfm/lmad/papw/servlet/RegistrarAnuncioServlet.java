@@ -6,6 +6,8 @@
 package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
+import edu.uanl.fcfm.lmad.papw.dao.ProductoDAO;
+import edu.uanl.fcfm.lmad.papw.model.Producto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,12 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Alberto
  */
-@WebServlet(name = "RegistrarAnuncioServlet", urlPatterns = {"/RegistrarAnuncio"})
+@WebServlet(name = "RegistrarAnuncioServlet", urlPatterns = {"/detalleProducto"})
 public class RegistrarAnuncioServlet extends HttpServlet {
 
     /**
@@ -35,23 +38,57 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {            
+        try {
+            HttpSession session = request.getSession();
+            
+            request.setCharacterEncoding("UTF-8");
+            
+            String nombreProducto = (String)request.getParameter("nombreProducto");
+            String precioProducto = (String)request.getParameter("precioProducto");
+            String descripcionProducto = (String)request.getParameter("descripcionProducto");
+            String existenciaProducto = (String)request.getParameter("existenciaProducto");
+            String idSubcategoria = (String)request.getParameter("idSubcategoria");
+            String idUsuario = (String)session.getAttribute("idUsuario").toString();
+            
+            Producto p = new Producto();
+            p.setNombre(nombreProducto);
+            p.setPrecio(Float.parseFloat(precioProducto));
+            p.setExistencia(Integer.parseInt(existenciaProducto));
+            p.setDescripcionLarga(descripcionProducto);
+            p.setImagen1("");
+            p.setImagen2("");
+            p.setImagen3("");
+            p.setVideo1("");
+            p.setVideo2("");
+            p.setVideo3("");
+            p.setIdSubcategoria(Integer.parseInt(idSubcategoria));
+            p.setIdUsuario(Integer.parseInt(idUsuario));
+            
+            ProductoDAO.editarProducto(p);
+            
+            
             String vigencia = request.getParameter("vigencia");
             String miniatura = request.getParameter("miniatura");
-            int efectivo;
-            if(request.getParameter("efectivo") != null)
-                efectivo = Integer.parseInt(request.getParameter("efectivo"));
-            else
-                efectivo = 0;
-            int tarjeta;
-            if (request.getParameter("tarjeta") != null)
-                tarjeta = Integer.parseInt(request.getParameter("tarjeta"));
-            else 
-                tarjeta = 0;
-            int metodoPago = efectivo + tarjeta;
-            int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+            String anunciar = request.getParameter("anunciar");
             
-            AnuncioDAO.setAnuncio(vigencia, miniatura, metodoPago, idProducto);
+            if(anunciar.equalsIgnoreCase("yes"))
+            {
+                int efectivo;
+                if(request.getParameter("efectivo") != null)
+                    efectivo = Integer.parseInt(request.getParameter("efectivo"));
+                else
+                    efectivo = 0;
+                int tarjeta;
+                if (request.getParameter("tarjeta") != null)
+                    tarjeta = Integer.parseInt(request.getParameter("tarjeta"));
+                else 
+                    tarjeta = 0;
+                int metodoPago = efectivo + tarjeta;
+                int idProducto = Integer.parseInt(request.getParameter("idProducto"));
+
+                AnuncioDAO.setAnuncio(vigencia, miniatura, metodoPago, idProducto);
+            }
+            
             RequestDispatcher disp = getServletContext()
                     .getRequestDispatcher("/listaProductos.jsp");
             disp.forward(request, response);

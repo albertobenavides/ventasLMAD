@@ -10,6 +10,18 @@ body
     background-color: #FAFAFA;
 }
 
+fieldset
+{
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+fieldset p
+{
+    padding-top: 0;
+    padding-left: 25px;
+}
+
 textarea
 {
     resize: none;
@@ -22,7 +34,15 @@ input[type="text"], textarea {
 
 input[type="number"]
 {
-    width: 100px;
+    width: 80px;
+    text-align:right;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button 
+{
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .inline li
