@@ -5,7 +5,7 @@
  */
 package edu.uanl.fcfm.lmad.papw.model;
 
-import java.sql.Blob;
+import java.io.InputStream;
 
 /**
  *
@@ -22,7 +22,9 @@ public class Usuario {
     private String fechaNacimiento;
     private String sexo;
     private String telefono;
-    private Blob imagen;
+    
+    private String tipo;
+    private InputStream stream;
 
     public Usuario(Usuario u)
     {
@@ -112,14 +114,20 @@ public class Usuario {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    public Blob getImagen() {
-        return imagen;
+    
+     public InputStream getStream() {
+        return stream;
     }
 
-    public void setImagen(Blob imagen) {
-        this.imagen = imagen;
+    public void setStream(InputStream stream) {
+        this.stream = stream;
+    }
+    
+    public String getTipo() {
+        return tipo;
     }
 
-   
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }

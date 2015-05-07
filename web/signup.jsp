@@ -20,7 +20,7 @@
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
             <h1>Registro de usuario</h1>
-            <form action="RegistroUsuario" method="post">
+            <form action="RegistroUsuario" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Información de registro</legend>
                     <div>
@@ -55,7 +55,7 @@
                                 <input type="date" name="fechaNacimiento"><br>
                             </td>
                             <td>
-                                <input type="radio" name="sexo" value="m">Hombre<br>
+                                <input type="radio" name="sexo" value="m" checked/>Hombre<br>
                                 <input type="radio" name="sexo" value="f">Mujer<br>
                             </td>
                         </tr>

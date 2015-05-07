@@ -23,8 +23,9 @@ public class UsuarioDao {
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         ResultSet rs = null;
+        
         try {
-            cs = conn.prepareCall("{ call insertarUsuario(?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{ call insertarUsuario(?,?,?,?,?,?,?,?,?) }");
             cs.setString(1, u.getNickname());
             cs.setString(2, u.getContrasenia());
             cs.setString(3, u.getCorreoElectronico());
@@ -34,7 +35,6 @@ public class UsuarioDao {
             cs.setString(7, u.getFechaNacimiento());
             cs.setString(8, u.getSexo());
             cs.setString(9, u.getTelefono());
-            cs.setBlob(10, u.getImagen());
             rs = cs.executeQuery();
             
             rs.first();
@@ -46,5 +46,33 @@ public class UsuarioDao {
             pool.freeConnection(conn);
         }
         return false;
+    }
+    
+     public static int insertarImagen(Usuario u) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try { 
+            cs = connection.prepareCall("{ call insertarImagen(?,?,?) }");
+            cs.setString(1, u.getNickname());
+            cs.setString(2, u.getTipo());
+            cs.setBlob(3, u.getStream());
+            rs = cs.executeQuery();
+           
+            if (rs.next()){
+                 int id = rs.getInt("idUsuario");
+                 return id;  
+            }            
+            else 
+                return 0;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0;
+            
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
+        }
     }
 }
