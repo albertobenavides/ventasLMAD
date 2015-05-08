@@ -193,6 +193,12 @@
                         }
                     </script>
                 </fieldset>
+                <fieldset>
+                    <legend style="color: red;">Eliminar cuenta</legend>
+                    <p>Eliminar una cuenta es un proceso irreversible.</p>
+                    <p>Al hacerlo se perderán <strong>todos</strong> sus datos.</p>
+                    <p>Si está seguro de que desea eliminar su cuenta, pulse <a href="">aquí</a>.</p>
+                </fieldset>
                 <input type="reset"><input type="button" onclick="check()" value="Enviar">
             </form>
         </div>
