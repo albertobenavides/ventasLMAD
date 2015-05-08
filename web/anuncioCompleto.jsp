@@ -31,20 +31,26 @@
                     <img src="images/item_new.gif" width="250" height="180" 
                          alt="<%= a.getNombre() %>" />
                 </div>
-                <div style="display: inline-block; vertical-align: top;">
+                <div style="display: inline-block; vertical-align: top; width: 330px;">
                     <h1><%= a.getNombre() %></h1>
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
                     <h2>Existencias: <%= a.getExistencias()%></h2>
-                    <%
+                </div>
+
+                <%
                 if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
                 {
                 %>
-                    <form action="Comprar" method="post">
-                        Cantidad: <input type="number" name="cantidadCompra" value="1"
-                                         max="<%= a.getExistencias()%>"
-                                         min="1">
-                        <input type="submit" value="Comprar"><br>
+                <div style="text-align: right;">
+                <form action="Comprar" method="post">
+                    <div style="display: inline-block">
+                        Cantidad: <br>
                         Método de pago:
+                    </div>
+                    <div style="display: inline-block; text-align: left">
+                        <input type="number" name="cantidadCompra" value="1"
+                                     max="<%= a.getExistencias()%>"
+                                     min="1"><br>
                         <select name="metodoPagoCompra">
                             <%
                             String[] metodoPago = a.getMetodoPago().split(",");
@@ -56,14 +62,16 @@
                             }
                             %>
                         </select>
+                    </div>
+                    <div style="display: inline-block; vertical-align: middle;">
                         <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
-                    </form>
+                    <input type="submit" value="Comprar">
+                    </div>
+                </form>
+                </div>
                 <%
                 }
                 %>
-                </div>
-
-                <br>
                 <h2>Descripción</h2>
                 <p><%= a.getCaracteristicas()%></p>
                 

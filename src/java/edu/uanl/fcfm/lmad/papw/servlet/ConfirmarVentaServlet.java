@@ -14,14 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Alberto
  */
-@WebServlet(name = "CompraServlet", urlPatterns = {"/Comprar"})
-public class CompraServlet extends HttpServlet {
+@WebServlet(name = "ConfirmarVentaServlet", urlPatterns = {"/ConfirmarVenta"})
+public class ConfirmarVentaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +36,14 @@ public class CompraServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            HttpSession session = request.getSession();
-            int idUsuario = (Integer)session.getAttribute("idUsuario");
-            int cantidadCompra = Integer.parseInt(request.getParameter("cantidadCompra"));
-            String metodoPagoCompra = request.getParameter("metodoPagoCompra");
-            int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
+            int idCompra = Integer.parseInt(request.getParameter("idCompra"));
             
-            CompraDAO.setCompra(idUsuario, cantidadCompra, metodoPagoCompra, idAnuncio);
+            CompraDAO.confirmarVenta(idCompra);
             
-            request.setAttribute("message", "Compra realizada con éxito.");
+            request.setAttribute("message", "Venta confirmada.");
             
             RequestDispatcher disp = getServletContext()
-                    .getRequestDispatcher("/listaCompras.jsp");
+                    .getRequestDispatcher("/listaVentas.jsp");
                     disp.forward(request, response);
         } finally {
             out.close();

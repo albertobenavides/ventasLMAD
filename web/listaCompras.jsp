@@ -1,14 +1,12 @@
 <%-- 
-    Document   : listaProductos
-    Created on : 22-abr-2015, 17:16:50
+    Document   : listaCompras
+    Created on : 08-may-2015, 10:17:51
     Author     : Alberto
 --%>
 
-<%@page import="edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO"%>
 <%@page import="java.util.Locale"%>
-<%@page import="edu.uanl.fcfm.lmad.papw.dao.ProductoDAO"%>
-<%@page import="edu.uanl.fcfm.lmad.papw.model.Producto"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.dao.CompraDAO"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.model.Compra"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,54 +28,65 @@
     <body>
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
-            <h1>Listado de productos</h1>
+            <h1>Listado de compras</h1>
             <div id="new_item_list">
             <%
                 int idUsuario = (Integer)session.getAttribute("idUsuario");
-                List<Producto> productos = new ArrayList<Producto>
-                    (ProductoDAO.getListaProductos(idUsuario));
+                List<Compra> compras = new ArrayList<Compra>
+                    (CompraDAO.getListaCompras(idUsuario));
             %>
                 <table cellspacing="0" cellpadding="0">
                     <tr>
+                        <th>Fecha</th>
                         <th>Producto</th>
-                        <th>Precio (MXN)</th>
-                        <th>Existencia</th>
-                        <th>Preguntas pendientes</th>
-                        <th>Compras pendientes</th>
-                        <th>Anunciado</th>
-                        <th>Editar</th>
+                        <th>Cantidad</th>
+                        <th>Total (MXN)</th>
+                        <th>Método de pago</th>
+                        <th>Estado</th>
+                        <th></th>
                     </tr>
             <%
-            for (Producto producto : productos)
+            for (Compra c : compras)
             {
             %>
                     <tr>
-                        <td><%= producto.getNombre() %></td>
-                        <td><%= String.format(Locale.US, "%.2f", producto.getPrecio()) %></td>
-                        <td><%= producto.getExistencia() %></td>
-                        <td><a href="anuncioCompleto.jsp?idAnuncio=<%= producto.getIdProducto() %>#preguntas">
-                                <%= producto.getPreguntasPendientes() %></a></td>
-                        <td><a href="listaVentas.jsp"><%= producto.getComprasPendientes()%></a></td>
+                        <td><%= c.getFechaCompra().substring(0,10)%></td>
+                        <td><a href="anuncioCompleto.jsp?idAnuncio=<%= c.getIdAnuncio() %>">
+                                <%= c.getNombreProducto() %></a></td>
+                        <td><%= c.getCantidadCompra() %></td>
+                        <td><%= String.format(Locale.US, "%.2f", c.getTotalCompra()) %></td>
+                        <td><%= c.getMetodoPagoCompra() %></td>
                         <%
-                        if (AnuncioDAO.getIdAnuncio(producto.getIdProducto()) != 0)
+                        if (c.getVentaRealizada() == 1)
                         {
                         %>
-                        <td>Sí</td>
+                        <td style="color: green">Confirmada</td>
                         <%
                         }
                         else
                         {
                         %>
-                        <td style="color: red">No</td>
+                        <td>Pendiente</td>
                         <%
                         }
                         %>
-                        <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto()%>">Editar</a></td>
+                        <td><a href="#">Cancelar</a></td>
                     </tr>
             <%
             }
             %>
             </table>
         </div>
+        <%                        
+        String message = (String)request.getAttribute("message");
+
+        if (message != null)
+        {
+        %>
+            <script src="lib/alertify.min.js"></script>
+            <script>alertify.log("<%= message %>");</script>
+        <%
+        }
+        %>
     </body>
 </html>

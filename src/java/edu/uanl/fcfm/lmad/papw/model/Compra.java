@@ -15,9 +15,10 @@ public class Compra {
     float totalCompra;
     String fechaCompra;
     String metodoPagoCompra;
-    boolean ventaRealizada;
+    int ventaRealizada;
     String usuarioComprador;
-    String nombreAnuncio;
+    String nombreProducto;
+    int idAnuncio;
 
     public int getIdCompra() {
         return idCompra;
@@ -59,11 +60,11 @@ public class Compra {
         this.metodoPagoCompra = metodoPagoCompra;
     }
 
-    public boolean isVentaRealizada() {
+    public int getVentaRealizada() {
         return ventaRealizada;
     }
 
-    public void setVentaRealizada(boolean ventaRealizada) {
+    public void setVentaRealizada(int ventaRealizada) {
         this.ventaRealizada = ventaRealizada;
     }
 
@@ -75,12 +76,20 @@ public class Compra {
         this.usuarioComprador = usuarioComprador;
     }
 
-    public String getNombreAnuncio() {
-        return nombreAnuncio;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setNombreAnuncio(String nombreAnuncio) {
-        this.nombreAnuncio = nombreAnuncio;
+    public void setNombreProducto(String nombreAnuncio) {
+        this.nombreProducto = nombreAnuncio;
+    }
+
+    public int getIdAnuncio() {
+        return idAnuncio;
+    }
+
+    public void setIdAnuncio(int idAnuncio) {
+        this.idAnuncio = idAnuncio;
     }
     
 }

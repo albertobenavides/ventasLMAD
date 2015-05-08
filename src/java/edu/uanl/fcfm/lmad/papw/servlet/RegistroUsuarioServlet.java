@@ -51,7 +51,9 @@ public class RegistroUsuarioServlet extends HttpServlet {
             Usuario u = new Usuario();
             
             HttpSession session = request.getSession();
-            u.setIdUsuario((Integer)session.getAttribute("idUsuario"));
+            
+            if (session.getAttribute("idUsuario") != null)
+                u.setIdUsuario((Integer)session.getAttribute("idUsuario"));
             u.setNickname(request.getParameter("nickname"));
             u.setContrasenia(request.getParameter("contrasenia"));
             u.setCorreoElectronico(request.getParameter("correoElectronico"));

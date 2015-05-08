@@ -48,7 +48,7 @@
                            {this.value=''; this.type='password';}"
                        onblur="if(this.value === '') 
                            { this.value='contraseña'; this.type='text';}"/>
-                <input type="submit">  <a href="registro.jsp" >Registrarse</a>
+                <input type="submit" value="Entrar">  <a href="registro.jsp" >Registrarse</a>
             </form>
         <%
             }
@@ -59,7 +59,7 @@
             <ul>
                 <li><a href="listaProductos.jsp">Mis productos</a></li>
                 <li><a href="nuevoProducto.jsp">Registrar producto</a></li>
-                <li><a href="nuevoProducto.jsp">Mis compras</a></li>
+                <li><a href="listaCompras.jsp">Mis compras</a></li>
                 <li><a href="editarUsuario.jsp">Detalles</a></li>
                 <li><a href="index.jsp?logout=true">Cerrar sesión</a></li>
             </ul>
