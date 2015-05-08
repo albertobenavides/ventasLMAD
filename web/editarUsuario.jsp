@@ -116,6 +116,24 @@
                         </tr>
                     </table>
                 </fieldset>
+                <fieldset>
+                    <legend style="color: red;">Eliminar cuenta</legend>
+                    <p><input type="button" id="delete" value="Click aquí para eliminar"
+                              onclick="eliminar();"></p>
+                    <div id="info" style="display: none; margin-top: -50px;">
+                        <p>Eliminar una cuenta es un proceso irreversible.</p>
+                        <p>Al hacerlo se perderán <strong>todos</strong> sus datos.</p>
+                        <p>Si está seguro de que desea eliminar su cuenta, pulse 
+                            <a href="EliminarUsuario">aquí</a>.</p>
+                    </div>
+                </fieldset>
+                <script>
+                    function eliminar()
+                    {
+                        document.getElementById('delete').style.visibility = 'hidden';
+                        document.getElementById('info').style.display = 'block';
+                    }
+                </script>
                 <input type="hidden" name="action" value="editUsuario">
                 <input type="reset"><input type="submit">
             </form>

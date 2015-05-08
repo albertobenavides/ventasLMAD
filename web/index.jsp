@@ -20,15 +20,13 @@
     </head>
     <body>
         <%
-        String logout = (String)request.getParameter("logout");
-            
+        String logout = request.getParameter("logout");
+        logout = (String)request.getAttribute("logout");
         if (logout != null) 
         {
             session = request.getSession();
             session.invalidate();
         }
-        
-        String logInTry = (String)request.getAttribute("logInTry");
         
         session = request.getSession(); // Revisar
         %>
@@ -41,7 +39,12 @@
             <div id="trending_items">
                 <h1>NOVEDADES</h1>
                 <%
-                for (int i = 0; i < 3; i++)
+                int total = 3;
+                if (anuncios.size() < 3)
+                    total = anuncios.size();
+                if (anuncios.size() > 0)
+                {
+                for (int i = 0; i < total; i++)
                 {
                 %>
                 <div class="item">
@@ -58,6 +61,7 @@
                 </div>
                 <%
                 }
+                }
                 %>
                 <p class="see_more"><a href="anuncios.jsp?orden=1">Ver más...</a></p>
             </div>
@@ -66,7 +70,11 @@
                 <h1>MÁS BARATOS</h1>
                 <%
                 anuncios = AnuncioDAO.getAnunciosCortos(null, null, 2);
-                for (int i = 0; i < 3; i++)
+                if (anuncios.size() < 3)
+                    total = anuncios.size();
+                if (anuncios.size() > 0)
+                {
+                for (int i = 0; i < total; i++)
                 {
                 %>
                 <div class="item">
@@ -82,6 +90,7 @@
                     </p>
                 </div>
                 <%
+                }
                 }
                 %>
                 <p class="see_more"><a href="anuncios.jsp?orden=2">Ver más...</a></p>

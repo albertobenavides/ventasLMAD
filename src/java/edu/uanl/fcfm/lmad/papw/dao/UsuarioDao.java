@@ -160,4 +160,21 @@ public class UsuarioDao {
             pool.freeConnection(connection);
         }
     } 
+    
+    public static void deleteUsuario(int idUsuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        
+        try {
+            cs = conn.prepareCall("{ call bajaUsuario(?) }");
+            cs.setInt(1, idUsuario);
+            cs.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
 }
