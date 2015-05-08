@@ -5,13 +5,16 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
+import edu.uanl.fcfm.lmad.papw.dao.CompraDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,7 +37,19 @@ public class CompraServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            HttpSession session = request.getSession();
+            int idUsuario = (Integer)session.getAttribute("idUsuario");
+            int cantidadCompra = Integer.parseInt(request.getParameter("cantidadCompra"));
+            String metodoPagoCompra = request.getParameter("metodoPagoCompra");
+            int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
             
+            CompraDAO.setCompra(idUsuario, cantidadCompra, metodoPagoCompra, idAnuncio);
+            
+            request.setAttribute("message", "Compra realizada con éxito.");
+            
+            RequestDispatcher disp = getServletContext()
+                    .getRequestDispatcher("/index.jsp");
+                    disp.forward(request, response);
         } finally {
             out.close();
         }

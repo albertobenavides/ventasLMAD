@@ -28,31 +28,35 @@
                 Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
                 %>
                 <div style="display: inline-block; margin-right: 20px;">
-                    <img src="images/item_new.gif" width="242" height="180" alt="New Item Name" />
+                    <img src="images/item_new.gif" width="250" height="180" 
+                         alt="<%= a.getNombre() %>" />
                 </div>
-                <div style="display: inline-block; vertical-align: bottom;">
+                <div style="display: inline-block; vertical-align: top;">
                     <h1><%= a.getNombre() %></h1>
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
-                    <br><br>
+                    <h2>Existencias: <%= a.getExistencias()%></h2>
                     <%
                 if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
                 {
                 %>
-                    <form action="compra" method="post">
-                        Cantidad: <input type="number" name="cantidad" value="1">
+                    <form action="Comprar" method="post">
+                        Cantidad: <input type="number" name="cantidadCompra" value="1"
+                                         max="<%= a.getExistencias()%>"
+                                         min="1">
                         <input type="submit" value="Comprar"><br>
                         Método de pago:
-                        <select>
+                        <select name="metodoPagoCompra">
                             <%
                             String[] metodoPago = a.getMetodoPago().split(",");
                             for(String s : metodoPago)
                             {
                             %>
-                            <option><%= s %></option>
+                            <option value="<%= s %>"><%= s %></option>
                             <%
                             }
                             %>
                         </select>
+                        <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
                     </form>
                 <%
                 }
@@ -68,7 +72,8 @@
                     <img 
                     src="<%= request.getServletContext().getContextPath() 
                                 + "/mostrarImagen?id=" +  a.getIdUsuario() %>"
-                                width="100px" height="130px"/></div>
+                                width="100px" height="130px"
+                                style="max-width: 100%; max-height: 100%;"/></div>
                 <div style="display: inline-block; vertical-align: bottom;">
                     <%= a.getNombreUsuario()%><br>
                     <%= a.getCorreoElectronico()%><br>
@@ -86,17 +91,20 @@
                     counter++;
                 %>
                 <div>
-                    <h2><img src="<%= request.getServletContext().getContextPath() 
+                    <div class="derecha"><%= p.getFechaPublicacion().substring(0,10) %></div>
+                    <img src="<%= request.getServletContext().getContextPath() 
                             + "/mostrarImagen?id=" +  p.getIdUsuario() %>"
-                            width="40px" height="40px;"/>
-                        <strong><%= p.getNombreUsuario()%></strong></h2>
+                            width="30px" height="40px"
+                            style="max-width: 100%; max-height: 100%;"
+                            align="middle"/>
+                    <span><%= p.getNombreUsuario()%></span>
                     
                     <p><%= p.getTextoPregunta() %></p>
                     <%
                     if(p.getTextoRespuesta() != null)
                     {
                     %>
-                        <h3><strong><%= a.getNickUsuario()%></strong>: <%= p.getTextoRespuesta() %></h3>
+                    <h3><%= p.getTextoRespuesta() %></h3>
                     <%
                     }
                     else if(a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
@@ -113,7 +121,6 @@
                     <%
                         }
                     %>
-                    <p align="right"><%= p.getFechaPublicacion().substring(0,10) %></p>
                 </div>
                 <%
                 }

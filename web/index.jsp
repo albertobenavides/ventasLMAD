@@ -21,7 +21,10 @@
     <body>
         <%
         String logout = request.getParameter("logout");
-        logout = (String)request.getAttribute("logout");
+        
+        if (logout == null)
+            logout = (String)request.getAttribute("logout");
+        
         if (logout != null) 
         {
             session = request.getSession();
@@ -50,7 +53,8 @@
                 <div class="item">
                     <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre() %></h2>
-                        <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
+                        <img src="images/item_printer.gif" width="180" height="170" 
+                             alt="<%= anuncios.get(i).getNombre() %>" />
                     </a>
 
                     <p class="footer">
@@ -80,7 +84,8 @@
                 <div class="item">
                     <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre() %></h2>
-                        <img src="images/item_printer.gif" width="180" height="170" alt="Sub Item Name" />
+                        <img src="images/item_printer.gif" width="180" height="170" 
+                             alt="<%= anuncios.get(i).getNombre() %>" />
                     </a>
 
                     <p class="footer">

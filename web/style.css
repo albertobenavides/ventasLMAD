@@ -219,6 +219,12 @@ p.footer
     text-align: left;
 }
 
+.ads div h1
+{
+    font-size: 30px;
+    margin: 0;
+}
+
 #searcher
 {
     text-align: right;
@@ -245,27 +251,46 @@ p.footer
 
 .questions div
 {
-    border-bottom-style: dotted;
-    border-width: 1px;
     margin-bottom: 20px;
-    background-color: #EFF5FB;
+    background-color: #CCC;
 }
 
-.questions div h2
+.questions div span
 {
-    font-weight: 100;
-    margin-bottom: 0;
+    font-size: 20px;
+    display:inline-block; 
+    vertical-align: middle;
+    margin-top: 10px;
+}
+.questions div .derecha
+{
+    background-color: #AAA;
+    position: relative;
+    float: none;
+    font-size: 12px;
+    width: 100%;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+}
+
+.questions div img
+{
+    margin-top: 5px;
+    margin-left: 5px;
 }
 
 .questions div p
 {
-    margin: 0 0 0 10px;
+    margin: 10px 0 0 35px;
 }
 
 .questions div h3
 {
-    margin: 0 0 0 10px;
-    background-color: #CEE3F6;
+    font-weight: 100;
+    margin: 10px 0 0 35px;
+    padding: 10px;
+    background-color: #FFF;
 }
 
 .pagination li {

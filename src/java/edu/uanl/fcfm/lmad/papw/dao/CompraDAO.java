@@ -14,17 +14,18 @@ import java.sql.SQLException;
  * @author Alberto
  */
 public class CompraDAO {
-    public static void setPregunta(String textoPregunta, int idUsuario,
-            int idAnuncio)
+    public static void setCompra(int idUsuario, int cantidadCompra,
+            String metodoPagoCompra, int idAnuncio)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = conn.prepareCall("{ call insertarCompra(?,?,?) }");
-            cs.setString(1, textoPregunta);
-            cs.setInt(2, idUsuario);
-            cs.setInt(3, idAnuncio);
+            cs = conn.prepareCall("{ call insertarCompra(?,?,?,?) }");
+            cs.setInt(1, idUsuario);
+            cs.setInt(2, cantidadCompra);
+            cs.setString(3, metodoPagoCompra);
+            cs.setInt(4, idAnuncio);
             cs.executeQuery();
             
         } catch (SQLException ex) {
