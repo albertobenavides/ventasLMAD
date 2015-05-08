@@ -73,7 +73,7 @@
                     <%= a.getNombreUsuario()%><br>
                     <%= a.getCorreoElectronico()%><br>
                     <%= a.getTelefono()%><br>
-                    Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %><<br><br>
+                    Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %><br><br>
                 </div>
             </div>
             <div class="questions">
@@ -87,7 +87,8 @@
                 %>
                 <div>
                     <h2><img src="<%= request.getServletContext().getContextPath() 
-                            + "/mostrarImagen?id=" +  p.getIdUsuario() %>"/>
+                            + "/mostrarImagen?id=" +  p.getIdUsuario() %>"
+                            width="40px" height="40px;"/>
                         <strong><%= p.getNombreUsuario()%></strong></h2>
                     
                     <p><%= p.getTextoPregunta() %></p>
