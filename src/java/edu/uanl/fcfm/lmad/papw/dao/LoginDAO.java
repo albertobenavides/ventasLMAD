@@ -31,7 +31,7 @@ public class LoginDAO {
                 if (rs.next())
                 {
                     Usuario u = new Usuario ();
-                    u.setId(rs.getInt("idUsuario"));
+                    u.setIdUsuario(rs.getInt("idUsuario"));
                     u.setNickname(username);
                     u.setCorreoElectronico(rs.getString("correoUsuario"));
                     return u;
@@ -39,7 +39,7 @@ public class LoginDAO {
                 else
                 {
                     Usuario u = new Usuario ();
-                    u.setId(0);
+                    u.setIdUsuario(0);
                     return u;
                 }
             } catch (SQLException ex) {

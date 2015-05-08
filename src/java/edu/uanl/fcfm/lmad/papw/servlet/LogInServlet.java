@@ -44,11 +44,11 @@ public class LogInServlet extends HttpServlet {
             
             Usuario u = new Usuario (LoginDAO.login(nickname, contrasenia));
             
-            if (u.getId() != 0)
+            if (u.getIdUsuario()!= 0)
             {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", nickname);
-                session.setAttribute("idUsuario", u.getId());
+                session.setAttribute("idUsuario", u.getIdUsuario());
                 session.setAttribute("email", u.getCorreoElectronico());
                 message = null;
             }

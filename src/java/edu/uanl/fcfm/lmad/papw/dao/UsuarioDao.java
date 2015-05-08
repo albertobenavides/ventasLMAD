@@ -7,7 +7,6 @@ package edu.uanl.fcfm.lmad.papw.dao;
 
 import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,11 +18,11 @@ import java.sql.SQLException;
  */
 public class UsuarioDao {
     
-    public static boolean insertar(Usuario u) {
+    public static boolean setUsuario(Usuario u) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
-        ResultSet rs = null;
+        ResultSet rs;
         
         try {
             cs = conn.prepareCall("{ call insertarUsuario(?,?,?,?,?,?,?,?,?) }");
@@ -47,6 +46,67 @@ public class UsuarioDao {
             pool.freeConnection(conn);
         }
         return false;
+    }
+    
+    public static Usuario getUsuario(int idUsuario) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs;
+        
+        try {
+            Usuario u = new Usuario();
+            cs = conn.prepareCall("{ call getUsuario(?) }");
+            cs.setInt(1, idUsuario);
+            rs = cs.executeQuery();
+            
+            while(rs.next())
+            {
+            
+            u.setNickname(rs.getString("nickUsuario"));
+            u.setContrasenia(rs.getString("contraseniaUsuario"));
+            u.setCorreoElectronico(rs.getString("correoUsuario"));
+            u.setNombre(rs.getString("nombreUsuario"));
+            u.setApellidoPaterno(rs.getString("apellidoPaternoUsuario"));
+            u.setApellidoMaterno(rs.getString("apellidoMaternoUsuario"));
+            u.setFechaNacimiento(rs.getString("fechaNacimientoUsuario"));
+            u.setSexo(rs.getString("sexoUsuario"));
+            u.setTelefono(rs.getString("telefonoUsuario")); 
+            }
+            
+            return u;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+        return null;
+    }
+    
+    public static void updateUsuario(Usuario u) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        
+        try {
+            cs = conn.prepareCall("{ call editarUsuario(?,?,?,?,?,?,?,?,?) }");
+            cs.setInt(1, u.getIdUsuario());
+            cs.setString(2, u.getContrasenia());
+            cs.setString(3, u.getCorreoElectronico());
+            cs.setString(4, u.getNombre());
+            cs.setString(5, u.getApellidoPaterno());
+            cs.setString(6, u.getApellidoMaterno());
+            cs.setString(7, u.getFechaNacimiento());
+            cs.setString(8, u.getSexo());
+            cs.setString(9, u.getTelefono());
+            cs.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
     }
     
     public static int insertarImagen(Usuario u) {

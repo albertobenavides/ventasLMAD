@@ -6,13 +6,14 @@
 package edu.uanl.fcfm.lmad.papw.model;
 
 import java.io.InputStream;
+import java.sql.Blob;
 
 /**
  *
  * @author Carlos
  */
 public class Usuario {
-    private int id;
+    private int idUsuario;
     private String nickname;
     private String contrasenia;
     private String correoElectronico;
@@ -25,22 +26,32 @@ public class Usuario {
     
     private String tipo;
     private InputStream stream;
+    
+    Blob imagenUsuario;
 
     public Usuario(Usuario u)
     {
-        this.id = u.getId();
+        this.idUsuario = u.getIdUsuario();
         this.nickname = u.getNickname();
         this.correoElectronico = u.getCorreoElectronico();
+        
+        this.contrasenia = u.contrasenia;
+        this.nombre = u.nombre;
+        this.apellidoPaterno = u.apellidoPaterno;
+        this.apellidoMaterno = u.apellidoMaterno;
+        this.fechaNacimiento = u.fechaNacimiento;
+        this.sexo = u.sexo;
+        this.telefono = u.telefono;
     }
     
     public Usuario() {}    
 
-    public int getId() {
-        return id;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNickname() {
@@ -130,4 +141,13 @@ public class Usuario {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Blob getImagenUsuario() {
+        return imagenUsuario;
+    }
+
+    public void setImagenUsuario(Blob imagenUsuario) {
+        this.imagenUsuario = imagenUsuario;
+    }
+    
 }

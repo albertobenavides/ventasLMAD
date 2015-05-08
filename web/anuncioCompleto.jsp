@@ -123,7 +123,7 @@
                 %>
                 <p>
                     Sólo los usuarios registrados pueden hacer preguntas. 
-                    Regístrate <a href="signup.jsp">aquí</a>.
+                    Regístrate <a href="registro.jsp">aquí</a>.
                 </p>
                 <%
                 }

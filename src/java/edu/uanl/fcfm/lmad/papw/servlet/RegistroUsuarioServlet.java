@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -49,6 +50,8 @@ public class RegistroUsuarioServlet extends HttpServlet {
             
             Usuario u = new Usuario();
             
+            HttpSession session = request.getSession();
+            u.setIdUsuario((Integer)session.getAttribute("idUsuario"));
             u.setNickname(request.getParameter("nickname"));
             u.setContrasenia(request.getParameter("contrasenia"));
             u.setCorreoElectronico(request.getParameter("correoElectronico"));
@@ -72,22 +75,38 @@ public class RegistroUsuarioServlet extends HttpServlet {
             RequestDispatcher disp;
             
             String message;
-            if (UsuarioDao.insertar(u) == true)
-            {   
-                UsuarioDao.insertarImagen(u);
-                message = "Usuario registrado con éxito.";
-                request.setAttribute("message", message);
-                disp = getServletContext()
-                        .getRequestDispatcher("/index.jsp");
-                disp.forward(request, response);
+            
+            String action = request.getParameter("action");
+            
+            if (action.equals("setUsuario"))
+            {
+                if (UsuarioDao.setUsuario(u) == true)
+                {   
+                    UsuarioDao.insertarImagen(u);
+                    message = "Usuario registrado con éxito.";
+                    request.setAttribute("message", message);
+                    disp = getServletContext()
+                            .getRequestDispatcher("/index.jsp");
+                    disp.forward(request, response);
+                }
+                else
+                {
+                    message = "Usuario existente.";
+                    request.setAttribute("message", message);
+                    disp = getServletContext()
+                            .getRequestDispatcher("/registro.jsp");
+                    disp.forward(request, response);
+                }
             }
             else
             {
-                message = "Usuario existente.";
-                request.setAttribute("message", message);
-                disp = getServletContext()
-                        .getRequestDispatcher("/signup.jsp");
-                disp.forward(request, response);
+                UsuarioDao.insertarImagen(u);
+                UsuarioDao.updateUsuario(u);
+                message = "Tus datos se han actualizado.";
+                    request.setAttribute("message", message);
+                    disp = getServletContext()
+                            .getRequestDispatcher("/index.jsp");
+                    disp.forward(request, response);
             }
         } finally {
             out.close();

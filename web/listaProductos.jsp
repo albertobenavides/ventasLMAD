@@ -25,7 +25,7 @@
                     .getRequestDispatcher("/Index");
                 disp.forward(request, response);
             }
-        %>          
+        %>
     </head>
     <body>
         <%@include file="header.jsp"%>

@@ -86,11 +86,6 @@
                 %>
                 <p class="see_more"><a href="anuncios.jsp?orden=2">Ver más...</a></p>
             </div>
-
-            <div id='users'>
-
-
-            </div>
         </div>                    
         <%                        
             String message = (String)request.getAttribute("message");
@@ -103,5 +98,6 @@
         <%
             }
         %>
+    </div>
     </body>
 </html>
