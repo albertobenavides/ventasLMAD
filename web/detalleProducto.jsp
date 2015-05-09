@@ -39,7 +39,7 @@
                     (ProductoDAO.getProducto(idProducto));
             %>
             <h1>Editar producto</h1>
-            <form action="detalleProducto" method="post" id="forma">
+            <form action="detalleProducto" method="post" id="forma" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Datos necesarios</legend>
                     <div>
@@ -90,8 +90,17 @@
                     <legend>Multimedia</legend>
                     <div>
                         Cargar imágenes:<br>
+                        <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=1"
+                                width="200px" height="200px"/>
                         <input type="file" name="imagenProducto1"><br>
+                        <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=2"
+                                width="200px" height="200px"/>
                         <input type="file" name="imagenProducto2"><br>
+                        <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=3"
+                                width="200px" height="200px"/>
                         <input type="file" name="imagenProducto3"><br>
                         Cargar Video:<br>
                         <input type="file" name="videoProducto1"><br>
@@ -134,7 +143,8 @@
                                                 name="vigencia" value="30"
                                                 min="1"
                                                 max="365"> días</p>
-                            <p>Miniatura: <input type="text" name="miniatura"></p>
+                            <p>Miniatura: <input type="text" name="miniatura"
+                                                 value="<%= a.getThumbnailAnuncio() %>"></p>
                             <p>Método de pago:
                                 <%
                             if (a.getMetodoPago().contains("Efectivo"))

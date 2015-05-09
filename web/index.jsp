@@ -53,8 +53,10 @@
                 <div class="item">
                     <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre() %></h2>
-                        <img src="images/item_printer.gif" width="180" height="170" 
-                             alt="<%= anuncios.get(i).getNombre() %>" />
+                        <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + 
+                                anuncios.get(i).getIdProducto()%>&imagen=<%= anuncios.get(i).getThumbnailAnuncio() %>"
+                                width="180px" height="170px"/>
                     </a>
 
                     <p class="footer">

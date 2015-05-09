@@ -28,8 +28,10 @@
                 Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
                 %>
                 <div style="display: inline-block; margin-right: 20px;">
-                    <img src="images/item_new.gif" width="250" height="180" 
-                         alt="<%= a.getNombre() %>" />
+                    <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + 
+                                a.getIdProducto()%>&imagen=<%= a.getThumbnailAnuncio() %>"
+                                width="250px" height="180px"/>
                 </div>
                 <div style="display: inline-block; vertical-align: top; width: 330px;">
                     <h1><%= a.getNombre() %></h1>

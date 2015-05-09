@@ -11,6 +11,8 @@ package edu.uanl.fcfm.lmad.papw.model;
  */
 public class Anuncio {
     int idAnuncio;
+    int idProducto;
+    int thumbnailAnuncio;
     String fecha;
     String vigencia;
     String imagen1;
@@ -52,6 +54,8 @@ public class Anuncio {
         this.nickUsuario = a.nickUsuario;
         this.metodoPago = a.metodoPago;
         this.idUsuario = a.idUsuario;
+        this.thumbnailAnuncio = a.thumbnailAnuncio;
+        this.idProducto = a.idProducto;
     }
 
     public int getIdAnuncio() {
@@ -213,4 +217,21 @@ public class Anuncio {
     public void setIdSubcategoria(int idSubcategoria) {
         this.idSubcategoria = idSubcategoria;
     }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public int getThumbnailAnuncio() {
+        return thumbnailAnuncio;
+    }
+
+    public void setThumbnailAnuncio(int thumbnailAnuncio) {
+        this.thumbnailAnuncio = thumbnailAnuncio;
+    }
+    
 }

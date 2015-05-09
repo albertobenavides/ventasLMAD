@@ -6,6 +6,7 @@
 package edu.uanl.fcfm.lmad.papw.dao;
 
 import edu.uanl.fcfm.lmad.papw.model.Producto;
+import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -68,9 +69,9 @@ public class ProductoDAO {
             cs.setFloat(2, p.getPrecio());
             cs.setInt(3, p.getExistencia());
             cs.setString(4, p.getDescripcionLarga());
-            cs.setString(5, p.getImagen1());
-            cs.setString(6, p.getImagen2());
-            cs.setString(7, p.getImagen3());
+            cs.setBinaryStream(5, p.getImagen1());
+            cs.setBinaryStream(6, p.getImagen2());
+            cs.setBinaryStream(7, p.getImagen3());
             cs.setString(8, p.getVideo1());
             cs.setString(9, p.getVideo2());
             cs.setString(10, p.getVideo3());
@@ -99,9 +100,9 @@ public class ProductoDAO {
             cs.setFloat(3, p.getPrecio());
             cs.setInt(4, p.getExistencia());
             cs.setString(5, p.getDescripcionLarga());
-            cs.setString(6, p.getImagen1());
-            cs.setString(7, p.getImagen2());
-            cs.setString(8, p.getImagen3());
+            cs.setBinaryStream(6, p.getImagen1());
+            cs.setBinaryStream(7, p.getImagen2());
+            cs.setBinaryStream(8, p.getImagen3());
             cs.setString(9, p.getVideo1());
             cs.setString(10, p.getVideo2());
             cs.setString(11, p.getVideo3());
@@ -168,4 +169,60 @@ public class ProductoDAO {
             pool.freeConnection(conn);
         }
     }
+    
+    public static int insertarImagenesProductos(int idProducto, Producto p) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try { 
+            cs = connection.prepareCall("{ call insertarImagenesProducto(?,?,?,?) }");
+            cs.setInt(1, idProducto);
+            cs.setBinaryStream(2, p.getImagen1());
+            cs.setBinaryStream(3, p.getImagen1());
+            cs.setBinaryStream(4, p.getImagen1());
+            rs = cs.executeQuery();
+           
+            
+            
+            if (rs.next()){
+                 int id = rs.getInt("idUsuario");
+                 return id;  
+            }            
+            else 
+                return 0;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return 0;
+            
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static InputStream obtenerImagenProducto(int idProducto, int imagen) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        try { 
+            cs = connection.prepareCall("{ call obtenerImagenesProducto(?, ?) }");
+            cs.setInt(1, idProducto);
+            cs.setInt(2, imagen);
+            rs = cs.executeQuery();
+            if (rs.next()) {
+                return rs.getBinaryStream(1);
+            }
+            return null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+            
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(connection);
+        }
+    } 
 }

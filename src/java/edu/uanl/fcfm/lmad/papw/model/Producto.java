@@ -5,6 +5,8 @@
  */
 package edu.uanl.fcfm.lmad.papw.model;
 
+import java.io.InputStream;
+
 /**
  *
  * @author Alberto
@@ -16,9 +18,9 @@ public class Producto {
     int existencia;
     String fecha;
     String descripcionLarga;
-    String imagen1;
-    String imagen2;
-    String imagen3;
+    InputStream imagen1;
+    InputStream imagen2;
+    InputStream imagen3;
     String video1;
     String video2;
     String video3;
@@ -93,27 +95,27 @@ public class Producto {
         this.descripcionLarga = descripcionLarga;
     }
 
-    public String getImagen1() {
+    public InputStream getImagen1() {
         return imagen1;
     }
 
-    public void setImagen1(String imagen1) {
+    public void setImagen1(InputStream imagen1) {
         this.imagen1 = imagen1;
     }
 
-    public String getImagen2() {
+    public InputStream getImagen2() {
         return imagen2;
     }
 
-    public void setImagen2(String imagen2) {
+    public void setImagen2(InputStream imagen2) {
         this.imagen2 = imagen2;
     }
 
-    public String getImagen3() {
+    public InputStream getImagen3() {
         return imagen3;
     }
 
-    public void setImagen3(String imagen3) {
+    public void setImagen3(InputStream imagen3) {
         this.imagen3 = imagen3;
     }
 

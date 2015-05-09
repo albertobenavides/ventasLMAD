@@ -9,20 +9,28 @@ import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
 import edu.uanl.fcfm.lmad.papw.dao.ProductoDAO;
 import edu.uanl.fcfm.lmad.papw.model.Producto;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Alberto
  */
 @WebServlet(name = "RegistrarAnuncioServlet", urlPatterns = {"/detalleProducto"})
+@MultipartConfig(
+        fileSizeThreshold   = 1024 * 1024 * 1,  // 1 MB
+        maxFileSize         = 1024 * 1024 * 10, // 10 MB
+        maxRequestSize      = 1024 * 1024 * 15 // 15 MB
+)
 public class RegistrarAnuncioServlet extends HttpServlet {
 
     /**
@@ -39,27 +47,40 @@ public class RegistrarAnuncioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            Part filePart1 = request.getPart("imagenProducto1"); 
+            String contentType1 = filePart1.getContentType();
+            
+            Part filePart2 = request.getPart("imagenProducto2"); 
+            String contentType2 = filePart2.getContentType();
+            
+            Part filePart3 = request.getPart("imagenProducto3"); 
+            String contentType3 = filePart3.getContentType();
+            
+            InputStream inputStream1 = filePart1.getInputStream();
+            InputStream inputStream2 = filePart2.getInputStream();
+            InputStream inputStream3 = filePart3.getInputStream();
+            
             HttpSession session = request.getSession();
             
             request.setCharacterEncoding("UTF-8");
             
-            int idProducto = Integer.parseInt(request.getParameter("idProducto"));
-            String nombreProducto = (String)request.getParameter("nombreProducto");
+            int idProducto = Integer.parseInt((String)request.getParameter("idProducto"));
             String precioProducto = (String)request.getParameter("precioProducto");
-            String descripcionProducto = (String)request.getParameter("descripcionProducto");
             String existenciaProducto = (String)request.getParameter("existenciaProducto");
             String idSubcategoria = (String)request.getParameter("idSubcategoria");
             String idUsuario = (String)session.getAttribute("idUsuario").toString();
             
             Producto p = new Producto();
             p.setIdProducto(idProducto);
-            p.setNombre(nombreProducto);
+            p.setNombre(new String (
+                            request.getParameter("nombreProducto").getBytes ("iso-8859-1"), "UTF-8"));
             p.setPrecio(Float.parseFloat(precioProducto));
             p.setExistencia(Integer.parseInt(existenciaProducto));
-            p.setDescripcionLarga(descripcionProducto);
-            p.setImagen1("");
-            p.setImagen2("");
-            p.setImagen3("");
+            p.setDescripcionLarga(new String (
+                            request.getParameter("descripcionProducto").getBytes ("iso-8859-1"), "UTF-8"));
+            p.setImagen1(inputStream1);
+            p.setImagen2(inputStream2);
+            p.setImagen3(inputStream3);
             p.setVideo1("");
             p.setVideo2("");
             p.setVideo3("");
@@ -69,7 +90,7 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             ProductoDAO.editarProducto(p);
             
             String vigencia = request.getParameter("vigencia");
-            String miniatura = request.getParameter("miniatura");
+            int miniatura = Integer.parseInt(request.getParameter("miniatura"));
             String anunciar = request.getParameter("anunciar");
             String anuncioExiste = request.getParameter("anuncioExiste");
             

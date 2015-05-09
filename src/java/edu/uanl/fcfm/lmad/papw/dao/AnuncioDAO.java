@@ -18,7 +18,7 @@ import java.util.List;
  * @author Alberto
  */
 public class AnuncioDAO {
-    public static void setAnuncio(String vigencia, String miniatura,
+    public static void setAnuncio(String vigencia, int miniatura,
             int metodoPago, int idProducto)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -28,7 +28,7 @@ public class AnuncioDAO {
         try {
             cs = conn.prepareCall("{ call altaAnuncio(?, ?, ?, ?) }");
             cs.setString(1, vigencia);
-            cs.setString(2, miniatura);
+            cs.setInt(2, miniatura);
             cs.setInt(3, metodoPago);
             cs.setInt(4, idProducto);
             rs = cs.executeQuery();
@@ -63,6 +63,8 @@ public class AnuncioDAO {
                 a.setNickUsuario(rs.getString("nickUsuario"));
                 a.setFecha(rs.getString("fechaPublicacionAnuncio"));
                 a.setIdAnuncio(rs.getInt("idAnuncio"));
+                a.setIdProducto(rs.getInt("fk_idProducto"));
+                a.setThumbnailAnuncio(rs.getInt("thumbnailAnuncio"));
                 anuncios.add(a);
             }
             return anuncios;
@@ -138,6 +140,8 @@ public class AnuncioDAO {
             a.setMetodoPago(rs.getString("metodoPagoAnuncio"));
             a.setIdUsuario(rs.getInt("idUsuario"));
             a.setExistencias(rs.getInt("existenciaProducto"));
+            a.setThumbnailAnuncio(rs.getInt("thumbnailAnuncio"));
+            a.setIdProducto(rs.getInt("fk_idProducto"));
             }
             return a;
         } catch (SQLException ex) {
@@ -192,7 +196,7 @@ public class AnuncioDAO {
     }
 
     public static void updateAnuncio
-        (int idAnuncio, int metodoPago, String miniatura, String vigencia) 
+        (int idAnuncio, int metodoPago, int miniatura, String vigencia) 
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
@@ -201,7 +205,7 @@ public class AnuncioDAO {
             cs = conn.prepareCall("{ call editarAnuncio(?, ?, ?, ?) }");
             cs.setInt(1, idAnuncio);
             cs.setInt(2, metodoPago);
-            cs.setString(3, miniatura);
+            cs.setInt(3, miniatura);
             cs.setString(4, vigencia);
             cs.executeQuery();
         } catch (SQLException ex) {

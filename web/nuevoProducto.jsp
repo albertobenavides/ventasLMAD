@@ -27,7 +27,7 @@
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
             <h1>Registrar nuevo producto</h1>
-            <form action="nuevoProducto" method="post" id="forma">
+            <form action="nuevoProducto" method="post" id="forma" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Campos requeridos</legend>
                     <div>
