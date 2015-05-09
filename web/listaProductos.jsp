@@ -17,6 +17,8 @@
         <title>Ventas LMAD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="themes/alertify.core.css" />
+        <link rel="stylesheet" href="themes/alertify.default.css" />
         <%
             if (session.getAttribute("username") == null)
             {
@@ -79,5 +81,16 @@
             %>
             </table>
         </div>
+        <%                        
+            String message = (String)request.getAttribute("message");
+
+            if (message != null)
+            {
+        %>
+        <script src="lib/alertify.min.js"></script>
+        <script>alertify.log("<%= message %>");</script>
+        <%
+            }
+        %>
     </body>
 </html>

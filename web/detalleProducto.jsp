@@ -193,6 +193,25 @@
                         }
                     </script>
                 </fieldset>
+                            <fieldset>
+                    <legend style="color: red;">Eliminar producto</legend>
+                    <p><input type="button" id="delete" value="Click aquí para eliminar"
+                              onclick="eliminar();"></p>
+                    <div id="info" style="display: none; margin-top: -50px;">
+                        <p>Al eliminar un producto se eliminarán también 
+                            <strong>todos</strong> los datos relacionados con 
+                            dicho producto.</p>
+                        <p>Si está seguro de que desea eliminar su este producto, pulse 
+                            <a href="EliminarProducto?idProducto=<%= idProducto %>">aquí</a>.</p>
+                    </div>
+                </fieldset>
+                <script>
+                    function eliminar()
+                    {
+                        document.getElementById('delete').style.visibility = 'hidden';
+                        document.getElementById('info').style.display = 'block';
+                    }
+                </script>
                 <input type="reset"><input type="button" onclick="check()" value="Enviar">
             </form>
         </div>

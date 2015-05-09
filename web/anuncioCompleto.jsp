@@ -36,9 +36,17 @@
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio()) %></h2>
                     <h2>Existencias: <%= a.getExistencias()%></h2>
                 </div>
-
                 <%
-                if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
+                if (session.getAttribute("username") == null)
+                {
+                %>
+                <p>
+                    Sólo los usuarios registrados pueden hacer compras. 
+                    Regístrate <a href="registro.jsp">aquí</a>.
+                </p>
+                <%
+                }
+                else if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
                 {
                 %>
                 <div style="text-align: right;">

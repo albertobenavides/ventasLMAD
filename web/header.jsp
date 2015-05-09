@@ -60,7 +60,7 @@
                 <li><a href="listaProductos.jsp">Mis productos</a></li>
                 <li><a href="nuevoProducto.jsp">Registrar producto</a></li>
                 <li><a href="listaCompras.jsp">Mis compras</a></li>
-                <li><a href="editarUsuario.jsp">Detalles</a></li>
+                <li><a href="editarUsuario.jsp">Editar cuenta</a></li>
                 <li><a href="index.jsp?logout=true">Cerrar sesión</a></li>
             </ul>
         <%

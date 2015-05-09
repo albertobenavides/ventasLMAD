@@ -151,4 +151,21 @@ public class ProductoDAO {
             pool.freeConnection(conn);
         }
     }
+        
+    public static void deleteProducto(int idProducto) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        
+        try {
+            cs = conn.prepareCall("{ call bajaProducto(?) }");
+            cs.setInt(1, idProducto);
+            cs.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
 }
