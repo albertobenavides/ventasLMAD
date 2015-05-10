@@ -6,9 +6,14 @@
 package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.CompraDAO;
+import edu.uanl.fcfm.lmad.papw.utils.EmailUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +27,21 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CompraServlet", urlPatterns = {"/Comprar"})
 public class CompraServlet extends HttpServlet {
+    
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+    
+    @Override
+    public void init() {
+        // Lee la configuacion del servidor SMTP desde el archivo web.xml
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        user = context.getInitParameter("user");
+        pass = context.getInitParameter("pass");
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +53,22 @@ public class CompraServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             HttpSession session = request.getSession();
+            String emailVendedor = request.getParameter("correoAnuncio");
             int idUsuario = (Integer)session.getAttribute("idUsuario");
             int cantidadCompra = Integer.parseInt(request.getParameter("cantidadCompra"));
             String metodoPagoCompra = request.getParameter("metodoPagoCompra");
             int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
             
             CompraDAO.setCompra(idUsuario, cantidadCompra, metodoPagoCompra, idAnuncio);
+                String emailMessage;
+                emailMessage = "Se ha realizado una compra de uno de tus productos.";
+                EmailUtility.sendEmail(host, port, user, pass, emailVendedor, ""
+                        + "Compra de producto", emailMessage);
             
             request.setAttribute("message", "Compra realizada con éxito.");
             
@@ -67,7 +92,12 @@ public class CompraServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+            //Logger.getLogger(CompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -81,7 +111,12 @@ public class CompraServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+            //Logger.getLogger(CompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

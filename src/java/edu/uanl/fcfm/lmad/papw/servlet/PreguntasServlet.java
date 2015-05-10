@@ -6,9 +6,12 @@
 package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.PreguntaDAO;
+import edu.uanl.fcfm.lmad.papw.utils.EmailUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +25,22 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "PreguntasServlet", urlPatterns = {"/PreguntasServlet"})
 public class PreguntasServlet extends HttpServlet {
-
+    
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+    
+    @Override
+    public void init() {
+        // Lee la configuacion del servidor SMTP desde el archivo web.xml
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        user = context.getInitParameter("user");
+        pass = context.getInitParameter("pass");
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,7 +51,7 @@ public class PreguntasServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -42,6 +60,9 @@ public class PreguntasServlet extends HttpServlet {
             String pregunta = request.getParameter("pregunta");
             String respuesta = request.getParameter("respuesta" 
                     + request.getParameter("counter"));
+            
+            String email = request.getParameter("correoVendedor");
+            
             int idUsuario;
             if(session.getAttribute("idUsuario") != null)
                 idUsuario = (Integer)session.getAttribute("idUsuario");
@@ -61,10 +82,16 @@ public class PreguntasServlet extends HttpServlet {
             if (pregunta != null)
             {
                 PreguntaDAO.setPregunta(pregunta, idUsuario, idAnuncio);
+                String emailMessage;
+                emailMessage = "Se ha publicado una pregunta: " + pregunta;
+                EmailUtility.sendEmail(host, port, user, pass, email, ""
+                        + "Publicación en anuncio", emailMessage);
             }
             else
             {
-                PreguntaDAO.setRespuesta(respuesta, idPregunta);
+                String emailRespuesta = PreguntaDAO.setRespuesta(respuesta, idPregunta);
+                String emailMessage = "Se ha publicado una respuesta a tu pregunta: " + respuesta;
+                EmailUtility.sendEmail(host, port, user, pass, emailRespuesta, "Respuesta a tu publicación", emailMessage);
             }
             
             RequestDispatcher disp = getServletContext()
@@ -87,7 +114,12 @@ public class PreguntasServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+            //Logger.getLogger(PreguntasServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -101,7 +133,12 @@ public class PreguntasServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+            //Logger.getLogger(PreguntasServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
