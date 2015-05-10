@@ -24,6 +24,7 @@
         <div id="content" class="inline_block">
             <div class="ads">
                 <%
+                String emailVendedor;
                 int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
                 Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
                 %>
@@ -76,6 +77,7 @@
                     </div>
                     <div style="display: inline-block; vertical-align: middle;">
                         <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
+                        <input type="hidden" name="correoAnuncio" value="<%= a.getCorreoElectronico() %>">
                     <input type="submit" value="Comprar">
                     </div>
                 </form>
@@ -96,9 +98,10 @@
                                  border-radius: 5px;"/></div>
                 <div style="display: inline-block; vertical-align: bottom;">
                     <%= a.getNombreUsuario()%><br>
-                    <%= a.getCorreoElectronico()%><br>
+                    <%= emailVendedor = a.getCorreoElectronico()%><br>
                     <%= a.getTelefono()%><br>
                     Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %><br><br>
+                    <% request.setAttribute("emailVendedor", emailVendedor); %>
                 </div>
             </div>
             <div class="questions">
@@ -163,6 +166,7 @@
                     <textarea name="pregunta" form="forma"
                               maxlength="500" rows="4" cols="65"></textarea><br>
                     <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
+                    <input type="hidden" name="correoVendedor" value="<%= (String)request.getAttribute("emailVendedor") %>">
                     <input type="submit" value="Preguntar">
                 </form>
                 <%

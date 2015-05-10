@@ -16,6 +16,7 @@ public class Pregunta {
     String nombreUsuario;
     int idPregunta;
     int idUsuario;
+    String correoUsuario;
 
     public Pregunta() {}
 
@@ -66,6 +67,12 @@ public class Pregunta {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
-    
+
+    public String getCorreoUsuario() {
+        return correoUsuario;
+    }
+
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
+    }
 }

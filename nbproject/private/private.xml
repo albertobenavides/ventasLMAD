@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/web/anuncios.jsp</file>
-            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/dao/AnuncioDAO.java</file>
-            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/web/header.jsp</file>
-            <file>file:/C:/Users/Alberto/Desktop/Proyectos/PAPW/mvc_v1/ventasLMAD/web/style.css</file>
+            <file>file:/C:/Users/RafaLaptop/Documents/ventasLMAD/web/anuncios.jsp</file>
+            <file>file:/C:/Users/RafaLaptop/Documents/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/dao/AnuncioDAO.java</file>
+            <file>file:/C:/Users/RafaLaptop/Documents/ventasLMAD/web/header.jsp</file>
+            <file>file:/C:/Users/RafaLaptop/Documents/ventasLMAD/web/style.css</file>
+            <file>file:/C:/Users/RafaLaptop/Documents/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/servlet/PreguntasServlet.java</file>
+            <file>file:/C:/Users/RafaLaptop/Documents/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/model/Pregunta.java</file>
+            <file>file:/C:/Users/RafaLaptop/Documents/ventasLMAD/src/java/edu/uanl/fcfm/lmad/papw/dao/PreguntaDAO.java</file>
         </group>
     </open-files>
 </project-private>
