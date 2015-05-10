@@ -47,9 +47,9 @@ public class RegistrarAnuncioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            Part filePart1 = request.getPart("imagenProducto1"); 
+            Part filePart1 = request.getPart("imagenProducto1");
             String contentType1 = filePart1.getContentType();
-            
+
             Part filePart2 = request.getPart("imagenProducto2"); 
             String contentType2 = filePart2.getContentType();
             
@@ -59,6 +59,17 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             InputStream inputStream1 = filePart1.getInputStream();
             InputStream inputStream2 = filePart2.getInputStream();
             InputStream inputStream3 = filePart3.getInputStream();
+            
+            boolean setImagen1 = true;
+            boolean setImagen2 = true;
+            boolean setImagen3 = true;
+            
+            if (filePart1.getSize() == 0)
+                setImagen1 = false;
+            if (filePart2.getSize() == 0)
+                setImagen2 = false;
+            if (filePart3.getSize() == 0)
+                setImagen3 = false;
             
             HttpSession session = request.getSession();
             
@@ -86,6 +97,9 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             p.setVideo3("");
             p.setIdSubcategoria(Integer.parseInt(idSubcategoria));
             p.setIdUsuario(Integer.parseInt(idUsuario));
+            p.setSetImagen1(setImagen1);
+            p.setSetImagen2(setImagen2);
+            p.setSetImagen3(setImagen3);
             
             ProductoDAO.editarProducto(p);
             

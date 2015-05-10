@@ -61,6 +61,7 @@ public class CompraDAO {
                 c.setVentaRealizada(rs.getInt("ventaRealizada"));
                 c.setNombreProducto(rs.getString("nombreProducto"));
                 c.setIdAnuncio(rs.getInt("idAnuncio"));
+                c.setIdCompra(rs.getInt("idCompra"));
                 
                 compras.add(c);
             }
@@ -118,6 +119,24 @@ public class CompraDAO {
         CallableStatement cs = null;
         try {
             cs = conn.prepareCall("{ call confirmarVenta(?) }");
+            cs.setInt(1, idCompra);
+            cs.executeQuery();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            DBUtil.closeStatement(cs);
+            pool.freeConnection(conn);
+        }
+    }
+    
+    public static void cancelarCompra(int idCompra)
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = pool.getConnection();
+        CallableStatement cs = null;
+        try {
+            cs = conn.prepareCall("{ call cancelarCompra(?) }");
             cs.setInt(1, idCompra);
             cs.executeQuery();
             

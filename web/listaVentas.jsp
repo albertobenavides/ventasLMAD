@@ -60,21 +60,16 @@
                         <td><%= v.getCantidadCompra() %></td>
                         <td><%= String.format(Locale.US, "%.2f", v.getTotalCompra()) %></td>
                         <td><%= v.getMetodoPagoCompra() %></td>
-                        <%
-                        if (v.getVentaRealizada() == 1)
-                        {
-                        %>
+                        <% if (v.getVentaRealizada() == 1){ %>
                         <td style="color: green">Confirmada</td>
-                        <%
-                        }
-                        else
-                        {
-                        %>
+                        <% }else if(v.getVentaRealizada() == 0){ %>
                         <td>Pendiente</td>
-                        <%
-                        }
-                        %>
-                        <td><a href="ConfirmarVenta?idCompra=<%= v.getIdCompra() %>">Vender</a></td>
+                        <% }else{ %>
+                        <td style="color: red">Cancelada</td>
+                        <% } %>
+                        <td><% if (v.getVentaRealizada() != 2){ %>
+                        <a href="ConfirmarVenta?idCompra=<%= v.getIdCompra() %>">Vender</a>
+                        <% } %></td>
                     </tr>
             <%
             }

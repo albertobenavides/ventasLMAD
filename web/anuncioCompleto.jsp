@@ -27,11 +27,12 @@
                 int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
                 Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
                 %>
-                <div style="display: inline-block; margin-right: 20px;">
+                <div style="display: inline-block; margin-right: 20px; width: 250px;
+                     text-align: center">
                     <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + 
                                 a.getIdProducto()%>&imagen=<%= a.getThumbnailAnuncio() %>"
-                                width="250px" height="180px"/>
+                                height="180px" style="max-width:100%;"/>
                 </div>
                 <div style="display: inline-block; vertical-align: top; width: 330px;">
                     <h1><%= a.getNombre() %></h1>
@@ -86,12 +87,12 @@
                 <p><%= a.getCaracteristicas()%></p>
                 
                 <h2>Publicado por</h2>
-                <div style="display: inline-block; margin-right: 20px;">
+                <div style="display: inline-block; margin-right: 20px; width: 100px;
+                     text-align: center">
                     <img 
                     src="<%= request.getServletContext().getContextPath() 
                                 + "/mostrarImagen?id=" +  a.getIdUsuario() %>"
-                                width="100px" height="130px"
-                                style="max-width: 100%; max-height: 100%;"/></div>
+                                 height="130px" style="max-width: 100%;"/></div>
                 <div style="display: inline-block; vertical-align: bottom;">
                     <%= a.getNombreUsuario()%><br>
                     <%= a.getCorreoElectronico()%><br>

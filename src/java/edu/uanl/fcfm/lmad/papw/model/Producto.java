@@ -13,6 +13,7 @@ import java.io.InputStream;
  */
 public class Producto {
     int idProducto;
+    int idAnuncio;
     String nombre;
     float precio;
     int existencia;
@@ -28,6 +29,10 @@ public class Producto {
     int idUsuario;
     int comprasPendientes;
     int preguntasPendientes;
+    
+    boolean setImagen1;
+    boolean setImagen2;
+    boolean setImagen3;
 
     public Producto() {}
 
@@ -45,6 +50,7 @@ public class Producto {
         this.video1 = p.video1;
         this.video2 = p.video2;
         this.video3 = p.video3;
+        this.idAnuncio = p.idAnuncio;
     }
     
     public int getIdProducto() {
@@ -173,6 +179,38 @@ public class Producto {
 
     public void setPreguntasPendientes(int preguntasPendientes) {
         this.preguntasPendientes = preguntasPendientes;
+    }
+
+    public int getIdAnuncio() {
+        return idAnuncio;
+    }
+
+    public void setIdAnuncio(int idAnuncio) {
+        this.idAnuncio = idAnuncio;
+    }
+
+    public boolean isSetImagen1() {
+        return setImagen1;
+    }
+
+    public void setSetImagen1(boolean setImagen1) {
+        this.setImagen1 = setImagen1;
+    }
+
+    public boolean isSetImagen2() {
+        return setImagen2;
+    }
+
+    public void setSetImagen2(boolean setImagen2) {
+        this.setImagen2 = setImagen2;
+    }
+
+    public boolean isSetImagen3() {
+        return setImagen3;
+    }
+
+    public void setSetImagen3(boolean setImagen3) {
+        this.setImagen3 = setImagen3;
     }
     
 }

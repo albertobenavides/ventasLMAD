@@ -210,6 +210,13 @@ p.footer
     margin-top: 0em;
 }
 
+p.usuario, p.precio, p.fecha
+{
+    text-align: right;
+    line-height: 40%;
+    margin-top: 0em;
+}
+
 .ads, .questions
 {
     border-style: solid;

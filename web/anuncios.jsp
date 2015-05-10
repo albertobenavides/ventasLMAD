@@ -61,7 +61,8 @@
                     else if (criterio.equals("usuarios"))
                         anuncios = AnuncioDAO.getAnunciosBusqueda(null, 
                                     parametro, null, null);
-
+                    else if (subcategoria != null && categoria == null)
+                        anuncios = AnuncioDAO.getAnunciosCortos(null, subcategoria, order);
                     else if (categoria != null || subcategoria != null)
                         anuncios = AnuncioDAO.getAnunciosCortos(categoria, subcategoria, order);
                     else
@@ -72,11 +73,19 @@
                     for (int i = 0; i < anuncios.size(); i++)
                     {
                 %>
-                    <li class="item">
-                        <h2 class="nombre"><%= anuncios.get(i).getNombre() %></h2>
+                    <li class="item" style="width: 180px; height: 250px; text-align: center; vertical-align: top;
+                        margin-bottom: 20px;">
                         <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
-                            <img src="images/noImage.jpg" width="180" height="170" alt="Sub Item Name" />
-                        </a>
+                            <h2 class="nombre"><%= anuncios.get(i).getNombre() %></h2>
+                        <div style="width: 180px; height: 170px; text-align: center; vertical-align: middle;
+                             margin-bottom: 15px;">
+                        <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + 
+                                anuncios.get(i).getIdProducto()%>&imagen=<%= anuncios.get(i).getThumbnailAnuncio() %>"
+                                style="max-width: 180px; max-height: 170px;
+                                width: auto; height: auto;"/>
+                        </div>
+                    </a>
                         <p class="usuario">Por: <%= anuncios.get(i).getNickUsuario() %></p>
                         <p class="precio">$<%= String.format(Locale.US, "%.2f", anuncios.get(i).getPrecio()) %></p>
                         <p class="fecha"><%= anuncios.get(i).getFecha().toString().substring(0, 10) %></p>

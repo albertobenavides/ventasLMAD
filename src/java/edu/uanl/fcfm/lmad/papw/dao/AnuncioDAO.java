@@ -103,6 +103,8 @@ public class AnuncioDAO {
                 a.setNickUsuario(rs.getString("nickUsuario"));
                 a.setFecha(rs.getString("fechaPublicacionAnuncio"));
                 a.setIdAnuncio(rs.getInt("idAnuncio"));
+                a.setIdProducto(rs.getInt("idProducto"));
+                a.setThumbnailAnuncio(rs.getInt("thumbnailAnuncio"));
                 anuncios.add(a);
             }
             return anuncios;
@@ -142,6 +144,9 @@ public class AnuncioDAO {
             a.setExistencias(rs.getInt("existenciaProducto"));
             a.setThumbnailAnuncio(rs.getInt("thumbnailAnuncio"));
             a.setIdProducto(rs.getInt("fk_idProducto"));
+            a.setImagen1(rs.getBinaryStream("imagenProducto1"));
+            a.setImagen2(rs.getBinaryStream("imagenProducto2"));
+            a.setImagen3(rs.getBinaryStream("imagenProducto3"));
             }
             return a;
         } catch (SQLException ex) {

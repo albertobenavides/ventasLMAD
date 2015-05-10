@@ -92,16 +92,42 @@
                         Cargar imágenes:<br>
                         <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=1"
-                                width="200px" height="200px"/>
-                        <input type="file" name="imagenProducto1"><br>
+                                width="200px" height="200px" id="target1"/>
+                        <input type="file" name="imagenProducto1" id="src1"><br>
                         <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=2"
-                                width="200px" height="200px"/>
-                        <input type="file" name="imagenProducto2"><br>
+                                width="200px" height="200px" id="target2"/>
+                        <input type="file" name="imagenProducto2" id="src2"><br>
                         <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=3"
-                                width="200px" height="200px"/>
-                        <input type="file" name="imagenProducto3"><br>
+                                width="200px" height="200px" id="target3"/>
+                        <input type="file" name="imagenProducto3" id="src3"><br>
+                        
+                        <script>
+                            function showImage(src,target) 
+                            {
+                                var fr=new FileReader();
+                                fr.onload = function(e) { target.src = this.result; };
+                                src.addEventListener("change",function() 
+                                {
+                                    // fill fr with image data    
+                                    fr.readAsDataURL(src.files[0]);
+                                    
+                                });
+                            }
+
+                              var src1 = document.getElementById("src1");
+                              var target1 = document.getElementById("target1");
+                              showImage(src1,target1);
+                              
+                              var src2 = document.getElementById("src2");
+                              var target2 = document.getElementById("target2");
+                              showImage(src2,target2);
+                              
+                              var src3 = document.getElementById("src3");
+                              var target3 = document.getElementById("target3");
+                              showImage(src3,target3);
+                        </script>
                         Cargar Video:<br>
                         <input type="file" name="videoProducto1"><br>
                         <input type="file" name="videoProducto2"><br>
@@ -143,8 +169,29 @@
                                                 name="vigencia" value="30"
                                                 min="1"
                                                 max="365"> días</p>
-                            <p>Miniatura: <input type="text" name="miniatura"
-                                                 value="<%= a.getThumbnailAnuncio() %>"></p>
+                            <p>Miniatura: <br>
+                                <%if (a.getImagen1() != null){%>
+                                <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=1"
+                                width="100px" height="100px" id="target"/>
+                                <input type="radio" name="miniatura" value="1"
+                                    <%if (a.getThumbnailAnuncio() == 1){%>checked<%}%>><br>
+                                
+                                <%}if (a.getImagen2() != null){%>
+                                <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=2"
+                                width="100px" height="100px" id="target"/>
+                                <input type="radio" name="miniatura" value="2"
+                                       <%if (a.getThumbnailAnuncio() == 2){%>checked<%}%>><br>
+                                
+                                <%}if (a.getImagen3() != null){%>
+                                <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=3"
+                                width="100px" height="100px" id="target"/>
+                                <input type="radio" name="miniatura" value="3"
+                                       <%if (a.getThumbnailAnuncio() == 3){%>checked<%}%>><br>
+                                <%}%>
+                            </p>
                             <p>Método de pago:
                                 <%
                             if (a.getMetodoPago().contains("Efectivo"))
@@ -190,12 +237,22 @@
                         }
                         function check()
                         {
+                            var form = new FormData(document.forms.namedItem("forma"));
+                            var url = document.getElementById("target").src.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+                            form.append("imagenProducto1", url);
+                            
+                            var request = new XMLHttpRequest();
+                            request.open("POST", "detalleProducto", false);
                             if (document.getElementById("no").checked)
                             {
                                 document.getElementById("forma").submit();
+                                //request.send(form);
                             }
                             else if (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked)
+                            {
                                 document.getElementById("forma").submit();
+                                //request.send(form);
+                            }
                             else
                             {
                                 alertify.log("Inserte al menos un método de pago");

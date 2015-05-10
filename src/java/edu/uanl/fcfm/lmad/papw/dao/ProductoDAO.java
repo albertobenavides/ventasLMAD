@@ -37,9 +37,9 @@ public class ProductoDAO {
             p.setPrecio(rs.getFloat("precioProducto"));
             p.setExistencia(rs.getInt("existenciaProducto"));
             p.setDescripcionLarga(rs.getString("caracteristicas"));
-            p.setImagen1(null);
-            p.setImagen2(null);
-            p.setImagen3(null);
+            p.setImagen1(rs.getBinaryStream("imagenProducto1"));
+            p.setImagen2(rs.getBinaryStream("imagenProducto2"));
+            p.setImagen3(rs.getBinaryStream("imagenProducto3"));
             p.setVideo1(null);
             p.setVideo2(null);
             p.setVideo3(null);
@@ -94,7 +94,7 @@ public class ProductoDAO {
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
         try {
-            cs = conn.prepareCall("{ call editarProducto(?,?,?,?,?,?,?,?,?,?,?,?) }");
+            cs = conn.prepareCall("{ call editarProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }");
             cs.setInt(1, p.getIdProducto());
             cs.setString(2, p.getNombre());
             cs.setFloat(3, p.getPrecio());
@@ -107,6 +107,9 @@ public class ProductoDAO {
             cs.setString(10, p.getVideo2());
             cs.setString(11, p.getVideo3());
             cs.setInt(12, p.getIdSubcategoria());
+            cs.setBoolean(13, p.isSetImagen1());
+            cs.setBoolean(14, p.isSetImagen2());
+            cs.setBoolean(15, p.isSetImagen3());
             
             cs.executeQuery();
             
@@ -118,8 +121,8 @@ public class ProductoDAO {
         }
     }
     
-    public static List<Producto> getListaProductos
-        (int idUsuario) {
+    public static List<Producto> getListaProductos (int idUsuario)
+    {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
@@ -139,6 +142,7 @@ public class ProductoDAO {
                 p.setFecha(rs.getString("date(creacionProducto)"));
                 p.setComprasPendientes(rs.getInt("comprasRealizadas"));
                 p.setPreguntasPendientes(rs.getInt("preguntasRealizadas"));
+                p.setIdAnuncio(rs.getInt("idAnuncio"));
                 
                 productos.add(p);
             }

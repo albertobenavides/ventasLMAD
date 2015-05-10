@@ -15,6 +15,8 @@
         <title>Ventas LMAD</title>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="themes/alertify.core.css" />
+        <link rel="stylesheet" href="themes/alertify.default.css" />
         <%
             if (session.getAttribute("username") == null)
             {
@@ -56,21 +58,18 @@
                         <td><%= c.getCantidadCompra() %></td>
                         <td><%= String.format(Locale.US, "%.2f", c.getTotalCompra()) %></td>
                         <td><%= c.getMetodoPagoCompra() %></td>
-                        <%
-                        if (c.getVentaRealizada() == 1)
-                        {
-                        %>
+                        <% if (c.getVentaRealizada() == 1){ %>
                         <td style="color: green">Confirmada</td>
-                        <%
-                        }
-                        else
-                        {
-                        %>
+                        <% } else if (c.getVentaRealizada() == 0){ %>
                         <td>Pendiente</td>
-                        <%
-                        }
-                        %>
-                        <td><a href="#">Cancelar</a></td>
+                        <% } else { %>
+                        <td style="color: red">Cancelada</td>
+                        <% } %>
+                        <td><% if (c.getVentaRealizada() != 2){ %>
+                        <a href="cancelarCompra?idCompra=<%= c.getIdCompra() %>">
+                                Cancelar</a>
+                        <% } %>
+                        </td>
                     </tr>
             <%
             }

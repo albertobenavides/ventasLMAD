@@ -50,16 +50,20 @@
                 for (int i = 0; i < total; i++)
                 {
                 %>
-                <div class="item">
+                <div class="item" style="width: 180px; height: 250px; text-align: center; vertical-align: top">
                     <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre() %></h2>
+                        <div style="width: 180px; height: 170px; text-align: center; vertical-align: middle;
+                             margin-bottom: 15px;">
                         <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + 
                                 anuncios.get(i).getIdProducto()%>&imagen=<%= anuncios.get(i).getThumbnailAnuncio() %>"
-                                width="180px" height="170px"/>
+                                style="max-width: 180px; max-height: 170px;
+                                width: auto; height: auto;"/>
+                        </div>
                     </a>
 
-                    <p class="footer">
+                                <p class="footer">
                         Por: <%= anuncios.get(i).getNickUsuario() %> <br>
                         $<%= String.format(Locale.US, "%.2f", anuncios.get(i).getPrecio()) %><br>
                         <%= anuncios.get(i).getFecha().toString().substring(0, 10) %>
@@ -83,11 +87,16 @@
                 for (int i = 0; i < total; i++)
                 {
                 %>
-                <div class="item">
+                <div class="item" style="width: 180px; height: 250px; text-align: center; vertical-align: top">
                     <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre() %></h2>
-                        <img src="images/item_printer.gif" width="180" height="170" 
-                             alt="<%= anuncios.get(i).getNombre() %>" />
+                        <div style="width: 180px; height: 170px; text-align: center; vertical-align: middle">
+                        <img src="<%= request.getServletContext().getContextPath() 
+                                + "/MostrarImagenProducto?idProducto=" + 
+                                anuncios.get(i).getIdProducto()%>&imagen=<%= anuncios.get(i).getThumbnailAnuncio() %>"
+                                style="max-width: 180px; max-height: 170px;
+                                width: auto; height: auto;"/>
+                        </div>
                     </a>
 
                     <p class="footer">
