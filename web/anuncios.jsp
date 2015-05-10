@@ -41,6 +41,8 @@
                     String categoria = request.getParameter("categoria");
                     String subcategoria = request.getParameter("subcategoria");
                     String criterio = request.getParameter("criterio");
+                    String fechaInicio = request.getParameter("fechaInicio");
+                    String fechaFin = request.getParameter("fechaFin");
                     int order;
                     if(request.getParameter("orden") != null)
                         order = Integer.parseInt(request.getParameter("orden"));
@@ -61,6 +63,9 @@
                     else if (criterio.equals("usuarios"))
                         anuncios = AnuncioDAO.getAnunciosBusqueda(null, 
                                     parametro, null, null);
+                    else if(fechaInicio != null)
+                        anuncios = AnuncioDAO.getAnunciosBusqueda(null, 
+                                    null, fechaInicio, fechaFin);
                     else if (subcategoria != null && categoria == null)
                         anuncios = AnuncioDAO.getAnunciosCortos(null, subcategoria, order);
                     else if (categoria != null || subcategoria != null)

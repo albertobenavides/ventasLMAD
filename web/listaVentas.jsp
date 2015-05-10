@@ -67,7 +67,7 @@
                         <% }else{ %>
                         <td style="color: red">Cancelada</td>
                         <% } %>
-                        <td><% if (v.getVentaRealizada() != 2){ %>
+                        <td><% if (v.getVentaRealizada() == 0){ %>
                         <a href="ConfirmarVenta?idCompra=<%= v.getIdCompra() %>">Vender</a>
                         <% } %></td>
                     </tr>

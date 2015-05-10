@@ -16,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author Alberto
  */
-public class UsuarioDao {
+public class UsuarioDAO {
     
     public static boolean setUsuario(Usuario u) {
         ConnectionPool pool = ConnectionPool.getInstance();

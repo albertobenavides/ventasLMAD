@@ -4,13 +4,20 @@
 <div id="header">
     <form action="anuncios.jsp" method="get">
         <ul class="inline">
-            <li><input type="text" name="parametro" value="Buscar..." 
+            <div id="searchBar" style="display: inline;">
+                <li><input type="text" name="parametro" value="Buscar..." 
                     onclick="if(this.value === 'Buscar...'){this.value='';}" 
                     onfocus="if(this.value === 'Buscar...'){this.value='';}" 
-                    onblur="if(this.value === '') { this.value='Buscar...';}"/></li>
+                    onblur="if(this.value === '') { this.value='Buscar...';}"/>
+                </li>
+            </div>
+            <div id="searchDate" style="display: none;">
+                <li>Desde: <input type="date" name="fechaInicio" id="fechaInicio"/></li>
+                <li> hasta: <input type="date" name="fechaFin" id="fechaFin"/></li>
+            </div>
             <li>
                  en 
-                <select name="criterio">
+                 <select name="criterio" onchange="searcher()" id="selectSearch">
                     <option value="todos">Todos</option>
                     <option value="productos">Productos</option>
                     <option value="usuarios">Usuarios</option>
@@ -20,6 +27,28 @@
             <li><input type="submit" value="Buscar"/></li>
         </ul>
     </form>
+    <script>
+        function searcher()
+        {
+            Date.prototype.toDateInputValue = (function() {
+                var local = new Date(this);
+                local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                return local.toJSON().slice(0,10);
+            });
+            if (document.getElementById("selectSearch").value === "fecha")
+            {
+                document.getElementById("searchBar").style.display = 'none';
+                document.getElementById("searchDate").style.display = 'inline';
+                document.getElementById('fechaInicio').value = new Date().toDateInputValue();
+                document.getElementById('fechaFin').value = new Date().toDateInputValue();
+            }
+            else
+            {
+                document.getElementById("searchBar").style.display = 'inline';
+                document.getElementById("searchDate").style.display = 'none';
+            }
+        }
+    </script>
 </div>
 
 <div id="main_content">

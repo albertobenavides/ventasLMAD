@@ -4,7 +4,7 @@
     Author     : Alberto
 --%>
 
-<%@page import="edu.uanl.fcfm.lmad.papw.dao.UsuarioDao"%>
+<%@page import="edu.uanl.fcfm.lmad.papw.dao.UsuarioDAO"%>
 <%@page import="edu.uanl.fcfm.lmad.papw.model.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,7 +32,7 @@
             <h1>Registro de usuario</h1>
             <%
             int idUsuario = (Integer)session.getAttribute("idUsuario");
-            Usuario u = new Usuario(UsuarioDao.getUsuario(idUsuario));
+            Usuario u = new Usuario(UsuarioDAO.getUsuario(idUsuario));
             %>
             <form action="RegistroUsuario" method="post" enctype="multipart/form-data">
                 <fieldset>

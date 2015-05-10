@@ -92,7 +92,8 @@
                     <img 
                     src="<%= request.getServletContext().getContextPath() 
                                 + "/mostrarImagen?id=" +  a.getIdUsuario() %>"
-                                 height="130px" style="max-width: 100%;"/></div>
+                                 height="130px" style="max-width: 100%;
+                                 border-radius: 5px;"/></div>
                 <div style="display: inline-block; vertical-align: bottom;">
                     <%= a.getNombreUsuario()%><br>
                     <%= a.getCorreoElectronico()%><br>
@@ -114,7 +115,8 @@
                     <img src="<%= request.getServletContext().getContextPath() 
                             + "/mostrarImagen?id=" +  p.getIdUsuario() %>"
                             width="30px" height="40px"
-                            style="max-width: 100%; max-height: 100%;"
+                            style="max-width: 100%; max-height: 100%;
+                            border-radius: 5px;"
                             align="middle"/>
                     <span><%= p.getNombreUsuario()%></span>
                     

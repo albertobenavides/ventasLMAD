@@ -5,7 +5,7 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
+import edu.uanl.fcfm.lmad.papw.dao.UsuarioDAO;
 import edu.uanl.fcfm.lmad.papw.model.Usuario;
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,13 +78,18 @@ public class RegistroUsuarioServlet extends HttpServlet {
             
             String message;
             
+            boolean setImagen = true;
+            if (filePart.getSize() == 0)
+                setImagen = false;
+            
             String action = request.getParameter("action");
             
             if (action.equals("setUsuario"))
             {
-                if (UsuarioDao.setUsuario(u) == true)
+                if (UsuarioDAO.setUsuario(u) == true)
                 {   
-                    UsuarioDao.insertarImagen(u);
+                    if (setImagen)
+                        UsuarioDAO.insertarImagen(u);
                     message = "Usuario registrado con éxito.";
                     request.setAttribute("message", message);
                     disp = getServletContext()
@@ -102,8 +107,9 @@ public class RegistroUsuarioServlet extends HttpServlet {
             }
             else
             {
-                UsuarioDao.insertarImagen(u);
-                UsuarioDao.updateUsuario(u);
+                if (setImagen)
+                    UsuarioDAO.insertarImagen(u);
+                UsuarioDAO.updateUsuario(u);
                 message = "Tus datos se han actualizado.";
                     request.setAttribute("message", message);
                     disp = getServletContext()

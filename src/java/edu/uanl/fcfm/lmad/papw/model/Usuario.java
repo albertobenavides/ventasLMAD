@@ -13,21 +13,23 @@ import java.sql.Blob;
  * @author Carlos
  */
 public class Usuario {
-    private int idUsuario;
-    private String nickname;
-    private String contrasenia;
-    private String correoElectronico;
-    private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    private String fechaNacimiento;
-    private String sexo;
-    private String telefono;
+    int idUsuario;
+    String nickname;
+    String contrasenia;
+    String correoElectronico;
+    String nombre;
+    String apellidoPaterno;
+    String apellidoMaterno;
+    String fechaNacimiento;
+    String sexo;
+    String telefono;
     
-    private String tipo;
-    private InputStream stream;
+    String tipo;
+    InputStream stream;
     
     Blob imagenUsuario;
+    
+    
 
     public Usuario(Usuario u)
     {

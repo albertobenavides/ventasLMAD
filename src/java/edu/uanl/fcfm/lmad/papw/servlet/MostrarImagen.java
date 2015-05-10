@@ -1,7 +1,7 @@
 
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
+import edu.uanl.fcfm.lmad.papw.dao.UsuarioDAO;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,7 +31,7 @@ public class MostrarImagen extends HttpServlet {
                 id = Integer.parseInt(strId);
             }
 
-            InputStream archivo = UsuarioDao.obtenerImagen(id);
+            InputStream archivo = UsuarioDAO.obtenerImagen(id);
             OutputStream out = response.getOutputStream();
             byte[] byteArray = new byte[1000000];
             int tamanio;

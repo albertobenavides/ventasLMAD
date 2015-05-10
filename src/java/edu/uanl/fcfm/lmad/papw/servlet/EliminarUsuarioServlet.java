@@ -5,7 +5,7 @@
  */
 package edu.uanl.fcfm.lmad.papw.servlet;
 
-import edu.uanl.fcfm.lmad.papw.dao.UsuarioDao;
+import edu.uanl.fcfm.lmad.papw.dao.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -40,7 +40,7 @@ public class EliminarUsuarioServlet extends HttpServlet {
             HttpSession session = request.getSession();
             int idUsuario = (Integer)session.getAttribute("idUsuario");
             
-            UsuarioDao.deleteUsuario(idUsuario);
+            UsuarioDAO.deleteUsuario(idUsuario);
             
             request.setAttribute("logout", "");
             
