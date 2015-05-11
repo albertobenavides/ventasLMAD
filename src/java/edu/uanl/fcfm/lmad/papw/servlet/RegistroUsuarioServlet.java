@@ -136,6 +136,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
             {
                 if (setImagen)
                     UsuarioDAO.insertarImagen(u);
+                u.setContrasenia(request.getParameter("contrasenia"));
                 UsuarioDAO.updateUsuario(u);
                 message = "Tus datos se han actualizado.";
                     request.setAttribute("message", message);

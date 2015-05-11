@@ -33,7 +33,7 @@
         <div id="content" class="inline_block">
             <h1>Listado de productos</h1>
             <div id="new_item_list">
-                <%                int idUsuario = (Integer) session.getAttribute("idUsuario");
+                <%                    int idUsuario = (Integer) session.getAttribute("idUsuario");
                     List<Producto> productos = new ArrayList<Producto>(ProductoDAO.getListaProductos(idUsuario));
                 %>
                 <table cellspacing="0" cellpadding="0">
@@ -50,7 +50,7 @@
                         for (Producto producto : productos) {
                     %>
                     <tr>
-                        <td><%= producto.getNombre() %></td>
+                        <td><%= producto.getNombre()%></td>
                         <td><%= String.format(Locale.US, "%.2f", producto.getPrecio())%></td>
                         <td><%= producto.getExistencia()%></td>
                         <td>
@@ -79,6 +79,9 @@
                         }
                     %>
                 </table>
+                <%if (productos.size() == 0) {%>
+                <p>No tienes ningun producto. ¿Por qué no registras uno <a href="nuevoProducto.jsp">aquí</a>?</p>
+                <%}%>
             </div>
             <%
                 String message = (String) request.getAttribute("message");

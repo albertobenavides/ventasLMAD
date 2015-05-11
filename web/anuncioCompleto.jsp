@@ -129,7 +129,7 @@
                           border-radius: 5px; margin: 10px; padding: 0">
                         <img src="<%= request.getServletContext().getContextPath()
                                  + "/mostrarImagen?id=" + p.getIdUsuario()%>"
-                             align="middle" style="width: 50px; max-height: auto;
+                             align="middle" style="width: 50px; max-height: 100%;
                              padding: 0; margin: 0"/>
                     </span>
                     <span><%= p.getNombreUsuario()%></span>
@@ -159,18 +159,14 @@
                             %>
                         </div>
                         <div style="padding: 1px;"></div>
-                        <%
-                            }
-                        %>
-                        <%
-                            if (session.getAttribute("username") == null) {
-                        %>
+                        <% } if (session.getAttribute("username") == null){ %>
                         <p>
                             Sólo los usuarios registrados pueden hacer preguntas. 
                             Regístrate <a href="registro.jsp">aquí</a>.
                         </p>
                         <%
-                        } else if (!a.getNickUsuario().equalsIgnoreCase((String) session.getAttribute("username"))) {
+                        } else if (!a.getNickUsuario().equalsIgnoreCase(
+                                (String) session.getAttribute("username"))) {
                         %>
                         <form action="PreguntasServlet" method="post" id="forma">
                             <textarea name="pregunta" form="forma"
