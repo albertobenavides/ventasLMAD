@@ -23,7 +23,8 @@
     </head>
     <body>
         <%@include file="header.jsp"%>
-        <%            int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
+        <%            String emailVendedor;
+            int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
             Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
         %>
         <div id="content" class="inline_block">
@@ -87,6 +88,7 @@
                         </div>
                         <div style="display: inline-block; vertical-align: middle;">
                             <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
+                            <input type="hidden" name="correoAnuncio" value="<%= a.getCorreoElectronico()%>">
                             <input type="submit" value="Comprar">
                         </div>
                     </form>
@@ -107,9 +109,10 @@
                         border-radius: 5px;"/></div>
                 <div style="display: inline-block; vertical-align: bottom;">
                     <%= a.getNombreUsuario()%><br>
-                    <%= a.getCorreoElectronico()%><br>
+                    <%= emailVendedor = a.getCorreoElectronico()%><br>
                     <%= a.getTelefono()%><br>
                     Fecha de publicación: <%= a.getFecha().toString().substring(0, 10)%><br><br>
+                    <% request.setAttribute("emailVendedor", emailVendedor); %>
                 </div>
             </div>
             <div class="questions">
@@ -124,10 +127,10 @@
                     <div class="derecha"><%= p.getFechaPublicacion().substring(0, 10)%></div>
                     <span style="width: 50px; height: 50px; overflow: hidden;
                           border-radius: 5px; margin: 10px; padding: 0">
-                         <img src="<%= request.getServletContext().getContextPath()
-                            + "/mostrarImagen?id=" + p.getIdUsuario()%>"
-                         align="middle" style="width: 50px; max-height: auto;
-                         padding: 0; margin: 0"/>
+                        <img src="<%= request.getServletContext().getContextPath()
+                                 + "/mostrarImagen?id=" + p.getIdUsuario()%>"
+                             align="middle" style="width: 50px; max-height: auto;
+                             padding: 0; margin: 0"/>
                     </span>
                     <span><%= p.getNombreUsuario()%></span>
 
@@ -180,14 +183,16 @@
                         %>
                     </div>
                 </div>
-                <script src="ImageSlider/ideal-image-slider.js"></script>
-                <script>
-                    var slider = new IdealImageSlider.Slider({
-                        selector: '#slider',
-                        height: 180,
-                        interval: 4000
-                    });
-                    slider.start();
-                </script>
-                </body>
-                </html>
+            </div>
+        </div>
+        <script src="ImageSlider/ideal-image-slider.js"></script>
+        <script>
+            var slider = new IdealImageSlider.Slider({
+                selector: '#slider',
+                height: 180,
+                interval: 4000
+            });
+            slider.start();
+        </script>
+    </body>
+</html>

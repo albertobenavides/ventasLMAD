@@ -7,10 +7,14 @@ package edu.uanl.fcfm.lmad.papw.servlet;
 
 import edu.uanl.fcfm.lmad.papw.dao.UsuarioDAO;
 import edu.uanl.fcfm.lmad.papw.model.Usuario;
+import edu.uanl.fcfm.lmad.papw.utils.EmailUtility;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.UUID;
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +34,23 @@ import javax.servlet.http.Part;
         maxFileSize         = 1024 * 1024 * 10, // 10 MB
         maxRequestSize      = 1024 * 1024 * 15 // 15 MB
 )
-public class RegistroUsuarioServlet extends HttpServlet {    
+public class RegistroUsuarioServlet extends HttpServlet {  
+    
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+    
+    @Override
+    public void init() {
+        // Lee la configuacion del servidor SMTP desde el archivo web.xml
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        user = context.getInitParameter("user");
+        pass = context.getInitParameter("pass");
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,12 +61,16 @@ public class RegistroUsuarioServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            
+            String email = request.getParameter("correoElectronico");
+            String verificationCode = UUID.randomUUID().toString();
+            
             Part filePart = request.getPart("imagen"); 
-            String contentType = filePart.getContentType();
+           // String contentType = filePart.getContentType();
             
             Usuario u = new Usuario();
             
@@ -55,7 +79,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
             if (session.getAttribute("idUsuario") != null)
                 u.setIdUsuario((Integer)session.getAttribute("idUsuario"));
             u.setNickname(request.getParameter("nickname"));
-            u.setContrasenia(request.getParameter("contrasenia"));
+            u.setContrasenia(verificationCode);
             u.setCorreoElectronico(request.getParameter("correoElectronico"));
             u.setNombre(
                     new String (
@@ -69,7 +93,7 @@ public class RegistroUsuarioServlet extends HttpServlet {
             u.setFechaNacimiento(request.getParameter("fechaNacimiento"));
             u.setSexo(request.getParameter("sexo"));
             u.setTelefono(request.getParameter("telefono"));
-            u.setTipo(contentType);
+            //u.setTipo(contentType);
             
             InputStream inputStream = filePart.getInputStream();
             u.setStream(inputStream);
@@ -87,9 +111,12 @@ public class RegistroUsuarioServlet extends HttpServlet {
             if (action.equals("setUsuario"))
             {
                 if (UsuarioDAO.setUsuario(u) == true)
-                {   
+                {
                     if (setImagen)
                         UsuarioDAO.insertarImagen(u);
+                    String emailMessage;
+                    emailMessage = "Ingresa el siguiente código de verificacion para activar la cuenta: " + verificationCode;
+                    EmailUtility.sendEmail(host, port, user, pass, email, "Código de acceso a VentasLMAD", emailMessage);
                     message = "Usuario registrado con éxito.";
                     request.setAttribute("message", message);
                     disp = getServletContext()
@@ -133,7 +160,12 @@ public class RegistroUsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+            //Logger.getLogger(RegistroUsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -147,7 +179,11 @@ public class RegistroUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**

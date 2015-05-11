@@ -39,6 +39,7 @@ public class PreguntaDAO {
             p.setNombreUsuario(rs.getString("nickUsuario"));
             p.setIdPregunta(rs.getInt("idPregunta"));
             p.setIdUsuario(rs.getInt("idUsuario"));
+            p.setCorreoUsuario(rs.getString("correoUsuario"));
             preguntas.add(p);
         }
         return preguntas;
@@ -72,22 +73,28 @@ public class PreguntaDAO {
         }
     }
     
-    public static void setRespuesta(String textoRespuesta, int idPregunta)
+    public static String setRespuesta(String textoRespuesta, int idPregunta)
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection conn = pool.getConnection();
         CallableStatement cs = null;
+        ResultSet rs = null;
         try {
             cs = conn.prepareCall("{ call insertarRespuesta(?,?) }");
             cs.setString(1, textoRespuesta);
             cs.setInt(2, idPregunta);
-            cs.executeQuery();
+            rs = cs.executeQuery();
             
+            if(rs.next()){                
+                String correoUsuario = rs.getString("correoUsuario");
+                return correoUsuario;            
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             DBUtil.closeStatement(cs);
             pool.freeConnection(conn);
         }
+        return "";
     }
 }
