@@ -8,6 +8,7 @@ package edu.uanl.fcfm.lmad.papw.servlet;
 import edu.uanl.fcfm.lmad.papw.dao.AnuncioDAO;
 import edu.uanl.fcfm.lmad.papw.dao.ProductoDAO;
 import edu.uanl.fcfm.lmad.papw.model.Producto;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -33,6 +34,20 @@ import javax.servlet.http.Part;
 )
 public class RegistrarAnuncioServlet extends HttpServlet {
 
+     private final String directorio = "archivos";
+    
+    private String extractExtension(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                String filename = s.substring(s.indexOf("=") + 2, s.length() - 1);
+                return filename.substring(filename.indexOf(".") - 1, filename.length());
+            }
+        }
+        return "";
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,19 +61,62 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        String uploadPath = getServletContext().getRealPath("/" + directorio + "/");
+        
+        File fdir = new File(uploadPath);
+        if (!fdir.exists()) {
+            fdir.mkdir();
+        }
+        
         try {
+            
             Part filePart1 = request.getPart("imagenProducto1");
-            String contentType1 = filePart1.getContentType();
-
+           
             Part filePart2 = request.getPart("imagenProducto2"); 
-            String contentType2 = filePart2.getContentType();
             
             Part filePart3 = request.getPart("imagenProducto3"); 
-            String contentType3 = filePart3.getContentType();
             
             InputStream inputStream1 = filePart1.getInputStream();
             InputStream inputStream2 = filePart2.getInputStream();
             InputStream inputStream3 = filePart3.getInputStream();
+            
+            String path4;
+            String path5;
+            String path6;
+            
+            Part filePart4 = request.getPart("videoProducto1");
+            if(filePart4.getContentType().equals("video/mp4")){
+                String nombreArchivo = String.valueOf(System.currentTimeMillis());
+                nombreArchivo += extractExtension(filePart4);
+                path4 = directorio + "/" + nombreArchivo;
+                filePart4.write(uploadPath + "/" + nombreArchivo);
+            }
+            else{
+                path4 = "";
+            }
+            
+            Part filePart5 = request.getPart("videoProducto2");
+            if(filePart5.getContentType().equals("video/mp4")){
+                String nombreArchivo = String.valueOf(System.currentTimeMillis());
+                nombreArchivo += extractExtension(filePart5);
+                path5 = directorio + "/" + nombreArchivo;
+                filePart5.write(uploadPath + "/" + nombreArchivo);
+            }
+            else{
+                path5 = "";
+            }
+            
+            Part filePart6 = request.getPart("videoProducto3");
+            if(filePart6.getContentType().equals("video/mp4")){
+                String nombreArchivo = String.valueOf(System.currentTimeMillis());
+                nombreArchivo += extractExtension(filePart6);
+                path6 = directorio + "/" + nombreArchivo;
+                filePart6.write(uploadPath + "/" + nombreArchivo);
+            }
+            else{
+                path6 = "";
+            }
             
             boolean setImagen1 = true;
             boolean setImagen2 = true;
@@ -92,9 +150,9 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             p.setImagen1(inputStream1);
             p.setImagen2(inputStream2);
             p.setImagen3(inputStream3);
-            p.setVideo1("");
-            p.setVideo2("");
-            p.setVideo3("");
+            p.setVideo1(path4);
+            p.setVideo2(path5);
+            p.setVideo3(path6);
             p.setIdSubcategoria(Integer.parseInt(idSubcategoria));
             p.setIdUsuario(Integer.parseInt(idUsuario));
             p.setSetImagen1(setImagen1);

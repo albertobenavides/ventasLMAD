@@ -40,9 +40,9 @@ public class ProductoDAO {
             p.setImagen1(rs.getBinaryStream("imagenProducto1"));
             p.setImagen2(rs.getBinaryStream("imagenProducto2"));
             p.setImagen3(rs.getBinaryStream("imagenProducto3"));
-            p.setVideo1(null);
-            p.setVideo2(null);
-            p.setVideo3(null);
+            p.setVideo1(rs.getString("videoProducto1"));
+            p.setVideo2(rs.getString("videoProducto2"));
+            p.setVideo3(rs.getString("videoProducto3"));
             p.setIdSubcategoria(rs.getInt("idSubCategoria"));
             p.setIdUsuario(0);
         }

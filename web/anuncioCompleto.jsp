@@ -54,6 +54,18 @@
                     <h1><%= a.getNombre()%></h1>
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio())%></h2>
                     <h2>Existencias: <%= a.getExistencias()%></h2>
+                    <br>
+                    <video controls="controls">
+                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1() %>" type="video/mp4">
+                    </video>
+                    
+                    <video controls="controls">
+                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2() %>" type="video/mp4">
+                    </video>
+                    
+                    <video controls="controls">
+                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2() %>" type="video/mp4">
+                    </video>
                 </div>
                 <%
                     if (session.getAttribute("username") == null) {

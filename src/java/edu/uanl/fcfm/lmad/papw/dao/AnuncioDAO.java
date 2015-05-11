@@ -147,6 +147,9 @@ public class AnuncioDAO {
             a.setImagen1(rs.getBinaryStream("imagenProducto1"));
             a.setImagen2(rs.getBinaryStream("imagenProducto2"));
             a.setImagen3(rs.getBinaryStream("imagenProducto3"));
+            a.setVideo1(rs.getString("videoProducto1"));
+            a.setVideo2(rs.getString("videoProducto2"));
+            a.setVideo3(rs.getString("videoProducto3"));
             }
             return a;
         } catch (SQLException ex) {
