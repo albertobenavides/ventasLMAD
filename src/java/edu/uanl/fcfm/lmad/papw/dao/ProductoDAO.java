@@ -142,7 +142,6 @@ public class ProductoDAO {
                 p.setFecha(rs.getString("date(creacionProducto)"));
                 p.setComprasPendientes(rs.getInt("comprasRealizadas"));
                 p.setPreguntasPendientes(rs.getInt("preguntasRealizadas"));
-                p.setIdAnuncio(rs.getInt("idAnuncio"));
                 
                 productos.add(p);
             }

@@ -104,7 +104,9 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             ProductoDAO.editarProducto(p);
             
             String vigencia = request.getParameter("vigencia");
-            int miniatura = Integer.parseInt(request.getParameter("miniatura"));
+            int miniatura = 1;
+            if (request.getParameter("miniatura") != null)
+                miniatura = Integer.parseInt(request.getParameter("miniatura"));
             String anunciar = request.getParameter("anunciar");
             String anuncioExiste = request.getParameter("anuncioExiste");
             
@@ -132,9 +134,9 @@ public class RegistrarAnuncioServlet extends HttpServlet {
                     AnuncioDAO.setAnuncio(vigencia, miniatura, metodoPago, idProducto);
                 }
             }
-            else if (anunciar.equalsIgnoreCase("no"))
+            else if (anunciar.equalsIgnoreCase("no") && request.getParameter("idAnuncio") != null)
             {
-                AnuncioDAO.bajaAnuncio(Integer.parseInt(request.getParameter("idAnuncio")));
+                    AnuncioDAO.bajaAnuncio(Integer.parseInt(request.getParameter("idAnuncio")));
             }
             
             RequestDispatcher disp = getServletContext()

@@ -20,11 +20,10 @@
         <link rel="stylesheet" href="themes/alertify.core.css" />
         <link rel="stylesheet" href="themes/alertify.default.css" />
         <%
-            if (session.getAttribute("username") == null)
-            {
+            if (session.getAttribute("username") == null) {
                 request.setAttribute("message", "Inicio de sesión requerido.");
                 RequestDispatcher disp = getServletContext()
-                    .getRequestDispatcher("/Index");
+                        .getRequestDispatcher("/Index");
                 disp.forward(request, response);
             }
         %>
@@ -34,11 +33,9 @@
         <div id="content" class="inline_block">
             <h1>Listado de productos</h1>
             <div id="new_item_list">
-            <%
-                int idUsuario = (Integer)session.getAttribute("idUsuario");
-                List<Producto> productos = new ArrayList<Producto>
-                    (ProductoDAO.getListaProductos(idUsuario));
-            %>
+                <%                int idUsuario = (Integer) session.getAttribute("idUsuario");
+                    List<Producto> productos = new ArrayList<Producto>(ProductoDAO.getListaProductos(idUsuario));
+                %>
                 <table cellspacing="0" cellpadding="0">
                     <tr>
                         <th>Producto</th>
@@ -49,48 +46,49 @@
                         <th>Anunciado</th>
                         <th>Editar</th>
                     </tr>
-            <%
-            for (Producto producto : productos)
-            {
-            %>
+                    <%
+                        for (Producto producto : productos) {
+                    %>
                     <tr>
-                        <td><%= producto.getNombre() %></td>
-                        <td><%= String.format(Locale.US, "%.2f", producto.getPrecio()) %></td>
-                        <td><%= producto.getExistencia() %></td>
-                        <td><a href="anuncioCompleto.jsp?idAnuncio=<%= producto.getIdAnuncio() %>#preguntas">
-                                <%= producto.getPreguntasPendientes() %></a></td>
+                        <td><%= producto.getNombre()%></td>
+                        <td><%= String.format(Locale.US, "%.2f", producto.getPrecio())%></td>
+                        <td><%= producto.getExistencia()%></td>
+                        <td>
+                            <%if (AnuncioDAO.getIdAnuncio(producto.getIdProducto()) != 0) {%>
+                            <a href="anuncioCompleto.jsp?idAnuncio=<%= AnuncioDAO.getIdAnuncio(producto.getIdProducto())%>#preguntas">
+                                <%= producto.getPreguntasPendientes()%></a>
+                                <%} else {%>
+                            N/A
+                            <%}%>
+                        </td>
                         <td><a href="listaVentas.jsp"><%= producto.getComprasPendientes()%></a></td>
-                        <%
-                        if (AnuncioDAO.getIdAnuncio(producto.getIdProducto()) != 0)
-                        {
-                        %>
+                            <%
+                                if (AnuncioDAO.getIdAnuncio(producto.getIdProducto()) != 0) {
+                            %>
                         <td>Sí</td>
                         <%
-                        }
-                        else
-                        {
+                        } else {
                         %>
                         <td style="color: red">No</td>
                         <%
-                        }
+                            }
                         %>
                         <td><a href="detalleProducto.jsp?idProducto=<%= producto.getIdProducto()%>">Editar</a></td>
                     </tr>
+                    <%
+                        }
+                    %>
+                </table>
+            </div>
             <%
-            }
-            %>
-            </table>
-        </div>
-        <%                        
-            String message = (String)request.getAttribute("message");
+                String message = (String) request.getAttribute("message");
 
-            if (message != null)
-            {
-        %>
-        <script src="lib/alertify.min.js"></script>
-        <script>alertify.log("<%= message %>");</script>
-        <%
-            }
-        %>
+                if (message != null) {
+            %>
+            <script src="lib/alertify.min.js"></script>
+            <script>alertify.log("<%= message%>");</script>
+            <%
+                }
+            %>
     </body>
 </html>

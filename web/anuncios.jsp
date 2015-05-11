@@ -91,7 +91,7 @@
                                 width: auto; height: auto;"/>
                         </div>
                     </a>
-                        <p class="usuario">Por: <%= anuncios.get(i).getNickUsuario() %></p>
+                        <p class="usuario">Por: <%= anuncios.get(i).getNickUsuario().toLowerCase() %></p>
                         <p class="precio">$<%= String.format(Locale.US, "%.2f", anuncios.get(i).getPrecio()) %></p>
                         <p class="fecha"><%= anuncios.get(i).getFecha().toString().substring(0, 10) %></p>
                     </li>
