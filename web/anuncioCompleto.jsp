@@ -23,7 +23,9 @@
     </head>
     <body>
         <%@include file="header.jsp"%>
-        <%            int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
+        <%            
+		  String emailVendedor;
+		int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
             Anuncio a = new Anuncio(AnuncioDAO.getAnuncioCompleto(idAnuncio));
         %>
         <div id="content" class="inline_block">
@@ -65,31 +67,33 @@
                 } else if (!a.getNickUsuario().equalsIgnoreCase((String) session.getAttribute("username"))) {
                 %>
                 <div style="text-align: right;">
-                    <form action="Comprar" method="post">
-                        <div style="display: inline-block">
-                            Cantidad: <br>
-                            Método de pago:
-                        </div>
-                        <div style="display: inline-block; text-align: left">
-                            <input type="number" name="cantidadCompra" value="1"
-                                   max="<%= a.getExistencias()%>"
-                                   min="1"><br>
-                            <select name="metodoPagoCompra">
-                                <%
-                                    String[] metodoPago = a.getMetodoPago().split(",");
-                                    for (String s : metodoPago) {
-                                %>
-                                <option value="<%= s%>"><%= s%></option>
-                                <%
-                                    }
-                                %>
-                            </select>
-                        </div>
-                        <div style="display: inline-block; vertical-align: middle;">
-                            <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
-                            <input type="submit" value="Comprar">
-                        </div>
-                    </form>
+                <form action="Comprar" method="post">
+                    <div style="display: inline-block">
+                        Cantidad: <br>
+                        Método de pago:
+                    </div>
+                    <div style="display: inline-block; text-align: left">
+                        <input type="number" name="cantidadCompra" value="1"
+                                     max="<%= a.getExistencias()%>"
+                                     min="1"><br>
+                        <select name="metodoPagoCompra">
+                            <%
+                            String[] metodoPago = a.getMetodoPago().split(",");
+                            for(String s : metodoPago)
+                            {
+                            %>
+                            <option value="<%= s %>"><%= s %></option>
+                            <%
+                            }
+                            %>
+                        </select>
+                    </div>
+                    <div style="display: inline-block; vertical-align: middle;">
+                        <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
+                        <input type="hidden" name="correoAnuncio" value="<%= a.getCorreoElectronico() %>">
+                    <input type="submit" value="Comprar">
+                    </div>
+                </form>
                 </div>
                 <%
                     }
@@ -107,9 +111,10 @@
                         border-radius: 5px;"/></div>
                 <div style="display: inline-block; vertical-align: bottom;">
                     <%= a.getNombreUsuario()%><br>
-                    <%= a.getCorreoElectronico()%><br>
+                    <%= emailVendedor = a.getCorreoElectronico()%><br>
                     <%= a.getTelefono()%><br>
-                    Fecha de publicación: <%= a.getFecha().toString().substring(0, 10)%><br><br>
+                    Fecha de publicación: <%= a.getFecha().toString().substring(0, 10) %><br><br>
+                    <% request.setAttribute("emailVendedor", emailVendedor); %>
                 </div>
             </div>
             <div class="questions">
@@ -180,7 +185,35 @@
                         %>
                     </div>
                 </div>
-                <script src="ImageSlider/ideal-image-slider.js"></script>
+                <%
+                }
+                %>
+                <%
+                if (session.getAttribute("username") == null)
+                {
+                %>
+                <p>
+                    Sólo los usuarios registrados pueden hacer preguntas. 
+                    Regístrate <a href="registro.jsp">aquí</a>.
+                </p>
+                <%
+                }
+                else if (!a.getNickUsuario().equalsIgnoreCase((String)session.getAttribute("username")))
+                {
+                %>
+                <form action="PreguntasServlet" method="post" id="forma">
+                    <textarea name="pregunta" form="forma"
+                              maxlength="500" rows="4" cols="65"></textarea><br>
+                    <input type="hidden" name="idAnuncio" value="<%= idAnuncio %>">
+                    <input type="hidden" name="correoVendedor" value="<%= (String)request.getAttribute("emailVendedor") %>">
+                    <input type="submit" value="Preguntar">
+                </form>
+                <%
+                }
+                %>
+            </div>
+        </div>
+		<script src="ImageSlider/ideal-image-slider.js"></script>
                 <script>
                     var slider = new IdealImageSlider.Slider({
                         selector: '#slider',
@@ -188,6 +221,6 @@
                         interval: 4000
                     });
                     slider.start();
-                </script>
-                </body>
-                </html>
+        </script>
+    </body>
+</html>

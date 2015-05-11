@@ -21,7 +21,7 @@ public class ConnectionPool {
         try {
             InitialContext ic = new InitialContext();
             dataSource = (DataSource) 
-                    ic.lookup("java:/comp/env/jdbc/Proyecto_BDMM_PAPW");
+                    ic.lookup("java:/comp/env/jdbc/Proyecto_BDMM_PAPW_PLUS");
         } catch (Exception e) {
             e.printStackTrace();
         }

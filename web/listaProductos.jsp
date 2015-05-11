@@ -50,7 +50,7 @@
                         for (Producto producto : productos) {
                     %>
                     <tr>
-                        <td><%= producto.getNombre()%></td>
+                        <td><%= producto.getNombre() %></td>
                         <td><%= String.format(Locale.US, "%.2f", producto.getPrecio())%></td>
                         <td><%= producto.getExistencia()%></td>
                         <td>
