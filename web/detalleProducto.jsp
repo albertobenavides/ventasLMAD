@@ -170,21 +170,21 @@
                                                 min="1"
                                                 max="365"> días</p>
                             <p>Miniatura: <br>
-                                <%if (a.getImagen1() != null){%>
+                                <%if (producto.getImagen1() != null){%>
                                 <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=1"
                                 width="100px" height="100px" id="target"/>
                                 <input type="radio" name="miniatura" value="1"
                                     <%if (a.getThumbnailAnuncio() == 1){%>checked<%}%>><br>
                                 
-                                <%}if (a.getImagen2() != null){%>
+                                <%}if (producto.getImagen2() != null){%>
                                 <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=2"
                                 width="100px" height="100px" id="target"/>
                                 <input type="radio" name="miniatura" value="2"
                                        <%if (a.getThumbnailAnuncio() == 2){%>checked<%}%>><br>
                                 
-                                <%}if (a.getImagen3() != null){%>
+                                <%}if (producto.getImagen3() != null){%>
                                 <img src="<%= request.getServletContext().getContextPath() 
                                 + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=3"
                                 width="100px" height="100px" id="target"/>

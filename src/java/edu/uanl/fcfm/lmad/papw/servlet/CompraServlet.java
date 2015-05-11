@@ -61,7 +61,7 @@ public class CompraServlet extends HttpServlet {
             String emailVendedor = request.getParameter("correoAnuncio");
             int idUsuario = (Integer)session.getAttribute("idUsuario");
             int cantidadCompra = Integer.parseInt(request.getParameter("cantidadCompra"));
-            String metodoPagoCompra = request.getParameter("metodoPagoCompra");
+            String metodoPagoCompra = (new String (request.getParameter("metodoPagoCompra").getBytes ("iso-8859-1"), "UTF-8"));
             int idAnuncio = Integer.parseInt(request.getParameter("idAnuncio"));
             
             CompraDAO.setCompra(idUsuario, cantidadCompra, metodoPagoCompra, idAnuncio);

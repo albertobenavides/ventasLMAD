@@ -57,8 +57,14 @@
                         <td><%= producto.getNombre() %></td>
                         <td><%= String.format(Locale.US, "%.2f", producto.getPrecio()) %></td>
                         <td><%= producto.getExistencia() %></td>
-                        <td><a href="anuncioCompleto.jsp?idAnuncio=<%= producto.getIdAnuncio() %>#preguntas">
-                                <%= producto.getPreguntasPendientes() %></a></td>
+                        <td>
+                            <%if (AnuncioDAO.getIdAnuncio(producto.getIdProducto()) != 0) {%>
+                            <a href="anuncioCompleto.jsp?idAnuncio=<%= AnuncioDAO.getIdAnuncio(producto.getIdProducto())%>#preguntas">
+                                <%= producto.getPreguntasPendientes()%></a>
+                                <%} else {%>
+                            N/A
+                            <%}%>
+                        </td>
                         <td><a href="listaVentas.jsp"><%= producto.getComprasPendientes()%></a></td>
                         <%
                         if (AnuncioDAO.getIdAnuncio(producto.getIdProducto()) != 0)
