@@ -84,21 +84,21 @@
                     <div style="text-align: center">
                         <h1>Cargar imágenes:</h1>
                         <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
-                            <img src="<%= request.getServletContext().getContextPath()
-                                     + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
-                                 height="200px" id="target1" style="width: auto;"/>
+                             <img src="<%= request.getServletContext().getContextPath()
+                                    + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
+                             height="200px" id="target1" style="width: auto;"/>
                             <input type="file" name="imagenProducto1" id="src1">
                         </div>
                         <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
-                            <img src="<%= request.getServletContext().getContextPath()
-                                     + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
-                                 height="200px" id="target2" style="width: auto;"/>
+                             <img src="<%= request.getServletContext().getContextPath()
+                                    + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
+                             height="200px" id="target2" style="width: auto;"/>
                             <input type="file" name="imagenProducto2" id="src2">
                         </div>
                         <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
-                            <img src="<%= request.getServletContext().getContextPath()
-                                     + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
-                                 height="200px" id="target3" style="width: auto;"/>
+                             <img src="<%= request.getServletContext().getContextPath()
+                                    + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
+                             height="200px" id="target3" style="width: auto;"/>
                             <input type="file" name="imagenProducto3" id="src3">
                         </div>
                         <script>
@@ -159,60 +159,6 @@
                             <input type="hidden" name="anuncioExiste" value="no">
                             </p>
                             <div id="anunciar" style="display: none">
-                            <%
-                            }
-                            %>
-                            <p>Vigencia: <input type="number" align="right" 
-                                                name="vigencia" value="30"
-                                                min="1"
-                                                max="365"> días</p>
-                            <p>Miniatura: <br>
-                                <%if (producto.getImagen1() != null){%>
-                                <img src="<%= request.getServletContext().getContextPath() 
-                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=1"
-                                width="100px" height="100px" id="target"/>
-                                <input type="radio" name="miniatura" value="1"
-                                    <%if (a.getThumbnailAnuncio() == 1){%>checked<%}%>><br>
-                                
-                                <%}if (producto.getImagen2() != null){%>
-                                <img src="<%= request.getServletContext().getContextPath() 
-                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=2"
-                                width="100px" height="100px" id="target"/>
-                                <input type="radio" name="miniatura" value="2"
-                                       <%if (a.getThumbnailAnuncio() == 2){%>checked<%}%>><br>
-                                
-                                <%}if (producto.getImagen3() != null){%>
-                                <img src="<%= request.getServletContext().getContextPath() 
-                                + "/MostrarImagenProducto?idProducto=" + idProducto %>&imagen=3"
-                                width="100px" height="100px" id="target"/>
-                                <input type="radio" name="miniatura" value="3"
-                                       <%if (a.getThumbnailAnuncio() == 3){%>checked<%}%>><br>
-                                <%}%>
-                            </p>
-                            <p>Método de pago:
-                                <%
-                            if (a.getMetodoPago().contains("Efectivo"))
-                            {
-                                %>
-                                <input type="checkbox" name="efectivo" checked value="1" id="efectivo">Efectivo 
-                                <%
-                            }
-                            else
-                            {
-                                %>
-                                <input type="checkbox" name="efectivo" value="1" id="efectivo">Efectivo
-                                <%
-                            }
-                            if (a.getMetodoPago().contains("Tarjeta"))
-                            {
-                                %>
-                                <input type="checkbox" name="tarjeta" checked value="2" id="tarjeta">Tarjeta<br>
-                                <%
-                            }
-                            else
-                            {
-                                %>
-                                <input type="checkbox" name="tarjeta" value="2" id="tarjeta">Tarjeta<br>
                                 <%
                                     }
                                 %>
@@ -228,8 +174,8 @@
                                     <%}%>
                                     <br>
                                     <%if (producto.getImagen1() != null) {%>
-                                    <img src="<%= request.getServletContext().getContextPath()
-                                                 + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
+                                         <img src="<%= request.getServletContext().getContextPath()
+                                            + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="1"
                                            <%if (a.getThumbnailAnuncio() == 1 || a.getThumbnailAnuncio() == 0) {%>
@@ -237,16 +183,16 @@
 
                                     <%}
                                         if (producto.getImagen2() != null) {%>
-                                    <img src="<%= request.getServletContext().getContextPath()
-                                                 + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
+                                         <img src="<%= request.getServletContext().getContextPath()
+                                            + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="2"
                                            <%if (a.getThumbnailAnuncio() == 2) {%>checked<%}%>><br>
 
                                     <%}
                                         if (producto.getImagen3() != null) {%>
-                                    <img src="<%= request.getServletContext().getContextPath()
-                                                 + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
+                                         <img src="<%= request.getServletContext().getContextPath()
+                                            + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="3"
                                            <%if (a.getThumbnailAnuncio() == 3) {%>checked<%}%>><br>
