@@ -36,7 +36,7 @@
                                maxlength="50" required><br>
                         Precio:<br>
                         <input type="number" name="precioProducto"
-                               required><br>
+                               step="any" required><br>
                         Categoría:
                         <select name="idSubcategoria" form="forma">
                     <%

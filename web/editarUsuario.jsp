@@ -40,7 +40,8 @@
                     <div>
                         Nombre de usuario:<br>
                         <input type="text" name="nickname" 
-                               value="<%= u.getNickname() %>"><br>
+                               value="<%= u.getNickname() %>"
+                               disabled><br>
                         Contraseña:<br>
                         <input type="password" name="contrasenia"
                                value="<%= u.getContrasenia()%>"><br>

@@ -46,7 +46,8 @@
                                    value="<%= producto.getNombre()%>"></p>
                         <p>Precio: 
                             <input type="number" name="precioProducto"
-                                   required value="<%= String.format(Locale.US, "%.2f", producto.getPrecio())%>"> MXN</p>
+                                   required value="<%= String.format(Locale.US, "%.2f", producto.getPrecio())%>"
+                                   step="any" pattern="[0-9]+([\.][0-9]+)?"> MXN</p>
                         <p>Categoría:
                             <select name="idSubcategoria" form="forma"></p>
                             <%
@@ -129,20 +130,26 @@
                             showImage(src3, target3);
                         </script>
                         <h1>Cargar Video:</h1>
+                        <% if (producto.getVideo1() != "") { %>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo1()%>" type="video/mp4">
                         </video>
+                        <% } %>
+                        <p><input type="file" name="videoProducto1"></p>
 
+                        <% if (producto.getVideo2() != "") { %>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo2()%>" type="video/mp4">
                         </video>
+                        <% } %>
+                        <p><input type="file" name="videoProducto2"></p>
 
+                        <% if (producto.getVideo3() != "") { %>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo3()%>" type="video/mp4">
                         </video>
-                        <input type="file" name="videoProducto1"><br>
-                        <input type="file" name="videoProducto2"><br>
-                        <input type="file" name="videoProducto3"><br>
+                        <% } %>
+                        <p><input type="file" name="videoProducto3"></p>
                     </div>
                 </fieldset>
                 <fieldset>

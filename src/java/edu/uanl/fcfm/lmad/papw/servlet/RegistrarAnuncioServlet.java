@@ -81,41 +81,41 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             InputStream inputStream2 = filePart2.getInputStream();
             InputStream inputStream3 = filePart3.getInputStream();
             
-            String path4;
-            String path5;
-            String path6;
+            String videoPath1;
+            String videoPath2;
+            String videoPath3;
             
             Part filePart4 = request.getPart("videoProducto1");
             if(filePart4.getContentType().equals("video/mp4")){
                 String nombreArchivo = String.valueOf(System.currentTimeMillis());
                 nombreArchivo += extractExtension(filePart4);
-                path4 = directorio + "/" + nombreArchivo;
+                videoPath1 = directorio + "/" + nombreArchivo;
                 filePart4.write(uploadPath + "/" + nombreArchivo);
             }
             else{
-                path4 = "";
+                videoPath1 = "";
             }
             
             Part filePart5 = request.getPart("videoProducto2");
             if(filePart5.getContentType().equals("video/mp4")){
                 String nombreArchivo = String.valueOf(System.currentTimeMillis());
                 nombreArchivo += extractExtension(filePart5);
-                path5 = directorio + "/" + nombreArchivo;
+                videoPath2 = directorio + "/" + nombreArchivo;
                 filePart5.write(uploadPath + "/" + nombreArchivo);
             }
             else{
-                path5 = "";
+                videoPath2 = "";
             }
             
             Part filePart6 = request.getPart("videoProducto3");
             if(filePart6.getContentType().equals("video/mp4")){
                 String nombreArchivo = String.valueOf(System.currentTimeMillis());
                 nombreArchivo += extractExtension(filePart6);
-                path6 = directorio + "/" + nombreArchivo;
+                videoPath3 = directorio + "/" + nombreArchivo;
                 filePart6.write(uploadPath + "/" + nombreArchivo);
             }
             else{
-                path6 = "";
+                videoPath3 = "";
             }
             
             boolean setImagen1 = true;
@@ -139,6 +139,17 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             String idSubcategoria = (String)request.getParameter("idSubcategoria");
             String idUsuario = (String)session.getAttribute("idUsuario").toString();
             
+            Producto productoVideo = new Producto(ProductoDAO.getProducto(idProducto));
+            
+            if (videoPath1.equals(""))
+                videoPath1 = productoVideo.getVideo1();
+            
+            if (videoPath2.equals(""))
+                videoPath2 = productoVideo.getVideo2();
+            
+            if (videoPath3.equals(""))
+                videoPath3 = productoVideo.getVideo3();
+            
             Producto p = new Producto();
             p.setIdProducto(idProducto);
             p.setNombre(new String (
@@ -150,9 +161,9 @@ public class RegistrarAnuncioServlet extends HttpServlet {
             p.setImagen1(inputStream1);
             p.setImagen2(inputStream2);
             p.setImagen3(inputStream3);
-            p.setVideo1(path4);
-            p.setVideo2(path5);
-            p.setVideo3(path6);
+            p.setVideo1(videoPath1);
+            p.setVideo2(videoPath2);
+            p.setVideo3(videoPath3);
             p.setIdSubcategoria(Integer.parseInt(idSubcategoria));
             p.setIdUsuario(Integer.parseInt(idUsuario));
             p.setSetImagen1(setImagen1);

@@ -61,6 +61,9 @@ public class Anuncio {
         this.imagen1 = a.imagen1;
         this.imagen2 = a.imagen2;
         this.imagen3 = a.imagen3;
+        this.video1 = a.video1;
+        this.video2 = a.video2;
+        this.video3 = a.video3;
     }
 
     public int getIdAnuncio() {

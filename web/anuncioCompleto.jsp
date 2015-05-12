@@ -54,19 +54,24 @@
                     <h1><%= a.getNombre()%></h1>
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio())%></h2>
                     <h2>Existencias: <%= a.getExistencias()%></h2>
-                    <br>
-                    <video controls="controls">
-                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1() %>" type="video/mp4">
-                    </video>
-                    
-                    <video controls="controls">
-                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2() %>" type="video/mp4">
-                    </video>
-                    
-                    <video controls="controls">
-                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2() %>" type="video/mp4">
-                    </video>
                 </div>
+                <% if(a.getVideo1() != "") { %>
+                <video controls="controls">
+                    <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1()%>" type="video/mp4">
+                </video>
+                <% } %>
+
+                <% if(a.getVideo2() != "") { %>
+                <video controls="controls">
+                    <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
+                </video>
+                <% } %>
+
+                <% if(a.getVideo3() != "") { %>
+                <video controls="controls">
+                    <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
+                </video>
+                <% } %>
                 <%
                     if (session.getAttribute("username") == null) {
                 %>
@@ -139,10 +144,10 @@
                     <div class="derecha"><%= p.getFechaPublicacion().substring(0, 10)%></div>
                     <span style="width: 50px; height: 50px; overflow: hidden;
                           border-radius: 5px; margin: 10px; padding: 0">
-                        <img src="<%= request.getServletContext().getContextPath()
-                                 + "/mostrarImagen?id=" + p.getIdUsuario()%>"
-                             align="middle" style="width: 50px; max-height: 100%;
-                             padding: 0; margin: 0"/>
+                         <img src="<%= request.getServletContext().getContextPath()
+                                + "/mostrarImagen?id=" + p.getIdUsuario()%>"
+                         align="middle" style="width: 50px; max-height: 100%;
+                         padding: 0; margin: 0"/>
                     </span>
                     <span><%= p.getNombreUsuario()%></span>
 
@@ -171,7 +176,8 @@
                             %>
                         </div>
                         <div style="padding: 1px;"></div>
-                        <% } if (session.getAttribute("username") == null){ %>
+                        <% }
+                            if (session.getAttribute("username") == null) { %>
                         <p>
                             Sólo los usuarios registrados pueden hacer preguntas. 
                             Regístrate <a href="registro.jsp">aquí</a>.
