@@ -150,6 +150,7 @@ public class AnuncioDAO {
             a.setVideo1(rs.getString("videoProducto1"));
             a.setVideo2(rs.getString("videoProducto2"));
             a.setVideo3(rs.getString("videoProducto3"));
+            a.setDiasVigencia(rs.getInt("diasrestantes"));
             }
             return a;
         } catch (SQLException ex) {

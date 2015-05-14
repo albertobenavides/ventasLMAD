@@ -40,6 +40,8 @@ public class Anuncio {
     
     int idSubcategoria;
     
+    int diasVigencia;
+    
     public Anuncio(){}
     
     public Anuncio (Anuncio a)
@@ -64,6 +66,7 @@ public class Anuncio {
         this.video1 = a.video1;
         this.video2 = a.video2;
         this.video3 = a.video3;
+        this.diasVigencia = a.diasVigencia;
     }
 
     public int getIdAnuncio() {
@@ -241,6 +244,14 @@ public class Anuncio {
 
     public void setThumbnailAnuncio(int thumbnailAnuncio) {
         this.thumbnailAnuncio = thumbnailAnuncio;
+    }
+
+    public int getDiasVigencia() {
+        return diasVigencia;
+    }
+
+    public void setDiasVigencia(int diasVigencia) {
+        this.diasVigencia = diasVigencia;
     }
     
 }

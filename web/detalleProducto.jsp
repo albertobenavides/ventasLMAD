@@ -85,21 +85,21 @@
                     <div style="text-align: center">
                         <h1>Cargar imágenes:</h1>
                         <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
-                             <img src="<%= request.getServletContext().getContextPath()
+                            <img src="<%= request.getServletContext().getContextPath()
                                      + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
-                             height="200px" id="target1" style="width: auto;"/>
+                                 height="200px" id="target1" style="width: auto;"/>
                             <input type="file" name="imagenProducto1" id="src1">
                         </div>
                         <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
-                             <img src="<%= request.getServletContext().getContextPath()
+                            <img src="<%= request.getServletContext().getContextPath()
                                      + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
-                             height="200px" id="target2" style="width: auto;"/>
+                                 height="200px" id="target2" style="width: auto;"/>
                             <input type="file" name="imagenProducto2" id="src2">
                         </div>
                         <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
-                             <img src="<%= request.getServletContext().getContextPath()
+                            <img src="<%= request.getServletContext().getContextPath()
                                      + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
-                             height="200px" id="target3" style="width: auto;"/>
+                                 height="200px" id="target3" style="width: auto;"/>
                             <input type="file" name="imagenProducto3" id="src3">
                         </div>
                         <script>
@@ -130,21 +130,21 @@
                             showImage(src3, target3);
                         </script>
                         <h1>Cargar Video:</h1>
-                        <% if (producto.getVideo1() != "") { %>
+                        <% if (producto.getVideo1() != "") {%>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo1()%>" type="video/mp4">
                         </video>
                         <% } %>
                         <p><input type="file" name="videoProducto1"></p>
 
-                        <% if (producto.getVideo2() != "") { %>
+                        <% if (producto.getVideo2() != "") {%>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo2()%>" type="video/mp4">
                         </video>
                         <% } %>
                         <p><input type="file" name="videoProducto2"></p>
 
-                        <% if (producto.getVideo3() != "") { %>
+                        <% if (producto.getVideo3() != "") {%>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo3()%>" type="video/mp4">
                         </video>
@@ -180,10 +180,17 @@
                                 <%
                                     }
                                 %>
+                                <%if (a.getDiasVigencia() < 1) {%>
                                 <p>Vigencia: <input type="number" align="right" 
-                                                    name="vigencia" value="30"
+                                                    name="vigencia" value='0'
                                                     min="1"
-                                                    max="365"> días</p>
+                                                    max="365"id="vigen"> días</p>
+                                    <% } else {%>
+                                <p>Vigencia: <input type="number" align="right" 
+                                                    name="vigencia" value="<%= a.getDiasVigencia()%>"
+                                                    min="1"
+                                                    max="365" id="vigen"> días</p>
+                                    <% } %>
                                 <p>Miniatura: 
                                     <%if (producto.getImagen1() == null
                                                 && producto.getImagen2() == null
@@ -192,7 +199,7 @@
                                     <%}%>
                                     <br>
                                     <%if (producto.getImagen1() != null) {%>
-                                         <img src="<%= request.getServletContext().getContextPath()
+                                    <img src="<%= request.getServletContext().getContextPath()
                                                  + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="1"
@@ -201,7 +208,7 @@
 
                                     <%}
                                         if (producto.getImagen2() != null) {%>
-                                         <img src="<%= request.getServletContext().getContextPath()
+                                    <img src="<%= request.getServletContext().getContextPath()
                                                  + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="2"
@@ -209,7 +216,7 @@
 
                                     <%}
                                         if (producto.getImagen3() != null) {%>
-                                         <img src="<%= request.getServletContext().getContextPath()
+                                    <img src="<%= request.getServletContext().getContextPath()
                                                  + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="3"
@@ -255,17 +262,28 @@
                                 }
                                 function check()
                                 {
-                                    if (document.getElementById("no").checked)
+                                    if(document.getElementById("vigen").value === '0')
                                     {
-                                        document.getElementById("forma").submit();
+                                        alertify.log("Inserte una vigencia válida");
                                     }
-                                    else if (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked)
+                                    else if (document.getElementById("vigen").value !== "")
                                     {
-                                        document.getElementById("forma").submit();
+                                        if (document.getElementById("no").checked)
+                                        {
+                                            document.getElementById("forma").submit();
+                                        }
+                                        else if (document.getElementById("efectivo").checked || document.getElementById("tarjeta").checked)
+                                        {
+                                            document.getElementById("forma").submit();
+                                        }
+                                        else
+                                        {
+                                            alertify.log("Inserte al menos un método de pago");
+                                        }
                                     }
                                     else
                                     {
-                                        alertify.log("Inserte al menos un método de pago");
+                                        alertify.log("Inserte una vigencia válida");
                                     }
                                 }
                         </script>
