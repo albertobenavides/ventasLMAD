@@ -84,8 +84,8 @@ public class PreguntasServlet extends HttpServlet {
                 PreguntaDAO.setPregunta(pregunta, idUsuario, idAnuncio);
                 String emailMessage;
                 emailMessage = "Se ha publicado una pregunta: " + pregunta;
-                EmailUtility.sendEmail(host, port, user, pass, email, ""
-                        + "Publicación en anuncio", emailMessage);
+                EmailUtility.sendEmail(host, port, user, pass, email,
+                         "Publicación en anuncio", emailMessage);
             }
             else
             {
@@ -97,7 +97,8 @@ public class PreguntasServlet extends HttpServlet {
             RequestDispatcher disp = getServletContext()
                     .getRequestDispatcher("/anuncioCompleto.jsp?idAnuncio=" + idAnuncio);
             disp.forward(request, response);
-        } finally {
+        }
+            finally {
             out.close();
         }
     }

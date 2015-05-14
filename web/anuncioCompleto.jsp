@@ -55,19 +55,19 @@
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio())%></h2>
                     <h2>Existencias: <%= a.getExistencias()%></h2>
                 </div>
-                <% if(a.getVideo1() != "") { %>
+                <% if (a.getVideo1() != "") {%>
                 <video controls="controls">
                     <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1()%>" type="video/mp4">
                 </video>
                 <% } %>
 
-                <% if(a.getVideo2() != "") { %>
+                <% if (a.getVideo2() != "") {%>
                 <video controls="controls">
                     <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
                 </video>
                 <% } %>
 
-                <% if(a.getVideo3() != "") { %>
+                <% if (a.getVideo3() != "") {%>
                 <video controls="controls">
                     <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
                 </video>
@@ -144,10 +144,10 @@
                     <div class="derecha"><%= p.getFechaPublicacion().substring(0, 10)%></div>
                     <span style="width: 50px; height: 50px; overflow: hidden;
                           border-radius: 5px; margin: 10px; padding: 0">
-                         <img src="<%= request.getServletContext().getContextPath()
-                                + "/mostrarImagen?id=" + p.getIdUsuario()%>"
-                         align="middle" style="width: 50px; max-height: 100%;
-                         padding: 0; margin: 0"/>
+                        <img src="<%= request.getServletContext().getContextPath()
+                                 + "/mostrarImagen?id=" + p.getIdUsuario()%>"
+                             align="middle" style="width: 50px; max-height: 100%;
+                             padding: 0; margin: 0"/>
                     </span>
                     <span><%= p.getNombreUsuario()%></span>
 
@@ -159,44 +159,45 @@
                         <p style="margin: 0; padding: 5px 0 0 0">
                             <%= p.getTextoRespuesta()%>
                         </p>
-                        <div>
-                            <%
-                            } else if (a.getNickUsuario().equalsIgnoreCase((String) session.getAttribute("username"))) {
-                            %>
-                            <form action="PreguntasServlet" method="post" id="forma<%=counter%>">
-                                <textarea name="respuesta<%=counter%>" form="forma<%=counter%>"
-                                          maxlength="500" rows="2" cols="65"></textarea><br>
-                                <input type="hidden" name="idPregunta" value="<%= p.getIdPregunta()%>">
-                                <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
-                                <input type="hidden" name="counter" value="<%= counter%>">
-                                <input type="submit" value="Responder">
-                            </form>
-                            <%
-                                }
-                            %>
-                        </div>
-                        <div style="padding: 1px;"></div>
-                        <% }
-                            if (session.getAttribute("username") == null) { %>
-                        <p>
-                            Sólo los usuarios registrados pueden hacer preguntas. 
-                            Regístrate <a href="registro.jsp">aquí</a>.
-                        </p>
-                        <%
-                        } else if (!a.getNickUsuario().equalsIgnoreCase(
-                                (String) session.getAttribute("username"))) {
-                        %>
-                        <form action="PreguntasServlet" method="post" id="forma">
-                            <textarea name="pregunta" form="forma"
-                                      maxlength="500" rows="4" cols="65"></textarea><br>
-                            <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
-                            <input type="submit" value="Preguntar">
-                        </form>
-                        <%
-                            }
-                        %>
                     </div>
                 </div>
+                <div>
+                    <%
+                    } else if (a.getNickUsuario().equalsIgnoreCase((String) session.getAttribute("username"))) {
+                    %>
+                    <form action="PreguntasServlet" method="post" id="forma<%=counter%>">
+                        <textarea name="respuesta<%=counter%>" form="forma<%=counter%>"
+                                  maxlength="500" rows="2" cols="65"></textarea><br>
+                        <input type="hidden" name="idPregunta" value="<%= p.getIdPregunta()%>">
+                        <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
+                        <input type="hidden" name="counter" value="<%= counter%>">
+                        <input type="submit" value="Responder">
+                    </form>
+                    <%
+                        }
+                    %>
+                </div>
+                <div style="padding: 1px;"></div>
+                <% }
+                        if (session.getAttribute("username") == null) { %>
+                <p>
+                    Sólo los usuarios registrados pueden hacer preguntas. 
+                    Regístrate <a href="registro.jsp">aquí</a>.
+                </p>
+                <%
+                } else if (!a.getNickUsuario().equalsIgnoreCase(
+                        (String) session.getAttribute("username"))) {
+                %>
+                <form action="PreguntasServlet" method="post" id="forma">
+                    <textarea name="pregunta" form="forma"
+                              maxlength="500" rows="4" cols="65"></textarea><br>
+                    <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
+                    <input type="hidden" name="correoVendedor" value="<%= a.getCorreoElectronico() %>">
+                    <input type="submit" value="Preguntar">
+                </form>
+                <%
+                    }
+                %>
             </div>
         </div>
         <script src="ImageSlider/ideal-image-slider.js"></script>
