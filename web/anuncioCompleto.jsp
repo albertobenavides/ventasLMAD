@@ -20,6 +20,11 @@
         <link rel="stylesheet" href="style.css" type="text/css"/>
         <link rel="stylesheet" href="ImageSlider/ideal-image-slider.css">
         <link rel="stylesheet" href="ImageSlider/themes/default/default.css">
+
+        <script src="videoSlider/jquery.min.js"></script>
+        <script src="videoSlider/plugins/jquery.fitvids.js"></script>
+        <script src="videoSlider/jquery.bxslider.js"></script>
+        <link href="videoSlider/jquery.bxslider.css" rel="stylesheet" />
     </head>
     <body>
         <%@include file="header.jsp"%>
@@ -102,26 +107,47 @@
                     }
                 %>
 
-                <div style="border-bottom-style: dotted; border-bottom-width: 1px">
-                    <% if (a.getVideo1() != "") {%>
-                    <video controls="controls" style="margin: 5px auto 5px auto; width: 400px;">
-                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1()%>" type="video/mp4">
-                    </video>
-                    <% } %>
-                    <br>
-                    <% if (a.getVideo2() != "") {%>
-                    <video controls="controls" style="margin: 5px auto 5px auto; width: 400px;">
-                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
-                    </video>
-                    <% } %>
-
-                    <% if (a.getVideo3() != "") {%>
-                    <video controls="controls" style="margin: 5px auto 5px auto; width: 400px;">
-                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
-                    </video>
-                    <% } %>
+                <div style="border-bottom-style: dotted; border-bottom-width: 1px;
+                     text-align: center; width: 270px; margin: 10px auto 20px auto;
+                     border-bottom-style: dotted; border-bottom-width: 1px">
+                    <ul class="bxslider">
+                        <% if (a.getVideo1() != "") {%>
+                        <li>
+                            <video controls="controls" style="max-width: 270px;
+                                   width: auto; height: 150px"> 
+                                <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1()%>" >
+                            </video>
+                        </li>
+                        <% } %>
+                        <% if (a.getVideo2() != "") {%>
+                        <li>
+                            <video controls="controls" style="max-width: 270px;
+                                   width: auto; height: 150px"> 
+                                <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" >
+                            </video>
+                        </li>
+                        <% } %>
+                        <% if (a.getVideo3() != "") {%>
+                        <li>
+                            <video controls="controls" style="max-width: 270px;
+                                   width: auto; height: 150px"> 
+                                <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo3()%>" >
+                            </video>
+                        </li>
+                        <% }%>
+                    </ul>
                 </div>
                 
+                    <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        $('.bxslider').bxSlider({
+                            video: true,
+                            useCSS: true
+                        });
+                    });
+                </script>
+
                 <div style="border-bottom-style: dotted; border-bottom-width: 1px">
                     <h2>Descripción</h2>
                     <p><%= a.getCaracteristicas()%></p>
@@ -132,7 +158,7 @@
                          text-align: center">
                         <img 
                             src="<%= request.getServletContext().getContextPath()
-                                + "/mostrarImagen?id=" + a.getIdUsuario()%>"
+                                    + "/mostrarImagen?id=" + a.getIdUsuario()%>"
                             height="130px" style="max-width: 100%;
                             border-radius: 5px;"/></div>
                     <div style="display: inline-block; vertical-align: bottom;">
@@ -156,10 +182,10 @@
                     <div class="derecha"><%= p.getFechaPublicacion().substring(0, 10)%></div>
                     <span style="width: 50px; height: 50px; overflow: hidden;
                           border-radius: 5px; margin: 10px; padding: 0">
-                        <img src="<%= request.getServletContext().getContextPath()
-                                 + "/mostrarImagen?id=" + p.getIdUsuario()%>"
-                             align="middle" style="width: 50px; max-height: 100%;
-                             padding: 0; margin: 0"/>
+                         <img src="<%= request.getServletContext().getContextPath()
+                                + "/mostrarImagen?id=" + p.getIdUsuario()%>"
+                         align="middle" style="width: 50px; max-height: 100%;
+                         padding: 0; margin: 0"/>
                     </span>
                     <span><%= p.getNombreUsuario()%></span>
 
@@ -211,13 +237,14 @@
                 %>
             </div>
         </div>
+
         <script src="ImageSlider/ideal-image-slider.js"></script>
         <script>
-            var slider = new IdealImageSlider.Slider({
-                selector: '#slider',
-                height: 180
-            });
-            slider.start();
+                        var slider = new IdealImageSlider.Slider({
+                            selector: '#slider',
+                            height: 180
+                        });
+                        slider.start();
         </script>
     </body>
 </html>
