@@ -30,7 +30,7 @@
         <div id="content" class="inline_block">
             <div class="ads">
                 <div style="display: inline-block; margin-right: 20px; width: 250px;
-                     text-align: center;">
+                     text-align: center">
                     <div id="slider">
                         <img src="<%= request.getServletContext().getContextPath()
                                 + "/MostrarImagenProducto?idProducto="
@@ -45,7 +45,7 @@
                         <% if (a.getImagen3() != null) {%>
                         <img src="<%= request.getServletContext().getContextPath()
                                 + "/MostrarImagenProducto?idProducto="
-                                + a.getIdProducto()%>&imagen=3"" 
+                                + a.getIdProducto()%>&imagen=3"
                              style="height: 180px; width: auto"/>
                         <% }%>
                     </div>
@@ -55,23 +55,7 @@
                     <h2>$<%= String.format(Locale.US, "%.2f", a.getPrecio())%></h2>
                     <h2>Existencias: <%= a.getExistencias()%></h2>
                 </div>
-                <% if (a.getVideo1() != "") {%>
-                <video controls="controls">
-                    <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1()%>" type="video/mp4">
-                </video>
-                <% } %>
 
-                <% if (a.getVideo2() != "") {%>
-                <video controls="controls">
-                    <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
-                </video>
-                <% } %>
-
-                <% if (a.getVideo3() != "") {%>
-                <video controls="controls">
-                    <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
-                </video>
-                <% } %>
                 <%
                     if (session.getAttribute("username") == null) {
                 %>
@@ -117,23 +101,47 @@
                 <%
                     }
                 %>
-                <h2>Descripción</h2>
-                <p><%= a.getCaracteristicas()%></p>
 
-                <h2>Publicado por</h2>
-                <div style="display: inline-block; margin-right: 20px; width: 100px;
-                     text-align: center">
-                    <img 
-                        src="<%= request.getServletContext().getContextPath()
+                <div style="border-bottom-style: dotted; border-bottom-width: 1px">
+                    <% if (a.getVideo1() != "") {%>
+                    <video controls="controls" style="margin: 5px auto 5px auto; width: 400px;">
+                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo1()%>" type="video/mp4">
+                    </video>
+                    <% } %>
+                    <br>
+                    <% if (a.getVideo2() != "") {%>
+                    <video controls="controls" style="margin: 5px auto 5px auto; width: 400px;">
+                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
+                    </video>
+                    <% } %>
+
+                    <% if (a.getVideo3() != "") {%>
+                    <video controls="controls" style="margin: 5px auto 5px auto; width: 400px;">
+                        <source src="<%=request.getServletContext().getContextPath() + "/" + a.getVideo2()%>" type="video/mp4">
+                    </video>
+                    <% } %>
+                </div>
+                
+                <div style="border-bottom-style: dotted; border-bottom-width: 1px">
+                    <h2>Descripción</h2>
+                    <p><%= a.getCaracteristicas()%></p>
+                </div>
+                <div style="border-bottom-style: dotted; border-bottom-width: 1px">
+                    <h2>Publicado por</h2>
+                    <div style="display: inline-block; margin-right: 20px; width: 100px;
+                         text-align: center">
+                        <img 
+                            src="<%= request.getServletContext().getContextPath()
                                 + "/mostrarImagen?id=" + a.getIdUsuario()%>"
-                        height="130px" style="max-width: 100%;
-                        border-radius: 5px;"/></div>
-                <div style="display: inline-block; vertical-align: bottom;">
-                    <%= a.getNombreUsuario()%><br>
-                    <%= emailVendedor = a.getCorreoElectronico()%><br>
-                    <%= a.getTelefono()%><br>
-                    Fecha de publicación: <%= a.getFecha().toString().substring(0, 10)%><br><br>
-                    <% request.setAttribute("emailVendedor", emailVendedor); %>
+                            height="130px" style="max-width: 100%;
+                            border-radius: 5px;"/></div>
+                    <div style="display: inline-block; vertical-align: bottom;">
+                        <%= a.getNombreUsuario()%><br>
+                        <%= emailVendedor = a.getCorreoElectronico()%><br>
+                        <%= a.getTelefono()%><br>
+                        Fecha de publicación: <%= a.getFecha().toString().substring(0, 10)%><br><br>
+                        <% request.setAttribute("emailVendedor", emailVendedor); %>
+                    </div>
                 </div>
             </div>
             <div class="questions">
@@ -148,10 +156,10 @@
                     <div class="derecha"><%= p.getFechaPublicacion().substring(0, 10)%></div>
                     <span style="width: 50px; height: 50px; overflow: hidden;
                           border-radius: 5px; margin: 10px; padding: 0">
-                         <img src="<%= request.getServletContext().getContextPath()
+                        <img src="<%= request.getServletContext().getContextPath()
                                  + "/mostrarImagen?id=" + p.getIdUsuario()%>"
-                         align="middle" style="width: 50px; max-height: 100%;
-                         padding: 0; margin: 0"/>
+                             align="middle" style="width: 50px; max-height: 100%;
+                             padding: 0; margin: 0"/>
                     </span>
                     <span><%= p.getNombreUsuario()%></span>
 
@@ -181,7 +189,6 @@
                         }
                     %>
                 </div>
-                <div style="padding: 1px;"></div>
                 <% }
                     if (session.getAttribute("username") == null) { %>
                 <p>
