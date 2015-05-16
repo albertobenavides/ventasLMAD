@@ -215,8 +215,7 @@
         <script>
             var slider = new IdealImageSlider.Slider({
                 selector: '#slider',
-                height: 180,
-                interval: 4000
+                height: 180
             });
             slider.start();
         </script>

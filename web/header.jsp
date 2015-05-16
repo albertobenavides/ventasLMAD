@@ -59,7 +59,7 @@
             <h1><a href="index.jsp">VENTASLMAD</a></h1>
         </div>
 
-        <div id="session">
+        <div>
         <%
             if (session.getAttribute("username") == null)
             {
@@ -85,7 +85,7 @@
             {
         %>
             <h2>Bienvenido, <%= (String)session.getAttribute("username") %></h2>
-            <ul>
+            <ul class="session">
                 <li><a href="listaProductos.jsp">Mis productos</a></li>
                 <li><a href="nuevoProducto.jsp">Registrar producto</a></li>
                 <li><a href="listaCompras.jsp">Mis compras</a></li>

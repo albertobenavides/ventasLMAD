@@ -146,6 +146,11 @@ tr:nth-child(odd) {background: #FFF}
     margin-left: -20px;
 }
 
+.session
+{
+    margin-left: -20px;
+}
+
 #categories li
 {
     list-style-type: circle;
