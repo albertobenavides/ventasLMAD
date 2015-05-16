@@ -132,9 +132,21 @@ public class RegistrarProductoServlet extends HttpServlet {
             p.setExistencia(Integer.parseInt(existenciaProducto));
             p.setDescripcionLarga(new String (
                             request.getParameter("descripcionProducto").getBytes ("iso-8859-1"), "UTF-8"));
-            p.setImagen1(inputStream1);
-            p.setImagen2(inputStream2);
-            p.setImagen3(inputStream3);
+            if (filePart1.getSize() == 0)
+                p.setImagen1(null);
+            else
+                p.setImagen1(inputStream1);
+            
+            if (filePart2.getSize() == 0)
+                p.setImagen2(null);
+            else
+                p.setImagen2(inputStream2);
+            
+            if (filePart3.getSize() == 0)
+                p.setImagen3(null);
+            else
+                p.setImagen3(inputStream3);
+            
             p.setVideo1(path4);
             p.setVideo2(path5);
             p.setVideo3(path6);

@@ -39,111 +39,141 @@
             <form action="detalleProducto" method="post" id="forma" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Datos necesarios</legend>
-                    <div>
-                        <p>Nombre del producto:<br>
-                            <input type="text" name="nombreProducto" 
-                                   maxlength="50" required
-                                   value="<%= producto.getNombre()%>"></p>
-                        <p>Precio: 
-                            <input type="number" name="precioProducto"
-                                   required value="<%= String.format(Locale.US, "%.2f", producto.getPrecio())%>"
-                                   step="any" pattern="[0-9]+([\.][0-9]+)?"> MXN</p>
-                        <p>Categoría:
-                            <select name="idSubcategoria" form="forma"></p>
-                            <%
-                                List<String> subcategorias = CategoriaDAO.listaSubcategorias();
-                                for (int i = 0; i < subcategorias.size(); i++) {
-                                    if (i + 1 == producto.getIdSubcategoria()) {
-                            %>
-                        <option value="<%= i + 1%>" selected><%= subcategorias.get(i)%></option>
-                        <%
-                        } else {
-                        %>
-                        <option value="<%= i + 1%>"><%= subcategorias.get(i)%></option>
-                        <%
-                                }
-                            }
-                        %>
-                        </select>
+                    <div style="display: inline-block; text-align: right; vertical-align: middle">
+                        <p>Nombre del producto:</p>
+                        <p>Precio:</p>
+                        <p>Categoría:</p>
+                    </div>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle">
+                        <p><input type="text" name="nombreProducto" 
+                                  maxlength="50" required
+                                  value="<%= producto.getNombre()%>"></p>
+                        <p><input type="number" name="precioProducto"
+                                  required value="<%= String.format(Locale.US, "%.2f", producto.getPrecio())%>"
+                                  step="any" pattern="[0-9]+([\.][0-9]+)?"> MXN</p>
+                        <p>
+                            <select name="idSubcategoria" form="forma">
+                                <%
+                                    List<String> subcategorias = CategoriaDAO.listaSubcategorias();
+                                    for (int i = 0; i < subcategorias.size(); i++) {
+                                        if (i + 1 == producto.getIdSubcategoria()) {
+                                %>
+                                <option value="<%= i + 1%>" selected><%= subcategorias.get(i)%></option>
+                                <%
+                                } else {
+                                %>
+                                <option value="<%= i + 1%>"><%= subcategorias.get(i)%></option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </select>
+                        </p>
                     </div>
                     <input type="hidden" name="idProducto" value="<%= idProducto%>">
                 </fieldset>
                 <fieldset>
                     <legend>Información adicional</legend>
-                    <div>
-                        Descripción:<br>
-                        <textarea name="descripcionProducto"
-                                  maxlength="500" form="forma"
-                                  rows="5" cols="40"><%= producto.getDescripcionLarga()%></textarea><br>
-                        Existencias: 
-                        <input type="number" name="existenciaProducto"
-                               value="<%= producto.getExistencia()%>"><br>
+                    <div style="display: inline-block; text-align: right; vertical-align: middle;
+                         margin-left: 67px;">
+                        <p>Descripción:</p>
+                    </div>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle">
+                        <p>
+                            <textarea name="descripcionProducto"
+                                      maxlength="500" form="forma"
+                                      rows="5" cols="40"><%= producto.getDescripcionLarga()%></textarea>
+                        </p>
+                    </div>
+                    <div style="display: inline-block; text-align: right; vertical-align: middle;
+                         margin-left: 78px;">
+                        <p>Existencias:</p>
+                    </div>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle">
+                        <p><input type="number" name="existenciaProducto"
+                                  value="<%= producto.getExistencia()%>"></p>
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend>Multimedia</legend>
-                    <div style="text-align: center">
-                        <h1>Cargar imágenes:</h1>
-                        <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
+                    <p>Cargar imágenes:</p>
+                    <div style="margin-bottom: 20px; border-bottom-style: dotted; border-width: 1px;">
+                        <div style="display: inline-block; width: auto; height: auto;">
                             <img src="<%= request.getServletContext().getContextPath()
                                      + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
-                                 height="200px" id="target1" style="width: auto;"/>
-                            <input type="file" name="imagenProducto1" id="src1">
+                                 style="width: auto; height: auto; max-height: 200px;
+                                 max-width: 200px; margin: 0; padding: 0" id="target1"/>
                         </div>
-                        <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
-                            <img src="<%= request.getServletContext().getContextPath()
+                        <p><input type="file" name="imagenProducto1" id="src1"></p>
+                    </div>
+
+                    <div style="margin-bottom: 20px; border-bottom-style: dotted; border-width: 1px;">
+                        <div style="display: inline-block; width: auto; height: auto;">
+                             <img src="<%= request.getServletContext().getContextPath()
                                      + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
-                                 height="200px" id="target2" style="width: auto;"/>
-                            <input type="file" name="imagenProducto2" id="src2">
+                             style="width: auto; height: auto; max-height: 200px;
+                             max-width: 200px; margin: 0; padding: 0" id="target2"/>
                         </div>
-                        <div style="width: 200px; height: 200px; text-align: center; margin-bottom: 50px;">
+                        <p><input type="file" name="imagenProducto2" id="src2"></p>
+                    </div>
+
+                    <div style="margin-bottom: 20px; border-bottom-style: double; border-width: 1px;">
+                        <div style="display: inline-block; width: auto; height: auto;">
                             <img src="<%= request.getServletContext().getContextPath()
                                      + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
-                                 height="200px" id="target3" style="width: auto;"/>
-                            <input type="file" name="imagenProducto3" id="src3">
+                                 style="width: auto; height: auto; max-height: 200px;
+                                 max-width: 200px; margin: 0; padding: 0" id="target3"/>
                         </div>
-                        <script>
-                            function showImage(src, target)
+                        <p><input type="file" name="imagenProducto3" id="src3"></p>
+                    </div>
+                    <script>
+                        function showImage(src, target)
+                        {
+                            var fr = new FileReader();
+                            fr.onload = function (e) {
+                                target.src = this.result;
+                            };
+                            src.addEventListener("change", function ()
                             {
-                                var fr = new FileReader();
-                                fr.onload = function (e) {
-                                    target.src = this.result;
-                                };
-                                src.addEventListener("change", function ()
-                                {
-                                    // fill fr with image data    
-                                    fr.readAsDataURL(src.files[0]);
+                                // fill fr with image data    
+                                fr.readAsDataURL(src.files[0]);
 
-                                });
-                            }
+                            });
+                        }
 
-                            var src1 = document.getElementById("src1");
-                            var target1 = document.getElementById("target1");
-                            showImage(src1, target1);
+                        var src1 = document.getElementById("src1");
+                        var target1 = document.getElementById("target1");
+                        showImage(src1, target1);
 
-                            var src2 = document.getElementById("src2");
-                            var target2 = document.getElementById("target2");
-                            showImage(src2, target2);
+                        var src2 = document.getElementById("src2");
+                        var target2 = document.getElementById("target2");
+                        showImage(src2, target2);
 
-                            var src3 = document.getElementById("src3");
-                            var target3 = document.getElementById("target3");
-                            showImage(src3, target3);
-                        </script>
-                        <h1>Cargar Video:</h1>
+                        var src3 = document.getElementById("src3");
+                        var target3 = document.getElementById("target3");
+                        showImage(src3, target3);
+                    </script>
+
+                    <p>Cargar Video:</p>
+                    <div style="margin-bottom: 20px;">
                         <% if (producto.getVideo1() != "") {%>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo1()%>" type="video/mp4">
                         </video>
                         <% } %>
                         <p><input type="file" name="videoProducto1"></p>
+                    </div>
 
+                    <div style="margin-bottom: 20px;">
                         <% if (producto.getVideo2() != "") {%>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo2()%>" type="video/mp4">
                         </video>
                         <% } %>
                         <p><input type="file" name="videoProducto2"></p>
+                    </div>
 
+                    <div style="margin-bottom: 20px;">
                         <% if (producto.getVideo3() != "") {%>
                         <video controls="controls">
                             <source src="<%=request.getServletContext().getContextPath() + "/" + producto.getVideo3()%>" type="video/mp4">
@@ -262,7 +292,7 @@
                                 }
                                 function check()
                                 {
-                                    if(document.getElementById("vigen").value === '0')
+                                    if (document.getElementById("vigen").value === '0')
                                     {
                                         alertify.log("Inserte una vigencia válida");
                                     }

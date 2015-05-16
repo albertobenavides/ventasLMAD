@@ -17,11 +17,10 @@
         <link rel="stylesheet" href="themes/alertify.default.css" />
         <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
         <%
-            if (session.getAttribute("username") == null)
-            {
+            if (session.getAttribute("username") == null) {
                 request.setAttribute("message", "Inicio de sesión requerido.");
                 RequestDispatcher disp = getServletContext()
-                    .getRequestDispatcher("/Index");
+                        .getRequestDispatcher("/Index");
                 disp.forward(request, response);
             }
         %>
@@ -30,92 +29,90 @@
         <%@include file="header.jsp"%>
         <div id="content" class="inline_block">
             <h1>Registro de usuario</h1>
-            <%
-            int idUsuario = (Integer)session.getAttribute("idUsuario");
-            Usuario u = new Usuario(UsuarioDAO.getUsuario(idUsuario));
+            <%                int idUsuario = (Integer) session.getAttribute("idUsuario");
+                Usuario u = new Usuario(UsuarioDAO.getUsuario(idUsuario));
             %>
             <form action="RegistroUsuario" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Información de registro</legend>
-                    <div>
-                        Nombre de usuario:<br>
-                        <input type="text" name="nickname" 
-                               value="<%= u.getNickname() %>"
-                               disabled><br>
-                        Contraseña:<br>
-                        <input type="password" name="contrasenia"
-                               value="<%= u.getContrasenia()%>"><br>
-                        Correo electrónico:<br>
-                        <input type="email" name="correoElectronico"
-                               value="<%= u.getCorreoElectronico()%>"><br>
+                    <div style="display: inline-block; text-align: right; vertical-align: middle">
+                        <p>Nombre de usuario:</p>
+                        <p>Contraseña:</p>
+                        <p>Confirma correo:</p>
+                    </div>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle">
+                        <p><input type="text" name="nickname" 
+                                  value="<%= u.getNickname()%>"
+                                  disabled></p>
+                        <p><input type="password" name="contrasenia"
+                                  value="<%= u.getContrasenia()%>"></p>
+                        <p><input type="email" name="correoElectronico"
+                                  value="<%= u.getCorreoElectronico()%>"></p>
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend>Datos personales</legend>
-                    <table>
-                        <tr>
-                            <td>
-                                Nombre:<br>
-                                <input type="text" name="nombre"
-                                       value="<%= u.getNombre()%>"><br>
-                            </td>
-                            <td>
-                                Apellido paterno:<br>
-                                <input type="text" name="apellidoPaterno"
-                                       value="<%= u.getApellidoPaterno()%>"><br>
-                            </td>
-                            <td>
-                                Apellido materno:<br>
-                                <input type="text" name="apellidoMaterno"
-                                       value="<%= u.getApellidoMaterno()%>"><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Fecha de nacimiento:<br>
-                                <input type="date" name="fechaNacimiento"
-                                       value="<%= u.getFechaNacimiento()%>"><br>
-                            </td>
-                            <td>
-                                <%
-                                if (u.getSexo().equalsIgnoreCase("m"))
-                                {
-                                %>
-                                <input type="radio" name="sexo" value="m" checked/>Hombre<br>
-                                <input type="radio" name="sexo" value="f"/>Mujer<br>
-                                <%
-                                }
-                                else
-                                {
-                                %>
-                                <input type="radio" name="sexo" value="m"/>Hombre<br>
-                                <input type="radio" name="sexo" value="f" checked/>Mujer<br>
-                                <%
-                                }
-                                %>
-                            </td>
-                        </tr>
-                    </table>
+                    <div style="display: inline-block; text-align: right; vertical-align: middle">
+                        <p>Nombre:</p>
+                        <p>Apellido paterno:</p>
+                        <p>Apellido materno:</p>
+                        <p>Fecha de nacimiento:</p>
+                    </div>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle">
+                        <p><input type="text" name="nombre"
+                                  value="<%= u.getNombre()%>"></p>
+                        <p><input type="text" name="apellidoPaterno"
+                                  value="<%= u.getApellidoPaterno()%>"></p>
+                        <p><input type="text" name="apellidoMaterno"
+                                  value="<%= u.getApellidoMaterno()%>"></p>
+                        <p><input type="date" name="fechaNacimiento"
+                                  value="<%= u.getFechaNacimiento()%>"></p>
+                    </div>
+                    <br>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle;
+                         margin-left: 110px">
+                        <p>Sexo:</p>
+                    </div>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle">
+                        <%
+                            if (u.getSexo().equalsIgnoreCase("m")) {
+                        %>
+                        <p>
+                            <input type="radio" name="sexo" value="m" checked/>Hombre<br>
+                            <input type="radio" name="sexo" value="f"/>Mujer
+                        </p>
+                        <%
+                        } else {
+                        %>
+                        <p>
+                            <input type="radio" name="sexo" value="m"/>Hombre<br>
+                            <input type="radio" name="sexo" value="f" checked/>Mujer
+                        </p>
+                        <%
+                            }
+                        %>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>Datos de contacto</legend>
-                    <table>
-                        <tr>
-                            <td>
-                                Teléfono:<br>
-                                <input type="tel" name="telefono"
-                                       value="<%= u.getTelefono()%>">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img 
-                    src="<%= request.getServletContext().getContextPath() 
-                                + "/mostrarImagen?id=" +  idUsuario %>"
-                                width="100px" height="130px"/></div><input type="file" name="imagen">
-                            </td>
-                        </tr>
-                    </table>
+                    <div style="display: inline-block; text-align: right; vertical-align: middle">
+                        <p>Teléfono:</p>
+                        <p>Imagen de perfil:</p>
+                    </div>
+                    <div style="display: inline-block; text-align: left; vertical-align: middle">
+                        <p>
+                            <input type="tel" name="telefono" value="<%= u.getTelefono()%>">
+                        </p>
+                        <p>
+                            <input type="file" name="imagen">
+                        </p>
+                    </div>
+                    <div>
+                         <img src="<%= request.getServletContext().getContextPath()
+                                + "/mostrarImagen?id=" + idUsuario%>"
+                                style="max-height: 130px; max-width: 100px;
+                                width: auto; height: auto"/>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend style="color: red;">Eliminar cuenta</legend>

@@ -65,6 +65,16 @@ a
     font-weight: 500;
 }
 
+h1, h2, h3
+{
+    color: darkred;
+}
+
+h1 a
+{
+    color: darkorange;
+}
+
 a:link
 {
     text-decoration: none;

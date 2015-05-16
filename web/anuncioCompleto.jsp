@@ -85,23 +85,27 @@
                 <div style="text-align: right;">
                     <form action="Comprar" method="post">
                         <div style="display: inline-block">
-                            Cantidad: <br>
-                            Método de pago:
+                            <p>Cantidad:</p>
+                            <p>Método de pago:</p>
                         </div>
                         <div style="display: inline-block; text-align: left">
-                            <input type="number" name="cantidadCompra" value="1"
-                                   max="<%= a.getExistencias()%>"
-                                   min="1"><br>
-                            <select name="metodoPagoCompra">
-                                <%
-                                    String[] metodoPago = a.getMetodoPago().split(",");
-                                    for (String s : metodoPago) {
-                                %>
-                                <option value="<%= s%>"><%= s%></option>
-                                <%
-                                    }
-                                %>
-                            </select>
+                            <p>
+                                <input type="number" name="cantidadCompra" value="1"
+                                       max="<%= a.getExistencias()%>"
+                                       min="1">
+                            </p>
+                            <p>
+                                <select name="metodoPagoCompra">
+                                    <%
+                                        String[] metodoPago = a.getMetodoPago().split(",");
+                                        for (String s : metodoPago) {
+                                    %>
+                                    <option value="<%= s%>"><%= s%></option>
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </p>
                         </div>
                         <div style="display: inline-block; vertical-align: middle;">
                             <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
@@ -144,10 +148,10 @@
                     <div class="derecha"><%= p.getFechaPublicacion().substring(0, 10)%></div>
                     <span style="width: 50px; height: 50px; overflow: hidden;
                           border-radius: 5px; margin: 10px; padding: 0">
-                        <img src="<%= request.getServletContext().getContextPath()
+                         <img src="<%= request.getServletContext().getContextPath()
                                  + "/mostrarImagen?id=" + p.getIdUsuario()%>"
-                             align="middle" style="width: 50px; max-height: 100%;
-                             padding: 0; margin: 0"/>
+                         align="middle" style="width: 50px; max-height: 100%;
+                         padding: 0; margin: 0"/>
                     </span>
                     <span><%= p.getNombreUsuario()%></span>
 
@@ -179,7 +183,7 @@
                 </div>
                 <div style="padding: 1px;"></div>
                 <% }
-                        if (session.getAttribute("username") == null) { %>
+                    if (session.getAttribute("username") == null) { %>
                 <p>
                     Sólo los usuarios registrados pueden hacer preguntas. 
                     Regístrate <a href="registro.jsp">aquí</a>.
@@ -192,7 +196,7 @@
                     <textarea name="pregunta" form="forma"
                               maxlength="500" rows="4" cols="65"></textarea><br>
                     <input type="hidden" name="idAnuncio" value="<%= idAnuncio%>">
-                    <input type="hidden" name="correoVendedor" value="<%= a.getCorreoElectronico() %>">
+                    <input type="hidden" name="correoVendedor" value="<%= a.getCorreoElectronico()%>">
                     <input type="submit" value="Preguntar">
                 </form>
                 <%
