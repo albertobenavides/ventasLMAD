@@ -84,14 +84,14 @@ public class PreguntasServlet extends HttpServlet {
                 PreguntaDAO.setPregunta(pregunta, idUsuario, idAnuncio);
                 String emailMessage;
                 emailMessage = "Se ha publicado una pregunta: " + pregunta;
-                EmailUtility.sendEmail(host, port, user, pass, email,
-                         "Publicación en anuncio", emailMessage);
+                //EmailUtility.sendEmail(host, port, user, pass, email,
+                //         "Publicación en anuncio", emailMessage);
             }
             else
             {
                 String emailRespuesta = PreguntaDAO.setRespuesta(respuesta, idPregunta);
                 String emailMessage = "Se ha publicado una respuesta a tu pregunta: " + respuesta;
-                EmailUtility.sendEmail(host, port, user, pass, emailRespuesta, "Respuesta a tu publicación", emailMessage);
+                //EmailUtility.sendEmail(host, port, user, pass, emailRespuesta, "Respuesta a tu publicación", emailMessage);
             }
             
             RequestDispatcher disp = getServletContext()

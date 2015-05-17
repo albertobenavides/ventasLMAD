@@ -51,13 +51,13 @@
                 <div class="item" style="width: 180px; height: 250px; text-align: center; vertical-align: top">
                     <a href="anuncioCompleto.jsp?idAnuncio=<%= anuncios.get(i).getIdAnuncio()%>">
                         <h2><%= anuncios.get(i).getNombre()%></h2>
-                        <div style="width: 180px; height: 170px; text-align: center; vertical-align: middle;
+                        <div style="width: 180px; max-height: 170px; height: 100%; text-align: center; vertical-align: middle;
                              margin-bottom: 15px;">
                             <img src="<%= request.getServletContext().getContextPath()
                                 + "/MostrarImagenProducto?idProducto="
                                 + anuncios.get(i).getIdProducto()%>&imagen=<%= anuncios.get(i).getThumbnailAnuncio()%>"
                                  style="max-width: 180px; max-height: 170px;
-                                 width: auto; height: auto;"/>
+                                 width: auto; height: auto; vertical-align: middle"/>
                         </div>
                     </a>
 

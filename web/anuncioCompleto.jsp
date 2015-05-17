@@ -40,18 +40,18 @@
                         <img src="<%= request.getServletContext().getContextPath()
                                 + "/MostrarImagenProducto?idProducto="
                                 + a.getIdProducto()%>&imagen=1" 
-                             style="height: 180px; width: auto"/>
+                             style="height: 180px; width: auto; max-width: 250px"/>
                         <% if (a.getImagen2() != null) {%>
                         <img src="<%= request.getServletContext().getContextPath()
                                 + "/MostrarImagenProducto?idProducto="
                                 + a.getIdProducto()%>&imagen=2"
-                             style="height: 180px; width: auto"/>
+                             style="height: 180px; width: auto; max-width: 250px"/>
                         <% } %>
                         <% if (a.getImagen3() != null) {%>
                         <img src="<%= request.getServletContext().getContextPath()
                                 + "/MostrarImagenProducto?idProducto="
                                 + a.getIdProducto()%>&imagen=3"
-                             style="height: 180px; width: auto"/>
+                             style="height: 180px; width: auto; max-width: 250px"/>
                         <% }%>
                     </div>
                 </div>
@@ -110,6 +110,7 @@
                 <div style="border-bottom-style: dotted; border-bottom-width: 1px;
                      text-align: center; width: 270px; margin: 10px auto 20px auto;
                      border-bottom-style: dotted; border-bottom-width: 1px">
+                    <% if (a.getVideo1() != "" || a.getVideo2() != "" || a.getVideo3() != "") { %>
                     <ul class="bxslider">
                         <% if (a.getVideo1() != "") {%>
                         <li>
@@ -136,6 +137,7 @@
                         </li>
                         <% }%>
                     </ul>
+                    <% } %>
                 </div>
                 
                     <script type="text/javascript">
