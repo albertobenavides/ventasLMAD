@@ -66,9 +66,12 @@ public class CompraServlet extends HttpServlet {
             
             CompraDAO.setCompra(idUsuario, cantidadCompra, metodoPagoCompra, idAnuncio);
                 String emailMessage;
-                emailMessage = "Se ha realizado una compra de uno de tus productos.";
-                //EmailUtility.sendEmail(host, port, user, pass, emailVendedor, ""
-                //        + "Compra de producto", emailMessage);
+                emailMessage = "<h1>VENTASLMAD</h1>"
+                        + "<p>Se ha realizado la compra de uno de tus productos.</p>"
+                        + "<p>Entra <a href='http://52.24.191.29:8080/ventasLMAD/anuncioCompleto.jsp?idAnuncio="+ idAnuncio 
+                        + "'>aquí</a> para revisarlo.</p>";
+                EmailUtility.sendEmail(host, port, user, pass, emailVendedor, ""
+                        + "Compra de producto", emailMessage);
             
             request.setAttribute("message", "Compra realizada con éxito.");
             

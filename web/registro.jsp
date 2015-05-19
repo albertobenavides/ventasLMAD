@@ -26,12 +26,10 @@
                     <div style="display: inline-block; text-align: right; vertical-align: middle">
                         <p>Nombre de usuario:</p>
                         <p>Correo electrónico:</p>
-                        <p>Confirma correo:</p>
                     </div>
                     <div style="display: inline-block; text-align: left; vertical-align: middle">
                         <p><input type="text" name="nickname"></p>
                         <p><input type="email" name="correoElectronico"></p>
-                        <p><input type="email" name="correoElectronicoConfirmar"></p>
                     </div>
                 </fieldset>
                 <fieldset>

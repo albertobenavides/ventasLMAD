@@ -115,8 +115,16 @@ public class RegistroUsuarioServlet extends HttpServlet {
                     if (setImagen)
                         UsuarioDAO.insertarImagen(u);
                     String emailMessage;
-                    emailMessage = "Ingresa el siguiente código de verificacion para activar la cuenta: " + verificationCode;
-                    //EmailUtility.sendEmail(host, port, user, pass, email, "Código de acceso a VentasLMAD", emailMessage);
+                    emailMessage = "<h1>VENTASLMAD</h1>"
+                        + "<h2>Usuario registrado con éxito.</h2>"
+                        + "<p>Te has registrado con éxito en VENTASLMAD con el "
+                        + "usuario" + u.getNickname() + "</p>"
+                        + "<p>Para acceder a la <a href='http://52.24.191.29:8080/ventasLMAD/'>"
+                        + "página</a> utiliza el siguiente código como tu contraseña:</p>"
+                        + "<p align='center'>" + verificationCode + "</p>"
+                        + "<br>"
+                        + "<p>Te recomendamos camibar esta clave en los detalles de tu cuenta.</p>";
+                    EmailUtility.sendEmail(host, port, user, pass, email, "Código de acceso a VentasLMAD", emailMessage);
                     message = "Usuario registrado con éxito.";
                     request.setAttribute("message", message);
                     disp = getServletContext()

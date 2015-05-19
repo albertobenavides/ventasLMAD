@@ -47,7 +47,8 @@
                         <p><input type="password" name="contrasenia"
                                   value="<%= u.getContrasenia()%>"></p>
                         <p><input type="email" name="correoElectronico"
-                                  value="<%= u.getCorreoElectronico()%>"></p>
+                                  value="<%= u.getCorreoElectronico()%>"
+                                  disabled></p>
                     </div>
                 </fieldset>
                 <fieldset>

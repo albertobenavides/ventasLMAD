@@ -83,15 +83,24 @@ public class PreguntasServlet extends HttpServlet {
             {
                 PreguntaDAO.setPregunta(pregunta, idUsuario, idAnuncio);
                 String emailMessage;
-                emailMessage = "Se ha publicado una pregunta: " + pregunta;
-                //EmailUtility.sendEmail(host, port, user, pass, email,
-                //         "Publicación en anuncio", emailMessage);
+                emailMessage = "<h1>VENTASLMAD</h1>"
+                        + "<p>Te han hecho una pregunta en uno de tus productos.</p>"
+                        + "<blockquote>" + pregunta + "</blockquote>"
+                        + "<p>Entra <a href='http://52.24.191.29:8080/ventasLMAD/anuncioCompleto.jsp?idAnuncio="+ idAnuncio 
+                        + "#preguntas'>aquí</a> para revisarla.</p>";
+                EmailUtility.sendEmail(host, port, user, pass, email,
+                         "Publicación en anuncio", emailMessage);
             }
             else
             {
                 String emailRespuesta = PreguntaDAO.setRespuesta(respuesta, idPregunta);
-                String emailMessage = "Se ha publicado una respuesta a tu pregunta: " + respuesta;
-                //EmailUtility.sendEmail(host, port, user, pass, emailRespuesta, "Respuesta a tu publicación", emailMessage);
+                String emailMessage;
+                emailMessage = "<h1>VENTASLMAD</h1>"
+                        + "<p>Han respondido una de tus preguntas.</p>"
+                        + "<blockquote>" + respuesta + "</blockquote>"
+                        + "<p>Entra <a href='http://52.24.191.29:8080/ventasLMAD/anuncioCompleto.jsp?idAnuncio="+ idAnuncio 
+                        + "#preguntas'>aquí</a> para revisarla.</p>";
+                EmailUtility.sendEmail(host, port, user, pass, emailRespuesta, "Respuesta a tu publicación", emailMessage);
             }
             
             RequestDispatcher disp = getServletContext()
