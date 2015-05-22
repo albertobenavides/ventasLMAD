@@ -99,30 +99,30 @@
                     <p>Cargar imágenes:</p>
                     <div style="margin-bottom: 20px; border-bottom-style: dotted; border-width: 1px;">
                         <div style="display: inline-block; width: auto; height: auto;">
-                            <img src="<%= request.getServletContext().getContextPath()
-                                     + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
-                                 style="width: auto; height: auto; max-height: 200px;
-                                 max-width: 200px; margin: 0; padding: 0" id="target1"/>
+                             <img src="<%= request.getServletContext().getContextPath()
+                                    + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
+                             style="width: auto; height: auto; max-height: 200px;
+                             max-width: 200px; margin: 0; padding: 0" id="target1"/>
                         </div>
                         <p><input type="file" name="imagenProducto1" id="src1"></p>
                     </div>
 
                     <div style="margin-bottom: 20px; border-bottom-style: dotted; border-width: 1px;">
                         <div style="display: inline-block; width: auto; height: auto;">
-                             <img src="<%= request.getServletContext().getContextPath()
+                            <img src="<%= request.getServletContext().getContextPath()
                                      + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
-                             style="width: auto; height: auto; max-height: 200px;
-                             max-width: 200px; margin: 0; padding: 0" id="target2"/>
+                                 style="width: auto; height: auto; max-height: 200px;
+                                 max-width: 200px; margin: 0; padding: 0" id="target2"/>
                         </div>
                         <p><input type="file" name="imagenProducto2" id="src2"></p>
                     </div>
 
                     <div style="margin-bottom: 20px; border-bottom-style: double; border-width: 1px;">
                         <div style="display: inline-block; width: auto; height: auto;">
-                            <img src="<%= request.getServletContext().getContextPath()
-                                     + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
-                                 style="width: auto; height: auto; max-height: 200px;
-                                 max-width: 200px; margin: 0; padding: 0" id="target3"/>
+                             <img src="<%= request.getServletContext().getContextPath()
+                                    + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
+                             style="width: auto; height: auto; max-height: 200px;
+                             max-width: 200px; margin: 0; padding: 0" id="target3"/>
                         </div>
                         <p><input type="file" name="imagenProducto3" id="src3"></p>
                     </div>
@@ -229,8 +229,8 @@
                                     <%}%>
                                     <br>
                                     <%if (producto.getImagen1() != null) {%>
-                                    <img src="<%= request.getServletContext().getContextPath()
-                                                 + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
+                                         <img src="<%= request.getServletContext().getContextPath()
+                                            + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=1"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="1"
                                            <%if (a.getThumbnailAnuncio() == 1 || a.getThumbnailAnuncio() == 0) {%>
@@ -238,16 +238,16 @@
 
                                     <%}
                                         if (producto.getImagen2() != null) {%>
-                                    <img src="<%= request.getServletContext().getContextPath()
-                                                 + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
+                                         <img src="<%= request.getServletContext().getContextPath()
+                                            + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=2"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="2"
                                            <%if (a.getThumbnailAnuncio() == 2) {%>checked<%}%>><br>
 
                                     <%}
                                         if (producto.getImagen3() != null) {%>
-                                    <img src="<%= request.getServletContext().getContextPath()
-                                                 + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
+                                         <img src="<%= request.getServletContext().getContextPath()
+                                            + "/MostrarImagenProducto?idProducto=" + idProducto%>&imagen=3"
                                          width="100px" height="100px" id="target"/>
                                     <input type="radio" name="miniatura" value="3"
                                            <%if (a.getThumbnailAnuncio() == 3) {%>checked<%}%>><br>
