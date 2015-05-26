@@ -42,13 +42,11 @@
                     </div>
                     <div style="display: inline-block; text-align: left; vertical-align: middle">
                         <p><input type="text" name="nickname" 
-                                  value="<%= u.getNickname()%>"
-                                  disabled></p>
+                                  value="<%= u.getNickname()%>"></p>
                         <p><input type="password" name="contrasenia"
                                   value="<%= u.getContrasenia()%>"></p>
                         <p><input type="email" name="correoElectronico"
-                                  value="<%= u.getCorreoElectronico()%>"
-                                  disabled></p>
+                                  value="<%= u.getCorreoElectronico()%>"></p>
                     </div>
                 </fieldset>
                 <fieldset>
